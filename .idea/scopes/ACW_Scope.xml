@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="ACW_Scope" pattern="file[AutoCarWashing]:Inc//*||file[AutoCarWashing]:Src//*" />
+</component>
