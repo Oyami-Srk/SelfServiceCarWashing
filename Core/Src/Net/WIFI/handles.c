@@ -38,10 +38,10 @@ const osThreadAttr_t task_net_wifi_attributes = {
 _Noreturn void task_net_wifi(void *argument);
 
 void NET_WIFI_INIT() {
-    printf("[MODULE] NET/WIFI Initializing.\n");
+    printf("[MODULE] NET/WIFI Initializing.\r\n");
     pid_net_wifi_task =
         osThreadNew(task_net_wifi, NULL, &task_net_wifi_attributes);
-    printf("[MODULE] NET/WIFI Initialization completed.\n");
+    printf("[MODULE] NET/WIFI Initialization completed.\r\n");
 }
 
 extern uint8_t NET_RX_BUFFER[NET_BUFFER_SIZE]; // common_vars.c
@@ -58,7 +58,7 @@ uint8_t        NET_WIFI_IPV4[0];
 _Noreturn void task_net_wifi(void *argument) {
     COMPILE_TIME_ASSERT(sizeof(NET_AT_RX_MSG) == sizeof(NET_WIFI_REQUEST_MSG));
 
-    printf("[NET/WIFI] Enter WIFI Task.\n");
+    printf("[NET/WIFI] Enter WIFI Task.\r\n");
     NET_STATUS            = NET_STATUS_NOT_CONNECTED;
     osMessageQId qid_wifi = xQueueCreate(16, sizeof(NET_AT_RX_MSG));
     NET_AT_REGISTER_RECV_BUFFER(NET_RX_BUFFER, NET_BUFFER_SIZE, qid_wifi);
@@ -81,14 +81,14 @@ _Noreturn void task_net_wifi(void *argument) {
             if (msg->len == 11 && memcmp(NET_RX_BUFFER, "busy", 4) == 0)
                 continue;
             if (AT_GET_RESULT(NET_RX_BUFFER, msg->len) != AT_OK) {
-                printf("[NET/WIFI] WiFi Module not ready. Wait 30 sec\n");
+                printf("[NET/WIFI] WiFi Module not ready. Wait 30 sec\r\n");
                 NET_STATUS = NET_STATUS_DEVICE_FAIL;
                 HAL_Delay(1000 * 30);
                 EMPTY_QUEUE(qid_wifi, msg_buffer);
                 NET_AT_SEND_STATIC_CMD("AT+GMR\r\n");
                 continue;
             } else {
-                printf("[NET/WIFI] WiFi Module ready.\n");
+                printf("[NET/WIFI] WiFi Module ready.\r\n");
                 PRINT_RX_BUFFER(NET_RX_BUFFER, msg->len, ">>>    ");
             }
             break;
@@ -102,7 +102,7 @@ connect_to_ap:;
     while ((p = WIFI_CONNECT_TO_AP(NET_RX_BUFFER, msg->len, p, &status)) != 0) {
         if (status != OK) {
             printf("[NET/WIFI] Failed to run connect to ap at step %d. Halt "
-                   "for 30sec and retry.\n",
+                   "for 30sec and retry.\r\n",
                    p - 1);
             EMPTY_QUEUE(qid_wifi, msg_buffer);
             NET_AT_SEND_STATIC_CMD("AT+RST\r\n"); // reset module
@@ -119,20 +119,20 @@ connect_to_ap:;
         }
     }
 
-    printf("[NET/WIFI] WiFi Connected to Network. Trying to update time.\n");
+    printf("[NET/WIFI] WiFi Connected to Network. Trying to update time.\r\n");
 update_time:
     p = 0;
     while ((p = WIFI_UPDATE_TIME(NET_RX_BUFFER, msg->len, p, &status)) != 0) {
         if (status != OK) {
             if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1) == 0xF103) {
-                printf(
-                    "[NET/WIFI] NTP Time update failed, but we got backup.\n");
+                printf("[NET/WIFI] NTP Time update failed, but we got "
+                       "backup.\r\n");
                 printf("[NET/WIFI] If time is incorrect, please restart the "
-                       "device.\n");
+                       "device.\r\n");
                 break;
             }
             printf("[NET/WIFI] Failed to run update time at step %d. Halt "
-                   "for 30sec and retry.\n",
+                   "for 30sec and retry.\r\n",
                    p - 1);
             EMPTY_QUEUE(qid_wifi, msg_buffer);
             HAL_Delay(30 * 1000);
@@ -148,7 +148,7 @@ update_time:
         }
     }
 
-    printf("[NET/WIFI] RTC Clock updated. Trying to Connect to server.\n");
+    printf("[NET/WIFI] RTC Clock updated. Trying to Connect to server.\r\n");
 
 connect_to_server:
     p = 0;
@@ -179,12 +179,12 @@ connect_to_server:
         xQueueReceive(qid_wifi, msg_buffer, osWaitForever);
         switch (msg_buffer[0]) {
         case NET_AT_MSG_UART_RECV: {
-            printf("Received Bytes: %d\n", msg->len);
+            printf("Received Bytes: %d\r\n", msg->len);
             PRINT_RX_BUFFER(NET_RX_BUFFER, msg->len, ">>>    ");
             break;
         }
         default:
-            printf("[NET/WIFI] Received Unknown type of message.\n");
+            printf("[NET/WIFI] Received Unknown type of message.\r\n");
             break;
         }
         HAL_Delay(1000);

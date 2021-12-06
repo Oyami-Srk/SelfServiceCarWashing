@@ -44,13 +44,13 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 1: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
-            printf("[NET/WIFI] Set station mode failed.\n");
+            printf("[NET/WIFI] Set station mode failed.\r\n");
             *status = Failed;
             break;
         }
         printf(
             "[NET/WIFI] Wait 1 sec for trying to connect to AP: " WIFI_AP_NAME
-            ".\n");
+            ".\r\n");
         HAL_Delay(200);
         NET_AT_SEND_STATIC_CMD("AT+CWJAP=\"" WIFI_AP_NAME "\",\"" WIFI_AP_PSWD
                                "\"\r\n");
@@ -65,19 +65,19 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
             printf("[NET/WIFI] Connect to AP Failed: ");
             switch (err_code) {
             case 1:
-                printf("Time out.\n");
+                printf("Time out.\r\n");
                 break;
             case 2:
-                printf("Password Incorrect.\n");
+                printf("Password Incorrect.\r\n");
                 break;
             case 3:
-                printf("Target AP " WIFI_AP_NAME " Not Found.\n");
+                printf("Target AP " WIFI_AP_NAME " Not Found.\r\n");
                 break;
             case 4:
-                printf("Connected Failed. (code 4)\n");
+                printf("Connected Failed. (code 4)\r\n");
                 break;
             default:
-                printf("Unknown Error. (code %d)\n", err_code);
+                printf("Unknown Error. (code %d)\r\n", err_code);
                 break;
             }
             *status = Failed;
@@ -93,13 +93,13 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
             return 2;
         }
         if (STATIC_CHAR_CMP(buffer + 5, "CONNECTED") == 0) {
-            printf("[NET/WIFI] WiFi Connected. Wait for IP.\n");
+            printf("[NET/WIFI] WiFi Connected. Wait for IP.\r\n");
             *status = OK;
             return 2;
         }
         if (STATIC_CHAR_CMP(buffer + 5, "GOT IP") == 0) {
             HAL_GPIO_TogglePin(LED_NET_STATUS);
-            printf("[NET/WIFI] WiFi Got IP.\n");
+            printf("[NET/WIFI] WiFi Got IP.\r\n");
             NET_STATUS = NET_STATUS_GOT_IP;
             *status    = OK;
             NET_AT_SEND_STATIC_CMD("AT+CIPSTAMAC?\r\n");
@@ -119,7 +119,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
         char *p = buffer;
         p += sizeof("+CIPSTAMAC:") - 1;
         if (*p != '\"') {
-            printf("[NET/WIFI] CMD Result broken.\n");
+            printf("[NET/WIFI] CMD Result broken.\r\n");
             *status = Failed;
             break;
         }
@@ -127,7 +127,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
         NET_WIFI_MAC[17] = 0;
         for (p = NET_WIFI_MAC; p < NET_WIFI_MAC + 17; p++)
             *p = toupper(*p);
-        printf("[NET/WIFI] Device MAC: %s\n", NET_WIFI_MAC);
+        printf("[NET/WIFI] Device MAC: %s\r\n", NET_WIFI_MAC);
         NET_AT_SEND_STATIC_CMD("AT+CIPSTA?\r\n");
         HAL_Delay(200);
         break;
@@ -141,7 +141,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
         char *p = buffer;
         p += sizeof("+CIPSTA:ip:") - 1;
         if (*p != '\"') {
-            printf("[NET/WIFI] CMD Result broken.\n");
+            printf("[NET/WIFI] CMD Result broken.\r\n");
             *status = Failed;
             break;
         }
@@ -157,7 +157,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
             *(j++)           = '\0';
             NET_WIFI_IPV4[i] = atoi(ipbuffer);
         }
-        printf("[NET/WIFI] Device IP: %d.%d.%d.%d\n", NET_WIFI_IPV4[0],
+        printf("[NET/WIFI] Device IP: %d.%d.%d.%d\r\n", NET_WIFI_IPV4[0],
                NET_WIFI_IPV4[1], NET_WIFI_IPV4[2], NET_WIFI_IPV4[3]);
         return 0;
     }
@@ -179,7 +179,7 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 1: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
-            printf("[NET/WIFI] Cannot set sntp server.\n");
+            printf("[NET/WIFI] Cannot set sntp server.\r\n");
             break;
         }
         HAL_Delay(5000); // 5 sec to sync
@@ -189,14 +189,14 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 2: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
-            printf("[NET/WIFI] Cannot get sntp time.\n");
+            printf("[NET/WIFI] Cannot get sntp time.\r\n");
             break;
         }
 
         char *p = buffer;
         p += sizeof("+CIPSNTPTIME") - 1;
         if (*p != ':') {
-            printf("[NET/WIFI] CMD Result broken.\n");
+            printf("[NET/WIFI] CMD Result broken.\r\n");
             *status = Failed;
             break;
         }
@@ -236,9 +236,10 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
         HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
         HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN);
 
-        printf("[NET/WIFI] NTP Time Updated: 20%02d/%02d/%02d %02d:%02d:%02d\n",
-               date.Year, date.Month, date.WeekDay, time.Hours, time.Minutes,
-               time.Seconds);
+        printf(
+            "[NET/WIFI] NTP Time Updated: 20%02d/%02d/%02d %02d:%02d:%02d\r\n",
+            date.Year, date.Month, date.WeekDay, time.Hours, time.Minutes,
+            time.Seconds);
         *status = OK;
         return 0;
     }
@@ -258,14 +259,15 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 1: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
-            printf("[NET/WIFI] Cannot ping to server " SERV_ADDR "\n");
+            printf("[NET/WIFI] Cannot ping to server " SERV_ADDR "\r\n");
             break;
         }
 
         char    *p = buffer;
         uint16_t ping_time;
         sscanf(p, "+PING:%hu", &ping_time);
-        printf("[NET/WIFI] Ping to server " SERV_ADDR ": %d ms.\n", ping_time);
+        printf("[NET/WIFI] Ping to server " SERV_ADDR ": %d ms.\r\n",
+               ping_time);
         *status = OK;
         NET_AT_SEND_STATIC_CMD("AT+CIPRECONNINTV=" TCP_RECONNECT_INTERVAL
                                "\r\n");
@@ -273,7 +275,7 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 2: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
-            printf("[NET/WIFI] Cannot set TCP reconnect interval.\n");
+            printf("[NET/WIFI] Cannot set TCP reconnect interval.\r\n");
             break;
         }
         NET_AT_SEND_STATIC_CMD("AT+CIPSTART=\"TCP\",\"" SERV_ADDR
@@ -284,7 +286,7 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     case 3: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
             printf("[NET/WIFI] Cannot connect to server " SERV_ADDR
-                   ":" SERV_PORT ".\n");
+                   ":" SERV_PORT ".\r\n");
             break;
         }
         *status = OK;
@@ -295,7 +297,7 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     case 4: {
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
             printf("[NET/WIFI] Cannot enter pass-through recv mode. Try "
-                   "again..\n");
+                   "again..\r\n");
             HAL_Delay(1000);
             NET_AT_SEND_STATIC_CMD("AT+CIPMODE=1\r\n");
             *status = OK;
@@ -307,7 +309,7 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     case 5: {
         if (buffer[len - 1] == '>') {
-            printf("[NET/WIFI] Enter full pass-through mode.\n");
+            printf("[NET/WIFI] Enter full pass-through mode.\r\n");
             NET_STATUS = NET_STATUS_LINK_ESTABLISHED;
             *status    = OK;
             return 0;

@@ -79,18 +79,18 @@ void NET_AT_UART_INTERRUPT_HANDLER(void) {
 }
 
 void NET_AT_UART_INIT(UART_HandleTypeDef *uart) {
-    printf("[MODULE] NET/AT.UART Initializing.\n");
+    printf("[MODULE] NET/AT.UART Initializing.\r\n");
     net_at_uart = uart;
 
     // Enable IDLE interrupt for receiving signal when transmission finished
     __HAL_UART_ENABLE_IT(uart, UART_IT_IDLE);
     // HAL_UART_Receive_DMA(uart, net_at_rx_buffer, NET_AT_BUFFER_SIZE);
 
-    printf("[MODULE] NET/AT.UART Initialization completed.\n");
+    printf("[MODULE] NET/AT.UART Initialization completed.\r\n");
 }
 
 void NET_AT_FREERTOS_INIT(void) {
-    printf("[MODULE] NET/AT.FREERTOS Initializing.\n");
+    printf("[MODULE] NET/AT.FREERTOS Initializing.\r\n");
 
     //    qid_net_at_rx_msg          = xQueueCreate(2, sizeof(NET_AT_RX_MSG));
     //    qid_net_at_application_msg = xQueueCreate(16, sizeof(AT_Command_MSG));
@@ -105,16 +105,16 @@ void NET_AT_FREERTOS_INIT(void) {
                                          */
 
     net_at_uart_initialized = 1;
-    printf("[MODULE] NET/AT.FREERTOS Initialization completed.\n");
+    printf("[MODULE] NET/AT.FREERTOS Initialization completed.\r\n");
 }
 
 _Noreturn void task_net_at_uart(void *argument) {
-    printf("[NET/AT] Entered UART Task.\n");
+    printf("[NET/AT] Entered UART Task.\r\n");
     NET_AT_RX_MSG msg;
     for (;;) {
         xQueueReceive(qid_net_at_rx_msg, (void *)&msg, osWaitForever);
         if (msg.flag) {
-            printf("Received: %d bytes.\n", msg.len);
+            printf("Received: %d bytes.\r\n", msg.len);
             for (int i = 0; i < msg.len; i++)
                 printf("%c", net_at_rx_buffer[i]);
             msg.flag = 0;
@@ -125,11 +125,11 @@ _Noreturn void task_net_at_uart(void *argument) {
 }
 
 _Noreturn void task_net_at_application(void *argument) {
-    printf("[NET/AT] Entered Application Task.\n");
+    printf("[NET/AT] Entered Application Task.\r\n");
     AT_Command_MSG msg;
     for (;;) {
         xQueueReceive(qid_net_at_application_msg, (void *)&msg, osWaitForever);
-        printf("Received an msg.\n");
+        printf("Received an msg.\r\n");
         // send to uart
         // wait uart tasks to finish
         // send back
@@ -138,7 +138,7 @@ _Noreturn void task_net_at_application(void *argument) {
         if (pdFALSE ==
             xQueueSend(qid, (void *)&msg,
                        pdMS_TO_TICKS(1000))) { // wait 1 sec for queue.
-            printf("[NET/AT] Send back response failed.\n");
+            printf("[NET/AT] Send back response failed.\r\n");
         }
     }
 }

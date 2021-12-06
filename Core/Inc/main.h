@@ -62,6 +62,8 @@ void Error_Handler(void);
 #define WORKING_STATUS_GPIO_Port GPIOH
 #define NET_STATUS_LED_Pin GPIO_PIN_5
 #define NET_STATUS_LED_GPIO_Port GPIOH
+#define LCD_BACK_LIGHT_Pin GPIO_PIN_13
+#define LCD_BACK_LIGHT_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
