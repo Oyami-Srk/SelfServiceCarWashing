@@ -24,7 +24,6 @@
 #include "dma2d.h"
 #include "ltdc.h"
 #include "rtc.h"
-#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 #include "fmc.h"
@@ -112,7 +111,6 @@ int main(void)
   MX_FMC_Init();
   MX_LTDC_Init();
   MX_DMA2D_Init();
-  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */

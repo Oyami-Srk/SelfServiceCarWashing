@@ -15,7 +15,6 @@
 #include "ltdc.h"
 #include "lvgl.h"
 #include "main.h"
-#include "tim.h"
 
 volatile uint8_t g_gpu_state = 0;
 lv_disp_drv_t    g_disp_drv;
@@ -58,7 +57,7 @@ void LCD_DMA2D_INIT(void) {
     lv_init();
     disp_init();
     // start timer
-    HAL_TIM_Base_Start_IT(&htim2);
+    //    HAL_TIM_Base_Start_IT(&htim2);
 }
 
 void LCD_GPIO_INIT() {
