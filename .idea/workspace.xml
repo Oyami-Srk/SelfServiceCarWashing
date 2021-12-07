@@ -18,13 +18,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openocd.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/openocd.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,17 +184,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/SDRAM/sdram.c</url>
-          <line>43</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

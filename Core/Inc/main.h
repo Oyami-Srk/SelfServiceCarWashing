@@ -58,6 +58,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LCD_WIDTH 800
+#define LCD_HEIGHT 480
+#define LCD_MEM_ADDR 0xD0000000
+#define LCD_LAYER0_MEM_ADDR LCD_MEM_ADDR
+#define LCD_PIXEL_BYTES 3
+#define LCD_LAYER1_MEM_ADDR LCD_MEM_ADDR+LCD_WIDTH*LCD_HEIGHT*LCD_PIXEL_BYTES
 #define WORKING_STATUS_Pin GPIO_PIN_4
 #define WORKING_STATUS_GPIO_Port GPIOH
 #define NET_STATUS_LED_Pin GPIO_PIN_5

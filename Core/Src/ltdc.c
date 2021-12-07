@@ -61,17 +61,17 @@ void MX_LTDC_Init(void)
     Error_Handler();
   }
   pLayerCfg.WindowX0 = 0;
-  pLayerCfg.WindowX1 = 800;
+  pLayerCfg.WindowX1 = LCD_WIDTH;
   pLayerCfg.WindowY0 = 0;
-  pLayerCfg.WindowY1 = 480;
+  pLayerCfg.WindowY1 = LCD_HEIGHT;
   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
   pLayerCfg.Alpha = 255;
   pLayerCfg.Alpha0 = 0;
   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  pLayerCfg.FBStartAdress = 0xD0000000;
-  pLayerCfg.ImageWidth = 800;
-  pLayerCfg.ImageHeight = 480;
+  pLayerCfg.FBStartAdress = LCD_LAYER0_MEM_ADDR;
+  pLayerCfg.ImageWidth = LCD_WIDTH;
+  pLayerCfg.ImageHeight = LCD_HEIGHT;
   pLayerCfg.Backcolor.Blue = 0;
   pLayerCfg.Backcolor.Green = 0;
   pLayerCfg.Backcolor.Red = 0;
@@ -80,17 +80,17 @@ void MX_LTDC_Init(void)
     Error_Handler();
   }
   pLayerCfg1.WindowX0 = 0;
-  pLayerCfg1.WindowX1 = 800;
+  pLayerCfg1.WindowX1 = LCD_WIDTH;
   pLayerCfg1.WindowY0 = 0;
-  pLayerCfg1.WindowY1 = 480;
+  pLayerCfg1.WindowY1 = LCD_HEIGHT;
   pLayerCfg1.PixelFormat = LTDC_PIXEL_FORMAT_ARGB8888;
   pLayerCfg1.Alpha = 255;
   pLayerCfg1.Alpha0 = 0;
   pLayerCfg1.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
   pLayerCfg1.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-  pLayerCfg1.FBStartAdress = 0xD0000000+800*480*3;
-  pLayerCfg1.ImageWidth = 800;
-  pLayerCfg1.ImageHeight = 480;
+  pLayerCfg1.FBStartAdress = LCD_LAYER1_MEM_ADDR;
+  pLayerCfg1.ImageWidth = LCD_WIDTH;
+  pLayerCfg1.ImageHeight = LCD_HEIGHT;
   pLayerCfg1.Backcolor.Blue = 0;
   pLayerCfg1.Backcolor.Green = 0;
   pLayerCfg1.Backcolor.Red = 0;

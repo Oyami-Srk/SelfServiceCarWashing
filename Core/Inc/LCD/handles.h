@@ -12,7 +12,11 @@
 #ifndef __LCD_HANDLES_H__
 #define __LCD_HANDLES_H__
 
+// call after msp init of gpio
 void LCD_GPIO_INIT();
+// call after ltds init
 void LCD_DISPLAY_INIT();
+// call after dma2d init
+void LCD_DMA2D_INIT();
 
 #endif // __LCD_HANDLES_H__

@@ -89,7 +89,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+    // Get rid of stupid openocd
+    if (__HAL_RCC_GET_SYSCLK_SOURCE() == RCC_CFGR_SWS_PLL)
+        HAL_RCC_DeInit();
   /* USER CODE END Init */
 
   /* Configure the system clock */
