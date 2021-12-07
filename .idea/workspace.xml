@@ -5,7 +5,9 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="SelfServiceCarWashing" targetName="lvgl" />
       <config projectName="SelfServiceCarWashing" targetName="SelfServiceCarWashing.elf" />
+      <config projectName="SelfServiceCarWashing" targetName="lvgl_examples" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -14,7 +16,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="" />
+    <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,6 +124,16 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="lvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lvgl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lvgl_examples" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lvgl_examples" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD SelfServiceCarWashing" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="$PROJECT_DIR$/openocd.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -123,6 +144,8 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.SelfServiceCashing.elf" />
+      <item itemvalue="CMake 应用程序.lvgl" />
+      <item itemvalue="CMake 应用程序.lvgl_examples" />
       <item itemvalue="OpenOCD 下载并运行.OCD SelfServiceCarWashing" />
     </list>
   </component>
