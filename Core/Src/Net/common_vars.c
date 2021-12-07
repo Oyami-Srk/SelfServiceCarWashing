@@ -12,5 +12,6 @@
 #include "Net/config.h"
 #include "main.h"
 
-uint8_t NET_RX_BUFFER[NET_BUFFER_SIZE] = {0};
-uint8_t NET_STATUS;
+// uint8_t NET_RX_BUFFER[NET_BUFFER_SIZE] = {0};
+uint8_t *NET_RX_BUFFER = 0xD0000000 + 2 * (800 * 480 * 2);
+uint8_t  NET_STATUS;

@@ -8,6 +8,7 @@
       <config projectName="SelfServiceCarWashing" targetName="lvgl" />
       <config projectName="SelfServiceCarWashing" targetName="SelfServiceCarWashing.elf" />
       <config projectName="SelfServiceCarWashing" targetName="lvgl_examples" />
+      <config projectName="SelfServiceCarWashing" targetName="lv_demos" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -17,15 +18,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/lv_conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_blend.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/draw/sw/lv_draw_sw_blend.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openocd.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/openocd.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +138,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="lv_demos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lv_demos" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="lvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lvgl" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -145,6 +163,7 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.SelfServiceCashing.elf" />
+      <item itemvalue="CMake 应用程序.lv_demos" />
       <item itemvalue="CMake 应用程序.lvgl" />
       <item itemvalue="CMake 应用程序.lvgl_examples" />
       <item itemvalue="OpenOCD 下载并运行.OCD SelfServiceCarWashing" />
@@ -184,6 +203,28 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Middlewares/Third_Party/lvgl/examples/widgets/btn/lv_example_btn_1.c</url>
+          <line>17</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Net/AT/handles.c</url>
+          <line>54</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="g_disp_drv" />
+        <watch expression="NET_RX_BUFFER" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
