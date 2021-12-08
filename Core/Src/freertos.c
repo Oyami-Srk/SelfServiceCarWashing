@@ -108,8 +108,6 @@ void MX_FREERTOS_Init(void) {
 
     /* USER CODE BEGIN RTOS_EVENTS */
     /* add events, ... */
-    //    lv_demo_benchmark();
-    //    lv_demo_widgets();
     /* USER CODE END RTOS_EVENTS */
 }
 
