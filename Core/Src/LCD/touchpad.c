@@ -343,16 +343,19 @@ uint8_t Touch_Init(void) {
 
     if (GT9XX_Info[0] == '9') //	判断第一个字符是否为 ‘9’
     {
-        printf("Touch ID： GT%.4s \r\n", GT9XX_Info); // 打印触摸芯片的ID
-        printf("固件版本： 0X%.4x\r\n",
+        printf("[SYSTEM] Touchpad ID: GT%.4s \r\n",
+               GT9XX_Info); // 打印触摸芯片的ID
+        printf("[SYSTEM] Touchpad Firmware Version: 0x%.4x\r\n",
                (GT9XX_Info[5] << 8) + GT9XX_Info[4]); // 芯片固件版本
-        printf("触摸分辨率：%d * %d\r\n", (GT9XX_Info[7] << 8) + GT9XX_Info[6],
+        printf("[SYSTEM] Touchpad Resolution: %d * %d\r\n",
+               (GT9XX_Info[7] << 8) + GT9XX_Info[6],
                (GT9XX_Info[9] << 8) + GT9XX_Info[8]); // 当前触摸分辨率
-        printf("触摸参数配置版本： 0X%.2x \r\n", cfgVersion); // 触摸配置版本
+        printf("[SYSTEM] Touchpad Conf Version: 0x%.2x \r\n",
+               cfgVersion); // 触摸配置版本
 
         return SUCCESS;
     } else {
-        printf("未检测到触摸IC\r\n"); //错误，未检测到触摸屏
+        printf("[SYSTEM] Touchpad undetected\r\n"); //错误，未检测到触摸屏
         return ERROR;
     }
 }
