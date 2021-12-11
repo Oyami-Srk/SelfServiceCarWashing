@@ -21,6 +21,7 @@
 #include "Net/AT/utils.h"
 #include "Net/WIFI/handles.h"
 #include "Net/WIFI/procedure.h"
+#include "Net/cmd.h"
 #include "Net/config.h"
 #include "cmsis_os.h"
 #include "rtc.h"
@@ -54,6 +55,8 @@ extern uint8_t NET_IPV4[4];
 #define EMPTY_QUEUE(qid, msg_buffer)                                           \
     while (xQueueReceive(qid, msg_buffer, pdMS_TO_TICKS(1000)) == pdTRUE)      \
         ;
+
+osMessageQId qid_wait_cmd = NULL;
 
 _Noreturn void task_net_wifi(void *argument) {
     COMPILE_TIME_ASSERT(sizeof(NET_AT_RX_MSG) == sizeof(NET_WIFI_REQUEST_MSG));
@@ -183,6 +186,12 @@ connect_to_server:
         case NET_AT_MSG_UART_RECV: {
             printf("Received Bytes: %d\r\n", msg->len);
             PRINT_RX_BUFFER(NET_RX_BUFFER, msg->len, ">>>    ");
+            if (qid_wait_cmd) {
+                NET_MSG msg1;
+                msg1.recv = NET_RX_BUFFER;
+                msg1.len  = msg->len;
+                xQueueSend(qid_wait_cmd, &msg1, pdMS_TO_TICKS(3000));
+            }
             break;
         }
         default:

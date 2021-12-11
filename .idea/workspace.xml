@@ -17,24 +17,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Comm/handles.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/vars.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Comm/handles.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Comm/procedure.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Comm/procedure.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Comm/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/procedure.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Comm/procedure.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/gui.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/gui.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/AT/utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,8 +199,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c</url>
-          <line>45</line>
-          <option name="timeStamp" value="22" />
+          <line>122</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

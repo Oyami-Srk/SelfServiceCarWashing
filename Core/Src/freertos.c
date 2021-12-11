@@ -26,6 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Comm/handles.h"
 #include "Common/config.h"
 #include "LCD/handles.h"
 #include "Net/AT/handles.h"
@@ -78,6 +79,7 @@ void MX_FREERTOS_Init(void) {
     LCD_INIT_FREERTOS();
     NET_AT_FREERTOS_INIT();
     NET_WIFI_INIT();
+    COMM_INIT_FREERTOS();
     /* USER CODE END Init */
 
     /* USER CODE BEGIN RTOS_MUTEX */

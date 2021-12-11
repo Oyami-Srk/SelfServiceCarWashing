@@ -162,7 +162,7 @@ header file. */
         for (;;)                                                               \
             ;                                                                  \
     }
-#undef configASSERT;
+#undef configASSERT
 /* USER CODE END 1 */
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS

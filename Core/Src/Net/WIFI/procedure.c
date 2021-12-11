@@ -14,6 +14,7 @@
 #include "Common/utils.h"
 #include "Net/AT/command.h"
 #include "Net/AT/utils.h"
+#include "Net/cmd.h"
 #include "Net/config.h"
 #include "rtc.h"
 #include <ctype.h>
@@ -320,3 +321,16 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
     }
     return step + 1;
 }
+
+extern osMessageQueueId_t qid_wait_cmd;
+
+uint8_t SEND_MSG(uint8_t *msg, uint16_t len, osMessageQueueId_t qid_recv_msg) {
+    if (NET_STATUS != NET_STATUS_LINK_ESTABLISHED) {
+        return SEND_MSG_STATUS_FAILED;
+    }
+    NET_AT_SEND_CMD(msg, len);
+    qid_wait_cmd = qid_recv_msg;
+    return SEND_MSG_STATUS_OK;
+}
+
+void RECIVED_MSG() { qid_wait_cmd = 0; }

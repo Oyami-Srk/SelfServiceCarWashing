@@ -9,6 +9,7 @@
  *
  */
 
+#include "Comm/procedure.h"
 #include "Net/AT/command.h"
 #include "Net/config.h"
 #include "Net/vars.h"
@@ -37,6 +38,16 @@ _Noreturn void task_comm(void *argument) {
         vTaskDelay(pdMS_TO_TICKS(1000)); // wait 1 sec for link established
     }
 
+    printf("[COMM] Server link established.\r\n");
+retry:
+    if (REGISTER_DEVICE() != CMD_RESULT_OK) {
+        printf("[COMM] Failed to register. retry after 30sec.\r\n");
+        vTaskDelay(pdMS_TO_TICKS(1000 * 30));
+        goto retry;
+    }
+    printf("[COMM] Device registered.\r\n");
+
     for (;;) {
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
