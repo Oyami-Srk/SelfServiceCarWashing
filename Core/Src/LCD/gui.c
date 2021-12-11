@@ -38,7 +38,7 @@ void get_time_str(char *buffer, uint8_t show_mark) {
 
 uint8_t login(const char *username, const char *password) {
     printf("Tring to login with %s and password %s.\n", username, password);
-    return LOGIN_SUCCESS;
+    return LOGIN_FAILED;
 }
 
 static uint8_t qr_array[] = {
@@ -99,6 +99,7 @@ lv_canvas_t *draw_qr_code(uint16_t width, uint16_t height, uint8_t *qr_array,
     uint16_t     dotsize = (width > height ? height : width) / matrix_size;
     lv_canvas_t *canvas  = lv_canvas_create(lv_scr_act());
     lv_obj_align(canvas, LV_ALIGN_CENTER, 0, 0);
+    bzero(cbuf, LV_CANVAS_BUF_SIZE_TRUE_COLOR(300, 300));
     lv_obj_set_size(canvas, matrix_size * dotsize, matrix_size * dotsize);
     lv_canvas_set_buffer(canvas, cbuf, 300, 300, LV_IMG_CF_TRUE_COLOR);
     lv_canvas_fill_bg(canvas, lv_color_white(), 0xFF);
@@ -109,6 +110,23 @@ lv_canvas_t *draw_qr_code(uint16_t width, uint16_t height, uint8_t *qr_array,
     dot_dsc.radius   = 0;
     dot_dsc.bg_color = lv_color_black();
 
+    int x = 0, y = 0;
+    for (int j = 0; j < size * size; j++) {
+        uint8_t c = parray[j];
+        for (uint8_t i = 0; i < 8; i++) {
+            if ((c >> (7 - i)) & 0x01 == 1)
+                lv_canvas_draw_rect(canvas, x * dotsize, y * dotsize, dotsize,
+                                    dotsize, &dot_dsc);
+            x++;
+            if (x >= matrix_size) {
+                x = 0;
+                y++;
+            }
+            if (y >= matrix_size) {
+                break;
+            }
+        }
+    }
     return canvas;
 }
 

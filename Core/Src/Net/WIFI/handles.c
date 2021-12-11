@@ -32,7 +32,7 @@ osThreadId pid_net_wifi_task;
 const osThreadAttr_t task_net_wifi_attributes = {
     .name       = "net-at-wifi",
     .stack_size = 1024,
-    .priority   = (osPriority_t)osPriorityNormal,
+    .priority   = (osPriority_t)osPriorityAboveNormal,
 };
 
 _Noreturn void task_net_wifi(void *argument);
@@ -48,8 +48,8 @@ extern uint8_t NET_RX_BUFFER[NET_BUFFER_SIZE]; // common_vars.c
 uint8_t        msg_buffer[sizeof(NET_AT_RX_MSG)] = {0};
 
 extern uint8_t NET_STATUS;
-char           NET_WIFI_MAC[18];
-uint8_t        NET_WIFI_IPV4[0];
+extern char    NET_MAC[18];
+extern uint8_t NET_IPV4[4];
 
 #define EMPTY_QUEUE(qid, msg_buffer)                                           \
     while (xQueueReceive(qid, msg_buffer, pdMS_TO_TICKS(1000)) == pdTRUE)      \
@@ -63,11 +63,11 @@ _Noreturn void task_net_wifi(void *argument) {
     osMessageQId qid_wifi = xQueueCreate(16, sizeof(NET_AT_RX_MSG));
     NET_AT_REGISTER_RECV_BUFFER(NET_RX_BUFFER, NET_BUFFER_SIZE, qid_wifi);
 
-    HAL_Delay(100);
+    vTaskDelay(pdMS_TO_TICKS(100));
     NET_AT_SEND_STATIC_CMD("+++"); // Exit pass-through for restart.
-    HAL_Delay(100);
+    vTaskDelay(pdMS_TO_TICKS(100));
     NET_AT_SEND_STATIC_CMD("AT+RST\r\n");
-    HAL_Delay(1000);
+    vTaskDelay(pdMS_TO_TICKS(1000));
     NET_AT_START_RECV();
     NET_AT_SEND_STATIC_CMD("ATE0\r\n");
     EMPTY_QUEUE(qid_wifi, msg_buffer);
@@ -83,7 +83,7 @@ _Noreturn void task_net_wifi(void *argument) {
             if (AT_GET_RESULT(NET_RX_BUFFER, msg->len) != AT_OK) {
                 printf("[NET/WIFI] WiFi Module not ready. Wait 30 sec\r\n");
                 NET_STATUS = NET_STATUS_DEVICE_FAIL;
-                HAL_Delay(1000 * 30);
+                vTaskDelay(pdMS_TO_TICKS(1000 * 30));
                 EMPTY_QUEUE(qid_wifi, msg_buffer);
                 NET_AT_SEND_STATIC_CMD("AT+GMR\r\n");
                 continue;
@@ -97,6 +97,7 @@ _Noreturn void task_net_wifi(void *argument) {
 
     // connect to ap
 connect_to_ap:;
+    EMPTY_QUEUE(qid_wifi, msg_buffer);
     uint8_t  p = 0;
     Status_t status;
     while ((p = WIFI_CONNECT_TO_AP(NET_RX_BUFFER, msg->len, p, &status)) != 0) {
@@ -106,7 +107,7 @@ connect_to_ap:;
                    p - 1);
             EMPTY_QUEUE(qid_wifi, msg_buffer);
             NET_AT_SEND_STATIC_CMD("AT+RST\r\n"); // reset module
-            HAL_Delay(30 * 1000);
+            vTaskDelay(pdMS_TO_TICKS(1000 * 30));
             goto connect_to_ap;
         }
         for (;;) {
@@ -121,6 +122,7 @@ connect_to_ap:;
 
     printf("[NET/WIFI] WiFi Connected to Network. Trying to update time.\r\n");
 update_time:
+    EMPTY_QUEUE(qid_wifi, msg_buffer);
     p = 0;
     while ((p = WIFI_UPDATE_TIME(NET_RX_BUFFER, msg->len, p, &status)) != 0) {
         if (status != OK) {
@@ -135,7 +137,7 @@ update_time:
                    "for 30sec and retry.\r\n",
                    p - 1);
             EMPTY_QUEUE(qid_wifi, msg_buffer);
-            HAL_Delay(30 * 1000);
+            vTaskDelay(pdMS_TO_TICKS(1000 * 30));
             goto update_time;
         }
         for (;;) {
@@ -149,8 +151,8 @@ update_time:
     }
 
     printf("[NET/WIFI] RTC Clock updated. Trying to Connect to server.\r\n");
-
 connect_to_server:
+    EMPTY_QUEUE(qid_wifi, msg_buffer);
     p = 0;
     while ((p = WIFI_CONNECT_TO_SERVER(NET_RX_BUFFER, msg->len, p, &status)) !=
            0) {
@@ -160,7 +162,7 @@ connect_to_server:
                 "for 30sec and retry.\n",
                 p - 1);
             EMPTY_QUEUE(qid_wifi, msg_buffer);
-            HAL_Delay(30 * 1000);
+            vTaskDelay(pdMS_TO_TICKS(1000 * 30));
             goto connect_to_server;
         }
         for (;;) {
@@ -187,6 +189,6 @@ connect_to_server:
             printf("[NET/WIFI] Received Unknown type of message.\r\n");
             break;
         }
-        HAL_Delay(1000);
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }

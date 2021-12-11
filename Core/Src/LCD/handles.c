@@ -10,21 +10,16 @@
  */
 
 #include "LCD/handles.h"
+#include "FreeRTOS.h"
 #include "cmsis_os2.h"
 #include "dma2d.h"
 #include "ltdc.h"
 #include "lvgl.h"
 #include "main.h"
+#include "task.h"
 
 extern volatile uint8_t g_gpu_state;
 extern lv_disp_drv_t    g_disp_drv;
-
-void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d) {
-    if (g_gpu_state == 1) {
-        g_gpu_state = 0;
-        lv_disp_flush_ready(&g_disp_drv);
-    }
-}
 
 void LCD_CLEAR(void) {
     hdma2d.Init.Mode = DMA2D_R2M;
@@ -67,19 +62,27 @@ void LCD_DISPLAY_INIT() {
 }
 
 // tick hook for lvgl
-void LCD_MS_TICK() { lv_tick_inc(1); }
+// void LCD_MS_TICK() { lv_tick_inc(1); }
 
 _Noreturn static void task_lvgl() {
+    TickType_t       xLastWakeTime;
+    const TickType_t xPeriod = pdMS_TO_TICKS(5);
+
+    // 使用当前时间初始化变量xLastWakeTime ,注意这和vTaskDelay()函数不同
+    xLastWakeTime = xTaskGetTickCount();
+
     for (;;) {
+        /* 调用系统延时函数,周期性阻塞5ms */
+        vTaskDelayUntil(&xLastWakeTime, xPeriod);
         lv_task_handler();
-        HAL_Delay(5);
     }
+    vTaskDelete(NULL);
 }
 
 static const osThreadAttr_t task_lvgl_attributes = {
     .name       = "lcd-lvgl",
-    .stack_size = 1024,
-    .priority   = (osPriority_t)osPriorityNormal,
+    .stack_size = 2048,
+    .priority   = (osPriority_t)osPriorityAboveNormal,
 };
 
 osThreadId_t pid_task_lvgl = 0;

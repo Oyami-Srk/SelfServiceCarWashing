@@ -12,6 +12,7 @@
 // LVGL Porting to DMA2D
 
 #include "lvgl.h"
+#include "dma2d.h"
 #include "main.h"
 
 #define LVGL_DRAW_BUFFER_SIZE LCD_WIDTH * 200
@@ -27,8 +28,10 @@ static lv_color_t *disp_buf1 = LCD_END_ADDR;
 static lv_color_t *disp_buf2 =
     LCD_END_ADDR + LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t);
 
-volatile uint8_t g_gpu_state = 0;
-lv_disp_drv_t    g_disp_drv;
+uint8_t       g_gpu_state = 0;
+lv_disp_drv_t g_disp_drv;
+
+static __IO uint16_t *my_fb = LCD_LAYER0_MEM_ADDR;
 
 static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
                        lv_color_t *color_p) {
@@ -38,6 +41,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
     uint32_t OffLineSrc = LCD_WIDTH - (area->x2 - area->x1 + 1);
     uint32_t addr       = LCD_LAYER0_MEM_ADDR +
                     LCD_LAYER0_PIXEL_BYTES * (LCD_WIDTH * area->y1 + area->x1);
+
     DMA2D->CR      = 0x00000000UL | (1 << 9);
     DMA2D->FGMAR   = (uint32_t)(uint16_t *)(color_p);
     DMA2D->OMAR    = (uint32_t)addr;
@@ -50,6 +54,15 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
     DMA2D->CR |= DMA2D_CR_START;
     g_gpu_state = 1;
 }
+
+void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d) {
+    if (g_gpu_state == 1) {
+        g_gpu_state = 0;
+        lv_disp_flush_ready(&g_disp_drv);
+    }
+}
+
+void DMA2D_CB_ERROR(DMA2D_HandleTypeDef *p_hdma2d) {}
 
 static volatile uint32_t t_saved = 0;
 static monitor_cb(lv_disp_drv_t *d, uint32_t t, uint32_t p) { t_saved = t; }

@@ -23,8 +23,8 @@
 #include <time.h>
 
 extern uint8_t NET_STATUS;
-extern char    NET_WIFI_MAC[18];
-extern uint8_t NET_WIFI_IPV4[0];
+extern char    NET_MAC[18];
+extern uint8_t NET_IPV4[4];
 
 static const char wday_name[][4] = {"Sun", "Mon", "Tue", "Wed",
                                     "Thu", "Fri", "Sat"};
@@ -37,7 +37,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
     switch (step) {
     case 0: {
         // initial step
-        HAL_Delay(200);
+        vTaskDelay(pdMS_TO_TICKS(200));
         NET_AT_SEND_STATIC_CMD("AT+CWMODE=1\r\n"); // enter station mode
         *status = OK;
         break;
@@ -51,7 +51,7 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
         printf(
             "[NET/WIFI] Wait 1 sec for trying to connect to AP: " WIFI_AP_NAME
             ".\r\n");
-        HAL_Delay(200);
+        vTaskDelay(pdMS_TO_TICKS(200));
         NET_AT_SEND_STATIC_CMD("AT+CWJAP=\"" WIFI_AP_NAME "\",\"" WIFI_AP_PSWD
                                "\"\r\n");
         *status = OK;
@@ -123,13 +123,13 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
             *status = Failed;
             break;
         }
-        memcpy(NET_WIFI_MAC, p + 1, 17);
-        NET_WIFI_MAC[17] = 0;
-        for (p = NET_WIFI_MAC; p < NET_WIFI_MAC + 17; p++)
+        memcpy(NET_MAC, p + 1, 17);
+        NET_MAC[17] = 0;
+        for (p = NET_MAC; p < NET_MAC + 17; p++)
             *p = toupper(*p);
-        printf("[NET/WIFI] Device MAC: %s\r\n", NET_WIFI_MAC);
+        printf("[NET/WIFI] Device MAC: %s\r\n", NET_MAC);
         NET_AT_SEND_STATIC_CMD("AT+CIPSTA?\r\n");
-        HAL_Delay(200);
+        vTaskDelay(pdMS_TO_TICKS(200));
         break;
     }
     case 4: {
@@ -154,11 +154,11 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
                 *j++ = *p++;
             }
             p++;
-            *(j++)           = '\0';
-            NET_WIFI_IPV4[i] = atoi(ipbuffer);
+            *(j++)      = '\0';
+            NET_IPV4[i] = atoi(ipbuffer);
         }
-        printf("[NET/WIFI] Device IP: %d.%d.%d.%d\r\n", NET_WIFI_IPV4[0],
-               NET_WIFI_IPV4[1], NET_WIFI_IPV4[2], NET_WIFI_IPV4[3]);
+        printf("[NET/WIFI] Device IP: %d.%d.%d.%d\r\n", NET_IPV4[0],
+               NET_IPV4[1], NET_IPV4[2], NET_IPV4[3]);
         return 0;
     }
     }
@@ -171,7 +171,7 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
     switch (step) {
     case 0: {
         // initial step
-        HAL_Delay(200);
+        vTaskDelay(pdMS_TO_TICKS(200));
         NET_AT_SEND_STATIC_CMD("AT+CIPSNTPCFG=1,8,\"" SNTP_SERVER
                                "\"\r\n"); // set sntp server
         *status = OK;
@@ -182,7 +182,8 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
             printf("[NET/WIFI] Cannot set sntp server.\r\n");
             break;
         }
-        HAL_Delay(5000); // 5 sec to sync
+        // wait 5 sec
+        vTaskDelay(pdMS_TO_TICKS(5000));
         NET_AT_SEND_STATIC_CMD("AT+CIPSNTPTIME?\r\n");
         *status = OK;
         break;
@@ -298,7 +299,7 @@ uint8_t WIFI_CONNECT_TO_SERVER(uint8_t *buffer, uint16_t len, uint8_t step,
         if (AT_GET_RESULT(buffer, len) != AT_OK) {
             printf("[NET/WIFI] Cannot enter pass-through recv mode. Try "
                    "again..\r\n");
-            HAL_Delay(1000);
+            vTaskDelay(pdMS_TO_TICKS(1000));
             NET_AT_SEND_STATIC_CMD("AT+CIPMODE=1\r\n");
             *status = OK;
             return 4;

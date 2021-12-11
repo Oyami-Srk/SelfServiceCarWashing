@@ -22,6 +22,7 @@ void LCD_DISPLAY_INIT();
 void LCD_DMA2D_INIT();
 
 void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d);
+void DMA2D_CB_ERROR(DMA2D_HandleTypeDef *p_hdma2d);
 
 void LCD_INIT_FREERTOS();
 

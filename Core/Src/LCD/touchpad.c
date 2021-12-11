@@ -398,8 +398,14 @@ uint8_t touchpad_get_xy(uint16_t *x, uint16_t *y) {
     Touch_Scan();
     if (touchInfo.flag == 0)
         return 0x00;
+    if (touchInfo.x[0] > LCD_WIDTH || touchInfo.y[0] > LCD_HEIGHT) {
+        *x = 0;
+        *y = 0;
+        return 0x00;
+    }
     // Only get first touch
     *x = touchInfo.x[0];
     *y = touchInfo.y[0];
+
     return 0xFF;
 }

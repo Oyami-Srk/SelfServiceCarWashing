@@ -25,9 +25,9 @@ AT_RESULT AT_GET_RESULT(uint8_t *buffer, uint16_t len) {
     }
     char pb[16] = {0};
     memcpy(pb, buffer + i, len - i - 2);
-    if (strcmp(pb, "OK") == 0) {
+    if (memcmp(pb, "OK", 2) == 0) {
         return AT_OK;
-    } else if (strcmp(pb, "ERROR") == 0) {
+    } else if (memcmp(pb, "ERROR", 5) == 0) {
         return AT_ERROR;
     }
 }

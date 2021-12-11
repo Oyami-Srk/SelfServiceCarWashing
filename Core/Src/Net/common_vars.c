@@ -10,7 +10,11 @@
  */
 
 #include "Net/config.h"
+#include "cmsis_os2.h"
 #include "main.h"
 
-uint8_t NET_RX_BUFFER[NET_BUFFER_SIZE] = {0};
-uint8_t NET_STATUS;
+uint8_t             NET_RX_BUFFER[NET_BUFFER_SIZE] = {0};
+uint8_t             NET_STATUS;
+char                NET_MAC[18] = {0};
+uint8_t             NET_IPV4[4] = {0};
+osMessageQueueId_t *net_queue   = NULL;
