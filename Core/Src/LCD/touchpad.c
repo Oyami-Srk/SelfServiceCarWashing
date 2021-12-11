@@ -23,10 +23,9 @@
 
 // Hardware IIC functionalities
 static inline void TOUCH_IIC_DELAY(uint32_t time) {
-    int i;
     while (time--)
-        for (i = 0; i < 10; i++)
-            ;
+        for (int i = 0; i < 45; i++)
+            __asm__ volatile("" : "+g"(i)::);
 }
 
 static void TOUCH_IIC_SET_IIC_OUTPUT() {
@@ -157,9 +156,15 @@ static uint8_t TOUCH_IIC_READ_BYTE(uint8_t ACK_Mode) {
 
 // Touch chip functionalities
 
-#define TOUCH_POINT_MAX   5
-#define GT9XX_IIC_RADDR   0xBB
-#define GT9XX_IIC_WADDR   0xBA
+#define TOUCH_POINT_MAX 5
+#define GT9XX_IIC_USE_0x28
+#ifdef GT9XX_IIC_USE_0x28
+#define GT9XX_IIC_RADDR 0x29
+#define GT9XX_IIC_WADDR 0x28
+#else
+#define GT9XX_IIC_RADDR 0xBB
+#define GT9XX_IIC_WADDR 0xBA
+#endif
 #define GT9XX_READ_ADDR   0x814E
 #define GT9XX_ID_ADDR     0x8140
 #define GT9XX_CFG_ADDR    0x8047 // 固件配置信息寄存器和配置起始地址
@@ -182,8 +187,64 @@ __IO static uint8_t Modify_Flag = 0;
  *	函数功能:	复位GT911
  *	说    明:	复位GT911，并将芯片的IIC地址配置为0xBA/0xBB
  ******************************************************************************************/
+
+#define Touch_IIC_SCL_CLK_ENABLE __HAL_RCC_GPIOC_CLK_ENABLE() // SCL 引脚时钟
+#define Touch_IIC_SCL_PORT       GPIOC       // SCL 引脚端口
+#define Touch_IIC_SCL_PIN        GPIO_PIN_13 // SCL 引脚
+
+#define Touch_IIC_SDA_CLK_ENABLE __HAL_RCC_GPIOB_CLK_ENABLE() // SDA 引脚时钟
+#define Touch_IIC_SDA_PORT       GPIOB      // SDA 引脚端口
+#define Touch_IIC_SDA_PIN        GPIO_PIN_2 // SDA 引脚
+
+#define Touch_INT_CLK_ENABLE __HAL_RCC_GPIOA_CLK_ENABLE() // INT 引脚时钟
+#define Touch_INT_PORT       GPIOA                        // INT 引脚端口
+#define Touch_INT_PIN        GPIO_PIN_15                  // INT 引脚
+
+#define Touch_RST_CLK_ENABLE __HAL_RCC_GPIOI_CLK_ENABLE() // RST 引脚时钟
+#define Touch_RST_PORT       GPIOI                        // RST 引脚端口
+#define Touch_RST_PIN        GPIO_PIN_11                  // RST 引脚
+void Touch_IIC_GPIO_Config(void) {
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    Touch_IIC_SCL_CLK_ENABLE; //初始化IO口时钟
+    Touch_IIC_SDA_CLK_ENABLE;
+    Touch_INT_CLK_ENABLE;
+    Touch_RST_CLK_ENABLE;
+
+    GPIO_InitStruct.Pin   = Touch_IIC_SCL_PIN;   // SCL引脚
+    GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_OD; // 开漏输出
+    GPIO_InitStruct.Pull  = GPIO_NOPULL;         // 不带上下拉
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; // 速度等级
+    HAL_GPIO_Init(Touch_IIC_SCL_PORT, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = Touch_IIC_SDA_PIN; // SDA引脚
+    HAL_GPIO_Init(Touch_IIC_SDA_PORT, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP; // 推挽输出
+    GPIO_InitStruct.Pull = GPIO_PULLUP;         // 上拉
+
+    GPIO_InitStruct.Pin = Touch_INT_PIN; //	INT
+    HAL_GPIO_Init(Touch_INT_PORT, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = Touch_RST_PIN; //	RST
+    HAL_GPIO_Init(Touch_RST_PORT, &GPIO_InitStruct);
+
+    HAL_GPIO_WritePin(Touch_IIC_SCL_PORT, Touch_IIC_SCL_PIN,
+                      GPIO_PIN_SET); // SCL输出高电平
+    HAL_GPIO_WritePin(Touch_IIC_SDA_PORT, Touch_IIC_SDA_PIN,
+                      GPIO_PIN_SET); // SDA输出高电平
+    HAL_GPIO_WritePin(Touch_INT_PORT, Touch_INT_PIN,
+                      GPIO_PIN_RESET); // INT输出低电平
+    HAL_GPIO_WritePin(Touch_RST_PORT, Touch_RST_PIN,
+                      GPIO_PIN_SET); // RST输出高	电平
+}
+
 void GT9XX_Reset(void) {
-    TOUCH_IIC_SET_IIC_OUTPUT(); //	将INT引脚配置为输出
+    Touch_IIC_GPIO_Config();
+    SET_GPIO(SET, TOUCH_IIC_SCL);
+    SET_GPIO(SET, TOUCH_IIC_SDA);
+    SET_GPIO(RESET, TOUCH_IIC_INT);
+    SET_GPIO(SET, TOUCH_IIC_RST);
 
     // 初始化引脚状态
     SET_GPIO(RESET, TOUCH_IIC_INT);
@@ -191,6 +252,15 @@ void GT9XX_Reset(void) {
     TOUCH_IIC_DELAY(10000);
 
     // 开始执行复位
+#ifdef GT9XX_IIC_USE_0x28
+    SET_GPIO(RESET, TOUCH_IIC_RST);
+    TOUCH_IIC_DELAY(250000);      // 延时
+    SET_GPIO(SET, TOUCH_IIC_INT); // 拉高INT引脚
+    TOUCH_IIC_DELAY(250000);      // 延时
+    SET_GPIO(SET, TOUCH_IIC_RST); // 拉高复位引脚，复位结束
+    TOUCH_IIC_DELAY(450000);      // 延时
+    TOUCH_IIC_SET_IIC_INPUT();    // INT引脚转为浮空输入
+#else
     //	INT引脚保持低电平不变，将器件地址设置为0XBA/0XBB
     SET_GPIO(RESET, TOUCH_IIC_RST); // 拉低复位引脚，此时芯片执行复位
     TOUCH_IIC_DELAY(250000);        // 延时
@@ -198,6 +268,7 @@ void GT9XX_Reset(void) {
     TOUCH_IIC_DELAY(450000);      // 延时
     TOUCH_IIC_SET_IIC_INPUT();    // INT引脚转为浮空输入
     TOUCH_IIC_DELAY(350000);      // 延时
+#endif
 }
 
 /*****************************************************************************************

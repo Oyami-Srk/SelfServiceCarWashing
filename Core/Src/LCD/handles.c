@@ -45,7 +45,6 @@ uint8_t Touch_Init(void); // in touchpad.c
 
 void LCD_DMA2D_INIT(void) {
     LCD_CLEAR();
-    Touch_Init();
     // lvgl process
     lv_init();
     disp_init();
@@ -54,6 +53,7 @@ void LCD_DMA2D_INIT(void) {
 void LCD_GPIO_INIT() {
     HAL_GPIO_WritePin(LCD_BACK_LIGHT_GPIO_Port, LCD_BACK_LIGHT_Pin,
                       GPIO_PIN_SET);
+    Touch_Init();
 }
 
 void LCD_DISPLAY_INIT() {
