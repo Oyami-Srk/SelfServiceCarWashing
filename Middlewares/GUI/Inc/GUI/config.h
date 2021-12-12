@@ -1,0 +1,13 @@
+#ifndef __GUI_CONFIG_H__
+#define __GUI_CONFIG_H__
+
+#define GUI_SIMULATING 1
+#define QR_CANVAS_USE_STATIC_ALLOC
+#define QR_CANVAS_SIZE_H 300
+#define QR_CANVAS_SIZE_W 300
+
+#ifndef QR_CANVAS_USE_STATIC_ALLOC
+#define QR_CANVAS_USE_EXTERN
+#endif
+
+#endif // __GUI_CONFIG_H__
