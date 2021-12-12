@@ -17,8 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Inc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/gui.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/gui.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +164,7 @@
       <workItem from="1638798483752" duration="4321000" />
       <workItem from="1639139498006" duration="2264000" />
       <workItem from="1639208015548" duration="5750000" />
-      <workItem from="1639297952975" duration="8887000" />
+      <workItem from="1639297952975" duration="9524000" />
     </task>
     <servers />
   </component>
