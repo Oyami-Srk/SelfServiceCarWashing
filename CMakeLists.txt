@@ -51,6 +51,9 @@ include_directories(Core/Inc Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_
 add_subdirectory(Middlewares/Third_Party/lvgl/)
 add_definitions(-DLV_LVGL_H_SIMPLE)
 
+file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
+include_directories("Middlewares/GUI/Inc")
+
 add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx)
 
 file(GLOB_RECURSE SOURCES "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Core/*.*")
@@ -61,7 +64,7 @@ add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+add_executable(${PROJECT_NAME}.elf ${SOURCES} ${GUI_SOURCES} ${LINKER_SCRIPT})
 target_link_libraries(${PROJECT_NAME}.elf lvgl)
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)

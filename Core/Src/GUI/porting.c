@@ -10,14 +10,16 @@
  */
 
 /* Porting function */
+#include "GUI/gui_lvgl.h"
 #include "main.h"
 #include "rtc.h"
 #include "time.h"
 #include <stdio.h>
 
 #define LVGL_DRAW_BUFFER_SIZE LCD_WIDTH * 200
-static lv_color_t *cbuf =
-    LCD_END_ADDR + 2 * (LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t));
+lv_color_t *qr_canvas_buf =
+    (lv_color_t *)(LCD_END_ADDR +
+                   2 * (LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t)));
 
 #define LOGIN_SUCCESS 0x00
 #define LOGIN_FAILED  0x01
@@ -89,4 +91,8 @@ static uint8_t qr_array[] = {
     0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,
     0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0,  0x0};
 
+uint16_t get_qr_code(uint8_t **pArray) {
+    *pArray = qr_array;
+    return sizeof(qr_array); // 408
+}
 /* End of Porting function */
