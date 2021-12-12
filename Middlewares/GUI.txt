@@ -1,0 +1,1 @@
+Note: GUI submodule only checkout Inc and Src directory
