@@ -1,3 +1,6 @@
 [submodule "Middlewares/Third_Party/lvgl"]
 	path = Middlewares/Third_Party/lvgl
 	url = https://github.com/lvgl/lvgl
+[submodule "Middlewares/GUI"]
+	path = Middlewares/GUI
+	url = git@github.com:Oyami-Srk/SelfServiceCarWashing-GUI
