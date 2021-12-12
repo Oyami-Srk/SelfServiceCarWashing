@@ -233,6 +233,9 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
         HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
         HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
         HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0xF103);
+        if (HAL_RTCEx_DeactivateTimeStamp(&hrtc) != HAL_OK) {
+            Error_Handler();
+        }
         memset(&time, 0, sizeof(RTC_TimeTypeDef));
         memset(&date, 0, sizeof(RTC_DateTypeDef));
         HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
@@ -240,7 +243,7 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
 
         printf(
             "[NET/WIFI] NTP Time Updated: 20%02d/%02d/%02d %02d:%02d:%02d\r\n",
-            date.Year, date.Month, date.WeekDay, time.Hours, time.Minutes,
+            date.Year, date.Month, date.Date, time.Hours, time.Minutes,
             time.Seconds);
         *status = OK;
         return 0;

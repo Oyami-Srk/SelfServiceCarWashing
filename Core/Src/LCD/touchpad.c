@@ -24,8 +24,8 @@
 // Hardware IIC functionalities
 static inline void TOUCH_IIC_DELAY(uint32_t time) {
     while (time--)
-        for (int i = 0; i < 45; i++)
-            __asm__ volatile("" : "+g"(i)::);
+        for (int i = 0; i < 10; i++)
+            ;
 }
 
 static void TOUCH_IIC_SET_IIC_OUTPUT() {

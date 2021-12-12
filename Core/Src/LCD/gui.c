@@ -37,6 +37,8 @@ void get_time_str(char *buffer, uint8_t show_mark) {
 }
 
 void switch_to_inuse_scr(const char *user);
+void switch_to_login_scr();
+void switch_to_loading_scr();
 
 uint8_t login(const char *username, const char *password) {
     printf("Tring to login with %s and password %s.\n", username, password);
@@ -48,6 +50,13 @@ float getCurrentFlow() { return 1; } // in ml/s
 
 float getCurrentUsage() {
     return 10; // in L
+}
+
+int getCurrentUsingTime() { return HAL_GetTick(); }
+
+void logout() {
+    switch_to_loading_scr();
+    switch_to_login_scr();
 }
 
 static uint8_t qr_array[] = {
@@ -101,6 +110,7 @@ lv_label_t    *user_label;
 
 lv_label_t *currentAmount;
 lv_label_t *currentFlow;
+lv_label_t *currentTime;
 lv_timer_t *update_timer;
 void        timer_update_data(lv_timer_t *timer);
 
@@ -115,19 +125,54 @@ void switch_to_inuse_scr(const char *user) {
     lv_timer_resume(timer_clock);
     lv_timer_ready(timer_clock);
     lv_scr_load_anim(screens[SCR_USING], LV_SCR_LOAD_ANIM_FADE_ON, 1000, 1000,
-                     1);
+                     0);
     if (user_label) {
         lv_label_set_text(user_label, user);
     }
 }
+
+typedef struct {
+    lv_textarea_t *username, *password;
+    lv_group_t    *textgrp;
+    lv_obj_t      *login_btn;
+} DataInputArea;
+
+lv_btn_t     *btn_login = NULL;
+DataInputArea dia;
 
 void switch_to_login_scr() {
     lv_timer_pause(update_timer);
     curr_clock_label = clock_label_login;
     lv_timer_resume(timer_clock);
     lv_timer_ready(timer_clock);
+    if (btn_login) {
+        lv_obj_clear_state(btn_login, LV_STATE_DISABLED);
+    }
+    if (dia.username) {
+        if (strlen(lv_textarea_get_text(dia.username)) != 0)
+            lv_textarea_set_text(dia.username, "");
+    }
+    if (dia.password) {
+        if (strlen(lv_textarea_get_text(dia.password)) != 0)
+            lv_textarea_set_text(dia.password, "");
+    }
+
+    lv_group_remove_obj(dia.password);
+    lv_group_remove_obj(dia.username);
+    lv_group_focus_freeze(dia.textgrp, 1);
+    lv_group_add_obj(dia.textgrp, dia.username);
+    lv_group_add_obj(dia.textgrp, dia.password);
+    lv_group_focus_freeze(dia.textgrp, 0);
+
     lv_scr_load_anim(screens[SCR_LOGIN], LV_SCR_LOAD_ANIM_FADE_ON, 1000, 1000,
-                     1);
+                     0);
+}
+
+void switch_to_loading_scr() {
+    lv_timer_pause(update_timer);
+    lv_timer_pause(timer_clock);
+    lv_scr_load_anim(screens[SCR_LOADING], LV_SCR_LOAD_ANIM_FADE_ON, 1000, 1000,
+                     0);
 }
 
 lv_canvas_t *draw_qr_code(uint16_t width, uint16_t height, uint8_t *qr_array,
@@ -172,15 +217,16 @@ lv_canvas_t *draw_qr_code(uint16_t width, uint16_t height, uint8_t *qr_array,
 }
 
 void simulate_login_switch(lv_timer_t *timer) {
-    switch_to_inuse_scr("TestUser");
+    //    switch_to_inuse_scr("TestUser");
+    switch_to_login_scr();
 }
 
 void simulate_loading(lv_timer_t *timer) {
     //    lv_scr_load(screens[SCR_LOGIN]);
-    switch_to_login_scr();
+    switch_to_loading_scr();
 
-    //    lv_timer_t *oneshot = lv_timer_create(simulate_login_switch, 3000,
-    //    NULL); lv_timer_set_repeat_count(oneshot, 1);
+    lv_timer_t *oneshot = lv_timer_create(simulate_login_switch, 3000, NULL);
+    lv_timer_set_repeat_count(oneshot, 1);
 }
 
 void draw_widget() {
@@ -208,9 +254,6 @@ void draw_widget() {
     // simulate loading
     lv_timer_t *oneshot = lv_timer_create(simulate_loading, 1000, NULL);
     lv_timer_set_repeat_count(oneshot, 1);
-
-    lv_scr_load(screens[SCR_LOADING]);
-    //    lv_scr_load(screens[SCR_LOGIN]);
 }
 
 void callback_btn_login(lv_event_t *event);
@@ -218,12 +261,6 @@ void callback_btn_clear(lv_event_t *event);
 void callback_btn_info(lv_event_t *event);
 void callback_show_kbd(lv_event_t *event);
 void callback_kbd(lv_event_t *event);
-
-typedef struct {
-    lv_textarea_t *username, *password;
-    lv_group_t    *textgrp;
-    lv_obj_t      *login_btn;
-} DataInputArea;
 
 void draw_scr_login(lv_obj_t *scr) {
     // Initialize title bar
@@ -296,10 +333,9 @@ void draw_scr_login(lv_obj_t *scr) {
     lv_obj_set_size(password, 250, 50);
     lv_obj_align(password, LV_ALIGN_BOTTOM_MID, 0, -5);
     lv_textarea_set_password_mode(password, 1);
-    static DataInputArea dia = {0};
-    dia.username             = username;
-    dia.password             = password;
-    lv_group_t *textgrp      = lv_group_create();
+    dia.username        = username;
+    dia.password        = password;
+    lv_group_t *textgrp = lv_group_create();
     lv_group_add_obj(textgrp, username);
     lv_group_add_obj(textgrp, password);
     dia.textgrp = textgrp;
@@ -312,7 +348,7 @@ void draw_scr_login(lv_obj_t *scr) {
     lv_obj_set_style_bg_opa(button_area, 0, LV_STATE_DEFAULT);
     lv_obj_set_style_border_opa(button_area, 0, LV_STATE_DEFAULT);
 
-    lv_btn_t *btn_login = lv_btn_create(button_area);
+    btn_login = lv_btn_create(button_area);
     lv_obj_align(btn_login, LV_ALIGN_TOP_MID, 0, 10);
     lv_label_t *btn_login_label = lv_label_create(btn_login);
     lv_label_set_text(btn_login_label, "LOGIN");
@@ -515,6 +551,17 @@ void timer_update_data(lv_timer_t *timer) {
         sprintf(buffer, "%lf", getCurrentFlow());
         lv_label_set_text(currentFlow, buffer);
     }
+    if (currentTime) {
+        sprintf(buffer, "%d", getCurrentUsingTime());
+        lv_label_set_text(currentTime, buffer);
+    }
+}
+
+void callback_logout(lv_event_t *event) {
+    lv_event_code_t code = lv_event_get_code(event);
+    if (code == LV_EVENT_CLICKED) {
+        logout();
+    }
 }
 
 void draw_scr_inuse(lv_obj_t *scr) {
@@ -606,13 +653,16 @@ void draw_scr_inuse(lv_obj_t *scr) {
     lv_obj_set_size(text_card, 700, 250);
     lv_obj_set_style_bg_opa(text_card, 0, LV_STATE_DEFAULT);
     lv_obj_set_style_pad_all(text_card, 0, LV_STATE_DEFAULT);
+    lv_obj_set_flex_flow(text_card, LV_FLEX_FLOW_COLUMN);
+
     lv_obj_t *current_usage_panel = lv_obj_create(text_card);
-    lv_obj_set_size(current_usage_panel, 680, 120);
+    lv_obj_set_size(current_usage_panel, 680, 60);
     lv_obj_set_flex_flow(current_usage_panel, LV_FLEX_FLOW_ROW);
-    lv_obj_set_align(current_usage_panel, LV_ALIGN_TOP_MID);
+    lv_obj_set_style_pad_all(current_usage_panel, 0, LV_STATE_DEFAULT);
+    //    lv_obj_set_align(current_usage_panel, LV_ALIGN_TOP_MID);
     lv_obj_set_style_bg_opa(current_usage_panel, 0, LV_STATE_DEFAULT);
     lv_label_t *lbl2 = lv_label_create(current_usage_panel);
-    lv_label_set_text(lbl2, "Current Usage(L): ");
+    lv_label_set_text(lbl2, "Usage(L): ");
 
     currentAmount = lv_label_create(current_usage_panel);
     lv_obj_set_style_text_font(lbl2, &lv_font_montserrat_36, LV_STATE_DEFAULT);
@@ -620,17 +670,41 @@ void draw_scr_inuse(lv_obj_t *scr) {
                                LV_STATE_DEFAULT);
 
     lv_obj_t *current_flow_panel = lv_obj_create(text_card);
-    lv_obj_set_size(current_flow_panel, 680, 120);
+    lv_obj_set_size(current_flow_panel, 680, 60);
     lv_obj_set_flex_flow(current_flow_panel, LV_FLEX_FLOW_ROW);
-    lv_obj_set_align(current_flow_panel, LV_ALIGN_BOTTOM_MID);
+    //    lv_obj_set_align(current_flow_panel, LV_ALIGN_BOTTOM_MID);
+    lv_obj_set_style_pad_all(current_flow_panel, 0, LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(current_flow_panel, 0, LV_STATE_DEFAULT);
     lv_label_t *lbl3 = lv_label_create(current_flow_panel);
-    lv_label_set_text(lbl3, "Current Flow(mL/s): ");
+    lv_label_set_text(lbl3, "Flow(mL/s): ");
 
     currentFlow = lv_label_create(current_flow_panel);
     lv_obj_set_style_text_font(lbl3, &lv_font_montserrat_36, LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(currentFlow, &lv_font_montserrat_36,
                                LV_STATE_DEFAULT);
+
+    lv_obj_t *current_time_panel = lv_obj_create(text_card);
+    lv_obj_set_size(current_time_panel, 680, 60);
+    lv_obj_set_flex_flow(current_time_panel, LV_FLEX_FLOW_ROW);
+    //    lv_obj_set_align(current_time_panel, LV_ALIGN_BOTTOM_MID);
+    lv_obj_set_style_pad_all(current_time_panel, 0, LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(current_time_panel, 0, LV_STATE_DEFAULT);
+    lv_label_t *lbl4 = lv_label_create(current_time_panel);
+    lv_label_set_text(lbl4, "Using Time(s): ");
+
+    currentTime = lv_label_create(current_time_panel);
+    lv_obj_set_style_text_font(lbl4, &lv_font_montserrat_36, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(currentTime, &lv_font_montserrat_36,
+                               LV_STATE_DEFAULT);
+
+    // draw exit button
+    lv_btn_t *logout_btn = lv_btn_create(main_card);
+    lv_obj_align(logout_btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
+    lv_label_t *logout_lbl = lv_label_create(logout_btn);
+    lv_label_set_text(logout_lbl, "LogOut");
+    lv_obj_set_style_text_font(logout_lbl, &lv_font_montserrat_26,
+                               LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(logout_btn, callback_logout, LV_EVENT_ALL, NULL);
 }
 
 void draw_scr_loading(lv_obj_t *scr) {

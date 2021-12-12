@@ -109,6 +109,6 @@ void disp_init(void) {
     indev_drv.read_cb = touchpad_read;
     indev_drv.type    = LV_INDEV_TYPE_POINTER;
     lv_indev_drv_register(&indev_drv);
-    //
+    // start main gui
     draw_widget();
 }
