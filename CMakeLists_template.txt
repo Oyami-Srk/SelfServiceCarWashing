@@ -54,7 +54,7 @@ add_definitions(-DLV_LVGL_H_SIMPLE)
 file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
 include_directories("Middlewares/GUI/Inc")
 
-file(GLOB_RECURSE SOURCES $${sources})
+file(GLOB_RECURSE SOURCES ${sources})
 
 set(LINKER_SCRIPT $${CMAKE_SOURCE_DIR}/${linkerScript})
 

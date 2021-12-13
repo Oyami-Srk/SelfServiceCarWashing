@@ -55,7 +55,7 @@ add_definitions(-DLV_LVGL_H_SIMPLE)
 file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
 include_directories("Middlewares/GUI/Inc")
 
-file(GLOB_RECURSE SOURCES ${sources})
+file(GLOB_RECURSE SOURCES "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Core/*.*")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F429BITx_FLASH.ld)
 
