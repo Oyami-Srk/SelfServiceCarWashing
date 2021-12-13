@@ -40,14 +40,28 @@ _Noreturn void task_comm(void *argument) {
     }
 
     printf("[COMM] Server link established.\r\n");
-retry:
+retry_reg:
     if (REGISTER_DEVICE() != CMD_RESULT_OK) {
         printf("[COMM] Failed to register. retry after 30sec.\r\n");
         vTaskDelay(pdMS_TO_TICKS(1000 * 30));
-        goto retry;
+        goto retry_reg;
     }
     printf("[COMM] Device registered.\r\n");
     switch_to_login_scr();
+    int retry_times = 0;
+
+    vTaskDelay(pdMS_TO_TICKS(2000));
+
+retry_qr:
+    if (ACQUIRE_QRCODE() != CMD_RESULT_OK && retry_times <= 3) {
+        printf("[COMM] Failed to acquire qr code. retry after 30sec.\r\n");
+        vTaskDelay(pdMS_TO_TICKS(1000 * 30));
+        goto retry_qr;
+    } else if (retry_times > 3) {
+        printf("[COMM] Maximum Retries, leave it empty.\r\n");
+    } else {
+        printf("[COMM] QR Code Acquired.\r\n");
+    }
 
     for (;;) {
         vTaskDelay(pdMS_TO_TICKS(1000));
