@@ -9,6 +9,7 @@
  *
  */
 
+#include "GUI/handles.h"
 #include "Comm/procedure.h"
 #include "Net/AT/command.h"
 #include "Net/config.h"
@@ -46,6 +47,7 @@ retry:
         goto retry;
     }
     printf("[COMM] Device registered.\r\n");
+    switch_to_login_scr();
 
     for (;;) {
         vTaskDelay(pdMS_TO_TICKS(1000));

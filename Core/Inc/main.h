@@ -74,6 +74,14 @@ void Error_Handler(void);
 #define WORKING_STATUS_LED_GPIO_Port GPIOH
 #define NET_STATUS_LED_Pin GPIO_PIN_5
 #define NET_STATUS_LED_GPIO_Port GPIOH
+#define FOAM_LED_Pin GPIO_PIN_4
+#define FOAM_LED_GPIO_Port GPIOA
+#define WATER_LED_Pin GPIO_PIN_5
+#define WATER_LED_GPIO_Port GPIOA
+#define WATER_BTN_Pin GPIO_PIN_7
+#define WATER_BTN_GPIO_Port GPIOA
+#define FOAM_BTN_Pin GPIO_PIN_4
+#define FOAM_BTN_GPIO_Port GPIOC
 #define TOUCH_IIC_SDA_Pin GPIO_PIN_2
 #define TOUCH_IIC_SDA_GPIO_Port GPIOB
 #define LCD_BACK_LIGHT_Pin GPIO_PIN_13

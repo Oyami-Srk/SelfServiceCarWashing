@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.21)
 # specify cross compilers and tools
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+set(CMAKE_ASM_COMPILER  arm-none-eabi-gcc)
 set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
@@ -48,15 +48,14 @@ endif ()
 
 include_directories(Core/Inc Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_HAL_Driver/Inc/Legacy Middlewares/Third_Party/FreeRTOS/Source/include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include)
 
+add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx)
 add_subdirectory(Middlewares/Third_Party/lvgl/)
 add_definitions(-DLV_LVGL_H_SIMPLE)
 
 file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
 include_directories("Middlewares/GUI/Inc")
 
-add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx)
-
-file(GLOB_RECURSE SOURCES "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Core/*.*")
+file(GLOB_RECURSE SOURCES ${sources})
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F429BITx_FLASH.ld)
 

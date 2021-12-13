@@ -18,10 +18,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/gui.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_template.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Comm/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +175,7 @@
       <workItem from="1638798483752" duration="4321000" />
       <workItem from="1639139498006" duration="2264000" />
       <workItem from="1639208015548" duration="5750000" />
-      <workItem from="1639297952975" duration="10539000" />
+      <workItem from="1639297952975" duration="12027000" />
     </task>
     <servers />
   </component>

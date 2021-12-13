@@ -49,8 +49,12 @@ include_directories(${includes})
 
 add_definitions(${defines})
 add_subdirectory(Middlewares/Third_Party/lvgl/)
+add_definitions(-DLV_LVGL_H_SIMPLE)
 
-file(GLOB_RECURSE SOURCES ${sources})
+file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
+include_directories("Middlewares/GUI/Inc")
+
+file(GLOB_RECURSE SOURCES $${sources})
 
 set(LINKER_SCRIPT $${CMAKE_SOURCE_DIR}/${linkerScript})
 
@@ -58,7 +62,7 @@ add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=$${PROJECT_BINARY_DI
 add_link_options(-mcpu=${mcpu} -mthumb -mthumb-interwork)
 add_link_options(-T $${LINKER_SCRIPT})
 
-add_executable($${PROJECT_NAME}.elf $${SOURCES} $${LINKER_SCRIPT})
+add_executable($${PROJECT_NAME}.elf $${SOURCES} $${GUI_SOURCES} $${LINKER_SCRIPT})
 target_link_libraries(${PROJECT_NAME}.elf lvgl)
 
 set(HEX_FILE $${PROJECT_BINARY_DIR}/$${PROJECT_NAME}.hex)
