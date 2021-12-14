@@ -124,6 +124,9 @@ connect_to_ap:;
     }
 
     printf("[NET/WIFI] WiFi Connected to Network. Trying to update time.\r\n");
+    printf("[NET/WIFI] Skip Time updating due to GIWiFi not connected to "
+           "public network.\r\n");
+    goto update_time_end;
 update_time:
     EMPTY_QUEUE(qid_wifi, msg_buffer);
     p = 0;
@@ -154,6 +157,7 @@ update_time:
     }
 
     printf("[NET/WIFI] RTC Clock updated. Trying to Connect to server.\r\n");
+update_time_end:
 connect_to_server:
     EMPTY_QUEUE(qid_wifi, msg_buffer);
     p = 0;
