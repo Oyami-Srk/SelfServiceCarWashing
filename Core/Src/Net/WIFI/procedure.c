@@ -99,7 +99,9 @@ uint8_t WIFI_CONNECT_TO_AP(uint8_t *buffer, uint16_t len, uint8_t step,
             return 2;
         }
         if (STATIC_CHAR_CMP(buffer + 5, "GOT IP") == 0) {
-            HAL_GPIO_TogglePin(LED_NET_STATUS);
+#ifdef ENABLE_NET_LED
+            HAL_GPIO_TogglePin(GPIO(NET_STATUS_LED));
+#endif
             printf("[NET/WIFI] WiFi Got IP.\r\n");
             NET_STATUS = NET_STATUS_GOT_IP;
             *status    = OK;
@@ -233,6 +235,17 @@ uint8_t WIFI_UPDATE_TIME(uint8_t *buffer, uint16_t len, uint8_t step,
         HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
         HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
         HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0xF103);
+
+        struct tm currTime = {.tm_year = date.Year + 100,
+            .tm_mon  = date.Month - 1,
+            .tm_mday = date.Date,
+            .tm_hour = time.Hours,
+            .tm_min  = time.Minutes,
+            .tm_sec  = time.Seconds};
+
+        // write last update time stamp
+        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, (uint32_t)mktime(&currTime));
+        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR3, 0);
         if (HAL_RTCEx_DeactivateTimeStamp(&hrtc) != HAL_OK) {
             Error_Handler();
         }

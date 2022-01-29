@@ -124,7 +124,9 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN StartDefaultTask */
     /* Infinite loop */
     for (;;) {
-        HAL_GPIO_TogglePin(LED_WORKING_STATUS);
+#ifdef ENABLE_WORKING_LED
+        HAL_GPIO_TogglePin(GPIO(WORKING_STATUS_LED));
+#endif
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
   /* USER CODE END StartDefaultTask */

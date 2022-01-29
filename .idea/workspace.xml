@@ -17,12 +17,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Inuse/handles.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Inuse/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" afterPath="$PROJECT_DIR$/.cproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Net/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/dma2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma2d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/fmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/fmc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/gpio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/ltdc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/ltdc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/rtc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/rtc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/tim.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/usart.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/fmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/fmc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/tim.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,8 +64,8 @@
     <option name="columnWidths">
       <list>
         <option value="262" />
-        <option value="112" />
-        <option value="1564" />
+        <option value="122" />
+        <option value="0" />
       </list>
     </option>
     <option name="columnOrder">
@@ -92,12 +119,13 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="settings.editor.splitter.proportion" value="0.28181043" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.splitter.proportion" value="0.21356651" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
   <component name="RecentsManager">
@@ -111,11 +139,6 @@
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
@@ -169,6 +192,14 @@
       <workItem from="1639139498006" duration="2264000" />
       <workItem from="1639208015548" duration="5750000" />
       <workItem from="1639297952975" duration="12027000" />
+      <workItem from="1639573072082" duration="40000" />
+      <workItem from="1639911178551" duration="1814000" />
+      <workItem from="1642412669596" duration="2039000" />
+      <workItem from="1642694723224" duration="847000" />
+      <workItem from="1642869367124" duration="8636000" />
+      <workItem from="1642934633238" duration="1836000" />
+      <workItem from="1643474411686" duration="1161000" />
+      <workItem from="1643475597375" duration="3734000" />
     </task>
     <servers />
   </component>
@@ -185,6 +216,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Middlewares/Third_Party/lv_demos" />
+      <path value="$PROJECT_DIR$/Middlewares/Third_Party/soft-i2c" />
+    </ignored-roots>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

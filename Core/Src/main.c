@@ -113,8 +113,9 @@ int main(void)
   MX_LTDC_Init();
   MX_DMA2D_Init();
   MX_TIM3_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-    HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
+//    HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Init scheduler */

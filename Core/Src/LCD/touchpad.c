@@ -12,8 +12,8 @@
 #include "main.h"
 #include <stdio.h>
 
-#define GPIO(name)             name##_GPIO_Port, name##_Pin
-#define SET_GPIO(status, name) HAL_GPIO_WritePin(GPIO(name), GPIO_PIN_##status)
+#define TP_DEF_GPIO(name)             name##_GPIO_Port, name##_Pin
+#define SET_GPIO(status, name) HAL_GPIO_WritePin(TP_DEF_GPIO(name), GPIO_PIN_##status)
 #define TOUCH_SCL(status)      SET_GPIO(status, TOUCH_IIC_SCL)
 #define TOUCH_SDA(status)      SET_GPIO(status, TOUCH_IIC_SDA)
 #define IIC_DELAY              20
@@ -102,7 +102,7 @@ static uint8_t TOUCH_IIC_WAIT_ACK(void) {
     TOUCH_SCL(SET);
     TOUCH_IIC_DELAY(IIC_DELAY);
 
-    if (HAL_GPIO_ReadPin(GPIO(TOUCH_IIC_SDA)) != 0) {
+    if (HAL_GPIO_ReadPin(TP_DEF_GPIO(TOUCH_IIC_SDA)) != 0) {
         TOUCH_SCL(RESET);
         TOUCH_IIC_DELAY(IIC_DELAY);
         return IIC_ACK_ERR;
@@ -141,7 +141,7 @@ static uint8_t TOUCH_IIC_READ_BYTE(uint8_t ACK_Mode) {
         data <<= 1;
         TOUCH_SCL(SET);
         TOUCH_IIC_DELAY(IIC_DELAY);
-        data |= (HAL_GPIO_ReadPin(GPIO(TOUCH_IIC_SDA)) & 0x01);
+        data |= (HAL_GPIO_ReadPin(TP_DEF_GPIO(TOUCH_IIC_SDA)) & 0x01);
         TOUCH_SCL(RESET);
         TOUCH_IIC_DELAY(IIC_DELAY);
     }

@@ -11,6 +11,7 @@
 
 /* Porting function */
 #include "Comm/procedure.h"
+#include "Inuse/handles.h"
 #include "GUI/gui_lvgl.h"
 #include "main.h"
 #include "rtc.h"
@@ -43,26 +44,39 @@ float CURRENT_USER_USED_WATER  = 0.0f;
 float CURRENT_USER_USED_FOAM   = 0.0f;
 float CURRENT_USER_FLOW_SPEED  = 0.0f;
 
+time_t CURRENT_USER_START_TIME = 0;
+time_t mktimestamp(); // Comm/procedure.c
+
 uint8_t login(const char *username, const char *password) {
     printf("Tring to login with %s and password %s.\n", username, password);
     if (CMD_RESULT_OK == USER_LOGIN(username, password, CURRENT_USER_ID,
                                     &CURRENT_USER_AVAIL_WATER)) {
         switch_to_inuse_scr(username);
+        CURRENT_USER_START_TIME = mktimestamp();
+        START_INUSE_TASK();
         return LOGIN_SUCCESS;
     } else {
         return LOGIN_FAILED;
     }
 }
 
-float getCurrentFlow() { return 1; } // in ml/s
+extern int pwm_lastTick;
+float getCurrentFlow() {
+    if(HAL_GetTick() - pwm_lastTick > 1000)
+        CURRENT_USER_FLOW_SPEED = 0.0f;
+    CURRENT_USER_USED_WATER += CURRENT_USER_FLOW_SPEED / 1000;
+    return CURRENT_USER_FLOW_SPEED;
+} // in ml/s
 
 float getCurrentUsage() {
-    return 10; // in L
+    return CURRENT_USER_USED_WATER; // in L
 }
 
-int getCurrentUsingTime() { return HAL_GetTick(); }
+int getCurrentUsingTime() { return mktimestamp() - CURRENT_USER_START_TIME; }
 
 void logout() {
+    STOP_INUSE_TASK();
+    USER_LOGOUT(CURRENT_USER_ID, CURRENT_USER_USED_WATER, CURRENT_USER_USED_FOAM, mktimestamp() - CURRENT_USER_START_TIME);
     switch_to_loading_scr();
     switch_to_login_scr();
 }

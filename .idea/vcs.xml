@@ -3,8 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Middlewares/GUI" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Middlewares/Third_Party/lv_demos" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Middlewares/Third_Party/soft-i2c" vcs="Git" />
   </component>
 </project>
