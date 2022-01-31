@@ -696,7 +696,7 @@ BaseType_t xQueueGenericSend( QueueHandle_t xQueue, const void * const pvItemToQ
 
  QueueHandle_t xQueue;
 
- // Tasks to create a queue and post a value.
+ // Task to create a queue and post a value.
  void vATask( void *pvParameters )
  {
  struct AMessage *pxMessage;
@@ -719,7 +719,7 @@ BaseType_t xQueueGenericSend( QueueHandle_t xQueue, const void * const pvItemToQ
 	// ... Rest of task code.
  }
 
- // Tasks to peek the data from the queue.
+ // Task to peek the data from the queue.
  void vADifferentTask( void *pvParameters )
  {
  struct AMessage *pxRxedMessage;
@@ -820,7 +820,7 @@ BaseType_t xQueuePeekFromISR( QueueHandle_t xQueue, void * const pvBuffer ) PRIV
 
  QueueHandle_t xQueue;
 
- // Tasks to create a queue and post a value.
+ // Task to create a queue and post a value.
  void vATask( void *pvParameters )
  {
  struct AMessage *pxMessage;
@@ -843,7 +843,7 @@ BaseType_t xQueuePeekFromISR( QueueHandle_t xQueue, void * const pvBuffer ) PRIV
 	// ... Rest of task code.
  }
 
- // Tasks to receive from the queue.
+ // Task to receive from the queue.
  void vADifferentTask( void *pvParameters )
  {
  struct AMessage *pxRxedMessage;

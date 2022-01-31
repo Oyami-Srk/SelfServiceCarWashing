@@ -75,7 +75,7 @@ typedef struct tskTaskControlBlock* TaskHandle_t;
  */
 typedef BaseType_t (*TaskHookFunction_t)( void * );
 
-/* Tasks states returned by eTaskGetState. */
+/* Task states returned by eTaskGetState. */
 typedef enum
 {
 	eRunning = 0,	/* A task is querying the state of itself, so must be running. */
@@ -294,12 +294,12 @@ is used in assert() statements. */
  *
  * Example usage:
    <pre>
- // Tasks to be created.
+ // Task to be created.
  void vTaskCode( void * pvParameters )
  {
 	 for( ;; )
 	 {
-		 // Tasks code goes here.
+		 // Task code goes here.
 	 }
  }
 
@@ -414,7 +414,7 @@ is used in assert() statements. */
 
         for( ;; )
         {
-            // Tasks code goes here.
+            // Task code goes here.
         }
     }
 
@@ -1208,7 +1208,7 @@ void vTaskStartScheduler( void ) PRIVILEGED_FUNCTION;
  {
 	 for( ;; )
 	 {
-		 // Tasks code goes here.
+		 // Task code goes here.
 
 		 // At some point we want to end the real time kernel processing
 		 // so call ...
@@ -1256,7 +1256,7 @@ void vTaskEndScheduler( void ) PRIVILEGED_FUNCTION;
  {
 	 for( ;; )
 	 {
-		 // Tasks code goes here.
+		 // Task code goes here.
 
 		 // ...
 
@@ -1305,7 +1305,7 @@ void vTaskSuspendAll( void ) PRIVILEGED_FUNCTION;
  {
 	 for( ;; )
 	 {
-		 // Tasks code goes here.
+		 // Task code goes here.
 
 		 // ...
 
@@ -1782,7 +1782,7 @@ uint32_t ulTaskGetIdleRunTimeCounter( void ) PRIVILEGED_FUNCTION;
  * "notification value", which is a 32-bit unsigned integer (uint32_t).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
@@ -1868,7 +1868,7 @@ BaseType_t xTaskGenericNotify( TaskHandle_t xTaskToNotify, uint32_t ulValue, eNo
  * (ISR).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
@@ -1956,7 +1956,7 @@ BaseType_t xTaskGenericNotifyFromISR( TaskHandle_t xTaskToNotify, uint32_t ulVal
  * "notification value", which is a 32-bit unsigned integer (uint32_t).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
@@ -2031,7 +2031,7 @@ BaseType_t xTaskNotifyWait( uint32_t ulBitsToClearOnEntry, uint32_t ulBitsToClea
  * "notification value", which is a 32-bit unsigned integer (uint32_t).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
@@ -2080,7 +2080,7 @@ BaseType_t xTaskNotifyWait( uint32_t ulBitsToClearOnEntry, uint32_t ulBitsToClea
  * routine (ISR).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
@@ -2132,7 +2132,7 @@ void vTaskNotifyGiveFromISR( TaskHandle_t xTaskToNotify, BaseType_t *pxHigherPri
  * "notification value", which is a 32-bit unsigned integer (uint32_t).
  *
  * Events can be sent to a task using an intermediary object.  Examples of such
- * objects are queues, semaphores, mutexes and event groups.  Tasks notifications
+ * objects are queues, semaphores, mutexes and event groups.  Task notifications
  * are a method of sending an event directly to a task without the need for such
  * an intermediary object.
  *
