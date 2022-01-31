@@ -23,9 +23,6 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "LCD/handles.h"
-#include "Net/AT/handles.h"
-#include "Inuse/handles.h"
 #include "lvgl.h"
 /* USER CODE END Includes */
 
@@ -216,7 +213,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
-  PWM_TIMER_ON_RISING();
+//  PWM_TIMER_ON_RISING();
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
@@ -230,7 +227,7 @@ void TIM3_IRQHandler(void)
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
-    NET_AT_UART_INTERRUPT_HANDLER();
+//    NET_AT_UART_INTERRUPT_HANDLER();
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */

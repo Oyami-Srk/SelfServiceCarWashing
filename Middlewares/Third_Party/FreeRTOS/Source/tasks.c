@@ -245,7 +245,7 @@ to its original value when it is released. */
 #endif
 
 /*
- * Task control block.  A task control block (TCB) is allocated for each task,
+ * Tasks control block.  A task control block (TCB) is allocated for each task,
  * and stores task state information, including a pointer to the task's context
  * (the task's run time environment, including register values)
  */
@@ -2442,7 +2442,7 @@ TCB_t *pxTCB;
 	UBaseType_t uxQueue = configMAX_PRIORITIES;
 	TCB_t* pxTCB;
 
-		/* Task names will be truncated to configMAX_TASK_NAME_LEN - 1 bytes. */
+		/* Tasks names will be truncated to configMAX_TASK_NAME_LEN - 1 bytes. */
 		configASSERT( strlen( pcNameToQuery ) < configMAX_TASK_NAME_LEN );
 
 		vTaskSuspendAll();

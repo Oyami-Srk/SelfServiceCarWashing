@@ -12,7 +12,11 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#define GPIO(name)             name##_GPIO_Port, name##_Pin
+
 #define COMPILE_TIME_ASSERT(expr)    typedef char assert_type[expr ? 1 : -1]
 #define STATIC_CHAR_CMP(dyn, static) memcmp(dyn, static, sizeof(static) - 1)
+
+#define LOG(msg) printf(msg "\r\n")
 
 #endif // __UTILS_H__

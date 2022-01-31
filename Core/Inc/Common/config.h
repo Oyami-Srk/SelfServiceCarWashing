@@ -14,10 +14,9 @@
 
 #include "main.h"
 
-#define GPIO(name)             name##_GPIO_Port, name##_Pin
-
 #define ENABLE_NET_LED
 #define ENABLE_WORKING_LED
 
+#define HEARTBEAT_INTV 5000 // in ms
 
 #endif // __COMMON_CONFIG_H__

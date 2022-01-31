@@ -21,7 +21,7 @@
 #include "fmc.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "Common/init.h"
 /* USER CODE END 0 */
 
 SDRAM_HandleTypeDef hsdram1;
@@ -68,11 +68,7 @@ void MX_FMC_Init(void)
   }
 
   /* USER CODE BEGIN FMC_Init 2 */
-    FMC_SDRAM_CommandTypeDef command;
-    SDRAM_Initialization_Sequence(&hsdram1, &command);
-    if (SDRAM_Test() != SUCCESS) {
-        Error_Handler();
-    }
+  SDRAM_INIT_FMC();
   /* USER CODE END FMC_Init 2 */
 }
 

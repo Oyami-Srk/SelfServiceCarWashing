@@ -9,7 +9,6 @@
  * This handles also provided lvgl init
  */
 
-#include "LCD/handles.h"
 #include "FreeRTOS.h"
 #include "cmsis_os2.h"
 #include "dma2d.h"
@@ -43,20 +42,20 @@ void LCD_CLEAR(void) {
 void    disp_init(void);  // in lvgl.c
 uint8_t Touch_Init(void); // in touchpad.c
 
-void LCD_DMA2D_INIT(void) {
+void LCD_INIT_DMA2D(void) {
     LCD_CLEAR();
     // lvgl process
     lv_init();
     disp_init();
 }
 
-void LCD_GPIO_INIT() {
+void LCD_INIT_GPIO() {
     HAL_GPIO_WritePin(LCD_BACK_LIGHT_GPIO_Port, LCD_BACK_LIGHT_Pin,
                       GPIO_PIN_SET);
     Touch_Init();
 }
 
-void LCD_DISPLAY_INIT() {
+void LCD_INIT_DISP() {
     HAL_GPIO_WritePin(LCD_BACK_LIGHT_GPIO_Port, LCD_BACK_LIGHT_Pin,
                       GPIO_PIN_SET);
 }
@@ -88,6 +87,6 @@ static const osThreadAttr_t task_lvgl_attributes = {
 osThreadId_t pid_task_lvgl = 0;
 
 // init for FreeRTOS
-void LCD_INIT_FREERTOS() {
+void LCD_INIT_RTOS() {
     pid_task_lvgl = osThreadNew(task_lvgl, NULL, &task_lvgl_attributes);
 }

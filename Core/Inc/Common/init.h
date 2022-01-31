@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 Shiroko
  * Project: SelfServiceCarWashing
- * File: handles.h
+ * File: init.h
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -9,22 +9,27 @@
  *
  */
 
-#ifndef __LCD_HANDLES_H__
-#define __LCD_HANDLES_H__
+//
+// Created by shiroko on 2022/2/1.
+//
 
-#include "dma2d.h"
+#ifndef __COMMON_INIT_H__
+#define __COMMON_INIT_H__
 
+/* LCD */
 // call after msp init of gpio
-void LCD_GPIO_INIT();
+void LCD_INIT_GPIO();
 // call after ltds init
-void LCD_DISPLAY_INIT();
+void LCD_INIT_DISP();
 // call after dma2d init
-void LCD_DMA2D_INIT();
+void LCD_INIT_DMA2D();
+// call in RTOS init
+void LCD_INIT_RTOS();
 
-void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d);
-void DMA2D_CB_ERROR(DMA2D_HandleTypeDef *p_hdma2d);
+/* SDRAM */
+void SDRAM_INIT_FMC();
 
-void LCD_INIT_FREERTOS();
+/* Tasks */
+void TASKS_INIT_RTOS();
 
-void LCD_MS_TICK();
-#endif // __LCD_HANDLES_H__
+#endif // __COMMON_INIT_H__

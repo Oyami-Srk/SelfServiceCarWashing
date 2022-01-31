@@ -21,7 +21,7 @@
 #include "ltdc.h"
 
 /* USER CODE BEGIN 0 */
-#include "LCD/handles.h"
+#include "Common/init.h"
 /* USER CODE END 0 */
 
 LTDC_HandleTypeDef hltdc;
@@ -79,7 +79,7 @@ void MX_LTDC_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN LTDC_Init 2 */
-    LCD_DISPLAY_INIT();
+    LCD_INIT_DISP();
   /* USER CODE END LTDC_Init 2 */
 
 }
@@ -167,7 +167,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* ltdcHandle)
     HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
   /* USER CODE BEGIN LTDC_MspInit 1 */
-        LCD_GPIO_INIT();
+    LCD_INIT_GPIO();
   /* USER CODE END LTDC_MspInit 1 */
   }
 }

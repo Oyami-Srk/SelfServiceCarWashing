@@ -674,7 +674,7 @@ BaseType_t xWaitConditionMet = pdFALSE;
 
 	if( xWaitForAllBits == pdFALSE )
 	{
-		/* Task only has to wait for one bit within uxBitsToWaitFor to be
+		/* Tasks only has to wait for one bit within uxBitsToWaitFor to be
 		set.  Is one already set? */
 		if( ( uxCurrentEventBits & uxBitsToWaitFor ) != ( EventBits_t ) 0 )
 		{
@@ -687,7 +687,7 @@ BaseType_t xWaitConditionMet = pdFALSE;
 	}
 	else
 	{
-		/* Task has to wait for all the bits in uxBitsToWaitFor to be set.
+		/* Tasks has to wait for all the bits in uxBitsToWaitFor to be set.
 		Are they set already? */
 		if( ( uxCurrentEventBits & uxBitsToWaitFor ) == uxBitsToWaitFor )
 		{

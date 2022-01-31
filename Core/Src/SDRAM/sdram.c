@@ -12,6 +12,7 @@
 #include "fmc.h"
 #include "main.h"
 #include <stdio.h>
+#include "Common/init.h"
 
 #define SDRAM_Size      0x01000000             // 16M字节
 #define SDRAM_BANK_ADDR ((uint32_t)0xD0000000) // FMC SDRAM 数据基地址
@@ -118,4 +119,12 @@ uint8_t SDRAM_Test(void) {
     }
     printf("[SYSTEM] SDRAM Self-Test Passed.\r\n");
     return SUCCESS; // 返回成功标志
+}
+
+void SDRAM_INIT_FMC() {
+    FMC_SDRAM_CommandTypeDef command;
+    SDRAM_Initialization_Sequence(&hsdram1, &command);
+    if (SDRAM_Test() != SUCCESS) {
+        Error_Handler();
+    }
 }

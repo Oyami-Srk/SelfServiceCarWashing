@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 Shiroko
  * Project: SelfServiceCarWashing
- * File: handles.h
+ * File: hooks.h
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -9,11 +9,15 @@
  *
  */
 
-#ifndef __INUSE_HANDLES_H__
-#define __INUSE_HANDLES_H__
+//
+// Created by shiroko on 2022/2/1.
+//
 
-void START_INUSE_TASK();
-void STOP_INUSE_TASK();
-void PWM_TIMER_ON_RISING();
+#ifndef __COMMON_HOOKS_H__
+#define __COMMON_HOOKS_H__
 
-#endif // __INUSE_HANDLES_H__
+/* DMA2D Hooks */
+void DMA2D_CB();
+void DMA2D_CB_ERROR();
+
+#endif // __COMMON_HOOKS_H__

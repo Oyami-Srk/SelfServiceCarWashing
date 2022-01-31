@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 Shiroko
  * Project: SelfServiceCarWashing
- * File: handles.h
+ * File: init.c
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -9,9 +9,12 @@
  *
  */
 
-#ifndef __COMM_HANDLES_H__
-#define __COMM_HANDLES_H__
+//
+// Created by shiroko on 2022/2/1.
+//
 
-void COMM_INIT_FREERTOS();
+#include "Common/init.h"
 
-#endif // __COMM_HANDLES_H__
+void TASKS_INIT_RTOS() {
+    LCD_INIT_RTOS();
+}

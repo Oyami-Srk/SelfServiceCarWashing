@@ -26,11 +26,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "Comm/handles.h"
 #include "Common/config.h"
-#include "LCD/handles.h"
-#include "Net/AT/handles.h"
-#include "Net/WIFI/handles.h"
+#include "Common/utils.h"
+#include "Common/init.h"
 #include "lvgl.h"
 /* USER CODE END Includes */
 
@@ -76,10 +74,7 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-    LCD_INIT_FREERTOS();
-    NET_AT_FREERTOS_INIT();
-    NET_WIFI_INIT();
-    COMM_INIT_FREERTOS();
+  TASKS_INIT_RTOS();
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -122,6 +117,7 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
+  extern int INUSE_TASK_RUNNING;
     /* Infinite loop */
     for (;;) {
 #ifdef ENABLE_WORKING_LED

@@ -31,7 +31,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "LCD/handles.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

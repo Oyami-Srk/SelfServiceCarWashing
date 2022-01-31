@@ -17,40 +17,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Inuse/handles.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Inuse/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" afterPath="$PROJECT_DIR$/.cproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Comm/handles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Comm/procedure.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dma2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma2d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/msg_types.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/status.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Inuse/handles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/command.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/handles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/WIFI/handles.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/WIFI/procedure.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/config.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/vars.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/fmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/fmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/gpio.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/ltdc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/ltdc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/rtc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/rtc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/tim.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/usart.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/handles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/procedure.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Inuse/handles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/command.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/handles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/fmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/fmc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/tim.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/queue.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/queue.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/task.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/task.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/tasks.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/tasks.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +154,11 @@
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -200,6 +218,7 @@
       <workItem from="1642934633238" duration="1836000" />
       <workItem from="1643474411686" duration="1161000" />
       <workItem from="1643475597375" duration="3734000" />
+      <workItem from="1643568749430" duration="7334000" />
     </task>
     <servers />
   </component>

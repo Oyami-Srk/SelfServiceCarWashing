@@ -252,7 +252,7 @@
 #endif
 #if (configUSE_TASK_NOTIFICATIONS == 0)
   /*
-    CMSIS-RTOS2 Thread Flags API functions use FreeRTOS Task Notification functions to implement
+    CMSIS-RTOS2 Thread Flags API functions use FreeRTOS Tasks Notification functions to implement
     thread flag management. In case if these functions are not used in the application image,
     compiler will optimize them away.
     Set #define configUSE_TASK_NOTIFICATIONS 1 to fix this error.

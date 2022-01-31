@@ -21,7 +21,7 @@
 #include "dma2d.h"
 
 /* USER CODE BEGIN 0 */
-#include "LCD/handles.h"
+#include "Common/hooks.h"
 /* USER CODE END 0 */
 
 DMA2D_HandleTypeDef hdma2d;
@@ -63,7 +63,7 @@ void MX_DMA2D_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN DMA2D_Init 2 */
-    LCD_DMA2D_INIT();
+    LCD_INIT_DMA2D();
   /* USER CODE END DMA2D_Init 2 */
 
 }
