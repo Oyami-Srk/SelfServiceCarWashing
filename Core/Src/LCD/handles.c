@@ -10,8 +10,8 @@
  */
 
 #include "FreeRTOS.h"
-#include "cmsis_os2.h"
 #include "dma2d.h"
+#include "cmsis_os.h"
 #include "ltdc.h"
 #include "lvgl.h"
 #include "main.h"
@@ -78,15 +78,7 @@ _Noreturn static void task_lvgl() {
     vTaskDelete(NULL);
 }
 
-static const osThreadAttr_t task_lvgl_attributes = {
-    .name       = "lcd-lvgl",
-    .stack_size = 2048,
-    .priority   = (osPriority_t)osPriorityAboveNormal,
-};
-
-osThreadId_t pid_task_lvgl = 0;
-
 // init for FreeRTOS
 void LCD_INIT_RTOS() {
-    pid_task_lvgl = osThreadNew(task_lvgl, NULL, &task_lvgl_attributes);
+    xTaskCreate(task_lvgl, "LCD-LVGL", 2048, NULL, tskIDLE_PRIORITY + 1, NULL);
 }

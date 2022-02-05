@@ -17,4 +17,5 @@
 
 void TASKS_INIT_RTOS() {
     LCD_INIT_RTOS();
+    NET_UART_INIT_RTOS();
 }

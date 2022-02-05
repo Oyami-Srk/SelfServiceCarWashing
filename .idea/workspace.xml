@@ -10,60 +10,64 @@
       <config projectName="SelfServiceCarWashing" targetName="lvgl_examples" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/at.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/uart.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" afterPath="$PROJECT_DIR$/.cproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/saveactions_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Comm/handles.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Comm/procedure.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_template.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/msg_types.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/status.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Inuse/handles.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/LCD/handles.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/command.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/handles.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/AT/utils.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/WIFI/handles.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/WIFI/procedure.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/config.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/vars.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/dma2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma2d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/fmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/fmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/handles.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Comm/procedure.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Inuse/handles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/gpio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/ltdc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/ltdc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/rtc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/rtc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/tim.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/usart.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/command.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/handles.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/AT/utils.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/handles.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/WIFI/procedure.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/common_vars.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/fmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/fmc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_msp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_msp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/tim.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/queue.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/queue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/task.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/include/task.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/tasks.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/tasks.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_mpool.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openocd.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/openocd.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +82,7 @@
       <list>
         <option value="262" />
         <option value="122" />
-        <option value="0" />
+        <option value="1817" />
       </list>
     </option>
     <option name="columnOrder">
@@ -89,7 +93,6 @@
       </list>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -100,6 +103,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://40" root0="SKIP_INSPECTION" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="36r5yame" />
@@ -137,7 +143,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="CLionExternalConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.21356651" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
@@ -148,7 +154,11 @@
       <recent name="$PROJECT_DIR$/Inc/Net" />
     </key>
   </component>
-  <component name="RunManager" selected="OpenOCD 下载并运行.OCD SelfServiceCarWashing">
+  <component name="RtosSettings">
+    <option name="rtosEnabled" value="true" />
+    <option name="rtosType" value="FreeRTOS" />
+  </component>
+  <component name="RunManager" selected="Shell Script.Run">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -174,6 +184,38 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RTT" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="nc localhost 9090" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/zsh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2">
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="Run" run_configuration_type="ShConfigurationType" />
+      </method>
+    </configuration>
+    <configuration name="Run" type="ShConfigurationType">
+      <option name="SCRIPT_TEXT" value="/usr/bin/openocd -s /usr/share/openocd/scripts -f $PROJECT_DIR$/openocd.cfg -c &quot;tcl_port disabled&quot; -c &quot;gdb_port disabled&quot; -c &quot;tcl_port disabled&quot; -c &quot;program \&quot;$PROJECT_DIR$/cmake-build-debug/SelfServiceCarWashing.elf\&quot;&quot; -c reset -c &quot;rtt setup 0x20000000 0x40000 \&quot;SEGGER RTT\&quot;&quot; -c &quot;rtt start&quot; -c &quot;rtt server start 9090 0&quot; " />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/zsh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="OCD SelfServiceCarWashing" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="$PROJECT_DIR$/openocd.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -187,6 +229,8 @@
       <item itemvalue="CMake 应用程序.lvgl" />
       <item itemvalue="CMake 应用程序.lvgl_examples" />
       <item itemvalue="OpenOCD 下载并运行.OCD SelfServiceCarWashing" />
+      <item itemvalue="Shell Script.Run" />
+      <item itemvalue="Shell Script.RTT" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -218,7 +262,9 @@
       <workItem from="1642934633238" duration="1836000" />
       <workItem from="1643474411686" duration="1161000" />
       <workItem from="1643475597375" duration="3734000" />
-      <workItem from="1643568749430" duration="7334000" />
+      <workItem from="1643568749430" duration="16561000" />
+      <workItem from="1643820414704" duration="3495000" />
+      <workItem from="1643823917490" duration="44778000" />
     </task>
     <servers />
   </component>
@@ -249,6 +295,16 @@
           <url>file://$PROJECT_DIR$/Middlewares/Third_Party/lvgl/examples/widgets/btn/lv_example_btn_1.c</url>
           <line>17</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
+          <line>93</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
+          <line>222</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -29,6 +29,9 @@ void LCD_INIT_RTOS();
 /* SDRAM */
 void SDRAM_INIT_FMC();
 
+/* Net UART3 */
+void NET_UART_INIT_RTOS();
+
 /* Tasks */
 void TASKS_INIT_RTOS();
 

@@ -1,27 +1,27 @@
+/* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    rtc.c
-  * @brief   This file provides code for the configuration
-  *          of the RTC instances.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
-
+ ******************************************************************************
+ * @file    rtc.c
+ * @brief   This file provides code for the configuration
+ *          of the RTC instances.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2022 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+/* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "rtc.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "Common/config.h"
 /* USER CODE END 0 */
 
 RTC_HandleTypeDef hrtc;
@@ -60,14 +60,14 @@ void MX_RTC_Init(void)
         Error_Handler();
     }
 
-    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1) == 0xF103) {
+    if (HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR1) == RTC_COOKIE) {
         // no need reset
         return;
     }
 
-  /* USER CODE END Check_RTC_BKUP */
+    /* USER CODE END Check_RTC_BKUP */
 
-  /** Initialize RTC and set the Time and Date
+    /** Initialize RTC and set the Time and Date
   */
   sTime.Hours = 0x0;
   sTime.Minutes = 0x0;
@@ -138,5 +138,3 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* rtcHandle)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

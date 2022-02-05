@@ -20,4 +20,7 @@
 void DMA2D_CB();
 void DMA2D_CB_ERROR();
 
+/* UART3 Hooks */
+void UART3_IRQ_HANDLER();
+
 #endif // __COMMON_HOOKS_H__
