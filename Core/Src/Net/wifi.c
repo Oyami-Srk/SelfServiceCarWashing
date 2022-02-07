@@ -78,7 +78,7 @@ retry_start:
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);                                       \
     result = AT_GetResult(msg.Buffer, msg.Len);                                \
     if (result != AT_OK) {                                                     \
-        printf(message " Retry after %d secs.\r\n", retry_intv / 1000);        \
+        PRINTF(message " Retry after %d secs.\r\n", retry_intv / 1000);        \
         AT_FREE_RESP(msg);                                                     \
         retries++;                                                             \
         vTaskDelay(pdMS_TO_TICKS(retry_intv));                                 \
@@ -117,26 +117,26 @@ connect_to_ap:
         if (STATIC_STR_CMP(msg.Buffer, "+CWJAP")) {
             uint8_t err_code;
             sscanf(msg.Buffer, "+CWJAP:%hhu", &err_code);
-            printf("[WIFI] Connect to AP Failed with Error code: %d(",
+            PRINTF("[WIFI] Connect to AP Failed with Error code: %d(",
                    err_code);
             switch (err_code) {
             case 1:
-                printf("Time out");
+                PRINTF("Time out");
                 break;
             case 2:
-                printf("Password Incorrect");
+                PRINTF("Password Incorrect");
                 break;
             case 3:
-                printf("Target AP " NET_WIFI_AP_NAME " cannot be found");
+                PRINTF("Target AP " NET_WIFI_AP_NAME " cannot be found");
                 break;
             case 4:
-                printf("Connection failed.");
+                PRINTF("Connection failed.");
                 break;
             default:
-                printf("Unknown error.");
+                PRINTF("Unknown error.");
                 break;
             }
-            printf(").\r\n");
+            PRINTF(").\r\n");
         } else {
             LOG("[WIFI] Unknown Error when connecting to AP, maybe a command "
                 "mismatch. Retry after 3 secs.");
@@ -233,7 +233,7 @@ get_mac_addr:
     mac_buffer[17] = '\0';
     for (p = mac_buffer; p < mac_buffer + 17; p++)
         *p = toupper(*p);
-    printf("[WIFI] Device MAC: %s\r\n", mac_buffer);
+    PRINTF("[WIFI] Device MAC: %s\r\n", mac_buffer);
     AT_SetMacAddr(mac_buffer);
 
     // Get IP
@@ -279,7 +279,7 @@ get_ip_addr:
         ip[i]  = atoi(ip_buffer);
     }
     AT_FREE_RESP(msg);
-    printf("[WIFI] Device IP Address: %d.%d.%d.%d\r\n", ip[0], ip[1], ip[2],
+    PRINTF("[WIFI] Device IP Address: %d.%d.%d.%d\r\n", ip[0], ip[1], ip[2],
            ip[3]);
     AT_SetIP(ip);
 
@@ -290,11 +290,11 @@ update_time:;
     time_t currTime   = GetRTCTime();
     if (lastUpdate != 0 && lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
         char *time_buffer = ParseTimeInStr(lastUpdate);
-        printf("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
+        PRINTF("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
                time_buffer);
         vPortFree(time_buffer);
         time_buffer = ParseTimeInStr(currTime);
-        printf("[WIFI] Now RTC Time is %s.\r\n", time_buffer);
+        PRINTF("[WIFI] Now RTC Time is %s.\r\n", time_buffer);
         vPortFree(time_buffer);
         goto update_time_finish;
     }
@@ -332,19 +332,19 @@ update_time:;
     AT_FREE_RESP(msg);
     currTime          = GetRTCLastUpdate();
     char *time_buffer = ParseTimeInStr(currTime);
-    printf("[WIFI] Updated time from SNTP, Last Update: %s.\r\n", time_buffer);
+    PRINTF("[WIFI] Updated time from SNTP, Last Update: %s.\r\n", time_buffer);
     vPortFree(time_buffer);
 update_time_finish:
 
     // Connect to Server
     retries = 0;
 connect_to_server:
-    printf("[WIFI] Trying to connect to server.");
+    PRINTF("[WIFI] Trying to connect to server.");
     if (retries != 0) {
         retry_intv = 100;
-        printf(" (retry times: %d).", retries);
+        PRINTF(" (retry times: %d).", retries);
     }
-    printf("\r\n");
+    PRINTF("\r\n");
     vTaskDelay(pdMS_TO_TICKS(500));
 
     while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
@@ -361,14 +361,9 @@ connect_to_server:
     vTaskDelay(pdMS_TO_TICKS(100));
     SEND_WAIT_CHECK("AT+PING=\"" SERVER_ADDR "\"",
                     "[WIFI] Failed to ping to server.", connect_to_server);
-    printf("Buffer addr: 0x%lX. ", (uint32_t)msg.Buffer);
-    HeapStats_t xHeapStats;
-    vPortGetHeapStats(&xHeapStats);
-    printf("Avalivable heap space: %d bytes.\r\n",
-           xHeapStats.xAvailableHeapSpaceInBytes);
     uint16_t ping;
     sscanf(msg.Buffer, "+PING:%hu", &ping);
-    printf("[WIFI] Ping to server " SERVER_ADDR " : %d ms.\r\n", ping);
+    PRINTF("[WIFI] Ping to server " SERVER_ADDR " : %d ms.\r\n", ping);
     AT_FREE_RESP(msg);
     SEND_WAIT_CHECK("AT+CIPRECONNINTV=" NET_TCP_RECONNECT_INTV,
                     "[WIFI] Failed to set TCP reconnect interval.",
@@ -422,7 +417,7 @@ void NET_WIFI_INIT() {
 
 // buffer need to be free
 void NET_WIFI_UART_PROC(uint8_t *buffer, uint16_t len) {
-    printf("[NET] Received active message.\r\n");
+    LOG("[NET] Received active message.");
     vPortFree(buffer);
 }
 

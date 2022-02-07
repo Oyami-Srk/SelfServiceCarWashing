@@ -82,7 +82,6 @@ PUTCHAR_PROTOTYPE {
 int main(void) {
     /* USER CODE BEGIN 1 */
     //  SEGGER_RTT_Init();
-    SEGGER_RTT_printf(0, "Rock and roll!!l test speed!\r\n");
     /* USER CODE END 1 */
 
     /* MCU
@@ -219,7 +218,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  */
 void Error_Handler(void) {
     /* USER CODE BEGIN Error_Handler_Debug */
-    printf("Error handler.Restart");
+    PRINTF("Error handler.Restart");
     HAL_NVIC_SystemReset();
     /* User can add his own implementation to report the HAL error return state
      */

@@ -15,6 +15,7 @@
 #include "rtc.h"
 #include "time.h"
 #include <stdio.h>
+#include "Common/printf-stdarg.h"
 
 #define LVGL_DRAW_BUFFER_SIZE LCD_WIDTH * 200
 lv_color_t *qr_canvas_buf =
@@ -28,8 +29,8 @@ void get_time_str(char *buffer, uint8_t show_mark) {
     RTC_TimeTypeDef time;
     memset(&time, 0, sizeof(RTC_TimeTypeDef));
     HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
-    sprintf(buffer, "%02hhu:%02hhu:%02hhu", time.Hours, time.Minutes,
-            time.Seconds);
+    f_sprintf(buffer, "%02hhu:%02hhu:%02hhu", time.Hours, time.Minutes,
+              time.Seconds);
 }
 
 uint8_t login(const char *username, const char *password) {

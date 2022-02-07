@@ -16,7 +16,7 @@
 #include "Common/config.h"
 #include "FreeRTOS.h"
 #include "rtc.h"
-#include "time.h"
+#include <time.h>
 
 #ifdef NET_MODULE_ESP32
 /*
@@ -99,4 +99,23 @@ char *ParseTimeInStr(time_t currTime) {
     char *time_buffer = (char *)pvPortMalloc(sizeof(char) * 100);
     strftime(time_buffer, 100, "%Y/%m/%d %X", localtime(&currTime));
     return time_buffer;
+}
+
+/* Debug output */
+
+#ifdef DEBUG_PRINT_USE_RTT
+#include "SEGGER_RTT.h"
+#endif
+#ifdef DEBUG_PRINT_USE_UART1
+#include "usart.h"
+#endif
+
+int f_putchar(int ch) {
+#ifdef DEBUG_PRINT_USE_RTT
+    SEGGER_RTT_PutChar(0, ch);
+#endif
+#ifdef DEBUG_PRINT_USE_UART1
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+#endif
+    return ch;
 }

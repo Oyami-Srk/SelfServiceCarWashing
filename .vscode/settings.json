@@ -1,5 +1,40 @@
 {
     "cortex-debug.armToolchainPath": "/usr/bin",
     "cortex-debug.openocdPath": "/usr/bin/openocd",
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    // PSI-Header
+    "psi-header.config": {
+        "forceToTop": true,
+        "blankLinesAfter": 2,
+        "author": "Shiroko",
+        "authorEmail": "hhx.xxm@gmail.com",
+    },
+    "psi-header.variables": [
+        ["projectCreationYear", "2021"],
+        ["projectname", "SelfServiceCarWashing"]
+    ],
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "template": [
+                "Copyright (c) <<projectCreationYear>> - <<year>> <<copyrightholder>>",
+                "Project: <<projectname>>",
+                "File: <<filename>>",
+                "Author: <<author>> <<<authoremail>>>",
+                "================================",
+                "This Project may contain code from ST under Ultimate Liberty license.",
+                "For that parts of codes, here is the copy of license: www.st.com/SLA0044",
+                "================================",
+                "Created: <<filecreated('YYYY/MM/DD hh:mm:ss')>>",
+                "Last Modified: <<dateformat('YYYY/MM/DD hh:mm:ss')>>",
+                "Modified By: <<author>> <<<authoremail>>>",
+            ],
+        }
+    ],
+    "ccls.misc.compilationDatabaseDirectory": "build",
+    "ccls.completion.detailedLabel": true,
+    "ccls.clang.extraArgs": [
+        "--gcc-toolchain=/usr/arm-none-eabi/",
+        "--sysroot=/usr/arm-none-eabi/"
+    ]
 }

@@ -14,6 +14,9 @@
 
 #include "main.h"
 
+#define DEBUG_PRINT_USE_RTT
+// #define DEBUG_PRINT_USE_UART1
+
 #define NET_MODULE_ESP32
 #define ENABLE_NET_BUFFER_PRINT
 
