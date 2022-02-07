@@ -4,7 +4,7 @@
 		{
 			"label": "Build Cmake",
 			"type": "shell",
-			"command": "cmake ${workspaceRoot} && make -j42",
+			"command": "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ${workspaceRoot} && make -j42",
 			"options": {
 				"cwd": "${workspaceRoot}/build"
 			},

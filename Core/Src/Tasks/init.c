@@ -14,8 +14,10 @@
 //
 
 #include "Common/init.h"
+#include "Common/utils.h"
 
 void TASKS_INIT_RTOS() {
+    LOG("[INIT] Starting init procedures.");
     LCD_INIT_RTOS();
     NET_UART_INIT_RTOS();
 }
