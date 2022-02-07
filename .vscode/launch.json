@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/SelfServiceCarWashing.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "jlink",
+            "interface": "swd",
+            // "runToEntryPoint": "main",
+            "device": "STM32F429BI",
+            "rtos": "FreeRTOS",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+        }
+    ]
+}

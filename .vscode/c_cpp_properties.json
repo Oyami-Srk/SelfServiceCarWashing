@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "name": "STM32",
+      "includePath": [
+        "Core/Inc",
+        "Core/Inc/Common",
+        "Core/Inc/Net"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/arm-none-eabi-gcc"
+    }
+  ],
+  "version": 4
+}

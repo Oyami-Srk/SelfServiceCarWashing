@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Shiroko
+ * Copyright (c) 2021-2022 Shiroko
  * Project: SelfServiceCashing
  * File: utils.h
  * Author: Shiroko <hhx.xxm@gmail.com>

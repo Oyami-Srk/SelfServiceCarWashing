@@ -17,57 +17,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Net/at.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Net/uart.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" afterPath="$PROJECT_DIR$/.cproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/saveactions_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_template.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dma.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/dma2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/dma2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/fmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/fmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/gpio.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/ltdc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/ltdc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/rtc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/rtc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/tim.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/fmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/fmc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_msp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_msp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/tim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_mpool.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/freertos_os2.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openocd.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/openocd.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,8 +33,8 @@
     <option name="columnWidths">
       <list>
         <option value="262" />
-        <option value="122" />
-        <option value="1817" />
+        <option value="156" />
+        <option value="1783" />
       </list>
     </option>
     <option name="columnOrder">
@@ -92,7 +44,189 @@
         <option value="描述" />
       </list>
     </option>
+    <option name="loadedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/STM32F429.svd" />
+      </list>
+    </option>
+    <option name="nodes">
+      <map>
+        <entry key="STM32F429.svd" value="-E" />
+        <entry key="STM32F429.svd|g:GPIO" value="-C" />
+        <entry key="STM32F429.svd|g:USART" value="-E" />
+        <entry key="STM32F429.svd|p:GPIOA" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOA|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOA|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOB|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOB|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOC|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOC|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOD|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOD|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOE|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOE|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOF|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOF|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOG|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOG|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOH|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOH|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOI|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOI|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOJ|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOJ|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOK|AFRH" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|AFRL" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|BSRR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|IDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|LCKR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|MODER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|ODR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|OSPEEDR" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|OTYPER" value="HC" />
+        <entry key="STM32F429.svd|p:GPIOK|PUPDR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC" value="-C" />
+        <entry key="STM32F429.svd|p:RTC|ALRMAR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|ALRMASSR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|ALRMBR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|ALRMBSSR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP0R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP10R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP11R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP12R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP13R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP14R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP15R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP16R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP17R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP18R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP19R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP1R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP2R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP3R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP4R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP5R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP6R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP7R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP8R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|BKP9R" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|CALIBR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|CALR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|CR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|DR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|ISR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|PRER" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|SHIFTR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|SSR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|TAFCR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|TR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|TSDR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|TSSSR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|TSTR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|WPR" value="HC" />
+        <entry key="STM32F429.svd|p:RTC|WUTR" value="HC" />
+        <entry key="STM32F429.svd|p:USART3" value="-E" />
+        <entry key="STM32F429.svd|p:USART3|BRR" value="HC" />
+        <entry key="STM32F429.svd|p:USART3|CR1" value="HC" />
+        <entry key="STM32F429.svd|p:USART3|CR2" value="HC" />
+        <entry key="STM32F429.svd|p:USART3|CR3" value="HC" />
+        <entry key="STM32F429.svd|p:USART3|DR" value="HE" />
+        <entry key="STM32F429.svd|p:USART3|GTPR" value="HC" />
+        <entry key="STM32F429.svd|p:USART3|SR" value="HC" />
+      </map>
+    </option>
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -138,12 +272,12 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/STM32F429.svd" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="CLionExternalConfigurable" />
+    <property name="settings.editor.selected.configurable" value="copyright.profiles" />
     <property name="settings.editor.splitter.proportion" value="0.21356651" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
@@ -158,7 +292,7 @@
     <option name="rtosEnabled" value="true" />
     <option name="rtosType" value="FreeRTOS" />
   </component>
-  <component name="RunManager" selected="Shell Script.Run">
+  <component name="RunManager" selected="OpenOCD 下载并运行.OCD SelfServiceCarWashing">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -264,7 +398,7 @@
       <workItem from="1643475597375" duration="3734000" />
       <workItem from="1643568749430" duration="16561000" />
       <workItem from="1643820414704" duration="3495000" />
-      <workItem from="1643823917490" duration="44778000" />
+      <workItem from="1643823917490" duration="50389000" />
     </task>
     <servers />
   </component>

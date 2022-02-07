@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Shiroko
+ * Copyright (c) 2021-2022 Shiroko
  * Project: SelfServiceCarWashing
  * File: touchpad.c
  * Author: Shiroko <hhx.xxm@gmail.com>

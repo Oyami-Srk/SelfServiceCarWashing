@@ -82,7 +82,7 @@ PUTCHAR_PROTOTYPE {
 int main(void) {
     /* USER CODE BEGIN 1 */
     //  SEGGER_RTT_Init();
-    SEGGER_RTT_printf(0, "Hello world.!");
+    SEGGER_RTT_printf(0, "Rock and roll!!l test speed!\r\n");
     /* USER CODE END 1 */
 
     /* MCU

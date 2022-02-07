@@ -1,7 +1,7 @@
 <component name="CopyrightManager">
   <settings default="ACW_Copyright">
     <module2copyright>
-      <element module="ACW_Scope" copyright="ACW_Copyright" />
+      <element module="Project Files" copyright="ACW_Copyright" />
     </module2copyright>
     <LanguageOptions name="ObjectiveC">
       <option name="fileTypeOverride" value="3" />
