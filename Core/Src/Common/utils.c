@@ -16,6 +16,7 @@
 #include "Common/config.h"
 #include "FreeRTOS.h"
 #include "rtc.h"
+#include <stdio.h>
 #include <time.h>
 
 #ifdef NET_MODULE_ESP32

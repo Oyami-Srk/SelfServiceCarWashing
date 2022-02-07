@@ -17,12 +17,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/tasks.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/touchpad.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,7 +399,7 @@
       <workItem from="1643568749430" duration="16561000" />
       <workItem from="1643820414704" duration="3495000" />
       <workItem from="1643823917490" duration="53230000" />
-      <workItem from="1644243600385" duration="623000" />
+      <workItem from="1644243600385" duration="1315000" />
     </task>
     <servers />
   </component>
@@ -433,12 +433,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
-          <line>93</line>
+          <line>94</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>222</line>
+          <line>221</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>

@@ -3,15 +3,22 @@
 	"tasks": [
 		{
 			"label": "Build Cmake",
-			"type": "cmake",
-			"command": "build",
+			"type": "shell",
+			"command": "cmake ${workspaceRoot} && make -j42",
 			"options": {
-				"cwd": "${workspaceRoot}"
+				"cwd": "${workspaceRoot}/build"
 			},
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
+			"problemMatcher": [
+				{
+					"base": "$gcc",
+					"fileLocation": ["relative", "${workspaceRoot}/build"]
+				}
+			],
+			"promptOnClose": true
 		},
 	]
 }

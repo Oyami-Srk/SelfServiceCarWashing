@@ -14,7 +14,7 @@
  * the License. You may obtain a copy of the License at:
  *                             www.st.com/SLA0044
  *
- ******************************************************************************
+ *****************************************************************************
  */
 /* USER CODE END Header */
 
@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Common/hooks.h"
+#include "Common/utils.h"
 #include "lvgl.h"
 /* USER CODE END Includes */
 

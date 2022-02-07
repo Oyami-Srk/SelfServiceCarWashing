@@ -31,7 +31,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "SEGGER_RTT.h"
+#include "Common/utils.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

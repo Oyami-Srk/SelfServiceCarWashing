@@ -9,8 +9,8 @@
  *
  */
 
+#include "Common/utils.h"
 #include "main.h"
-#include <stdio.h>
 
 #define TP_DEF_GPIO(name)             name##_GPIO_Port, name##_Pin
 #define SET_GPIO(status, name) HAL_GPIO_WritePin(TP_DEF_GPIO(name), GPIO_PIN_##status)
