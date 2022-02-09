@@ -1,12 +1,12 @@
 /*
  * Copyright (c) 2021-2022 Shiroko
- * Project: SelfServiceCashing
+ * Project: SelfServiceCarWashing
  * File: utils.h
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
  * For that parts of codes, here is the copy of license: www.st.com/SLA0044
- *
+ * ================================
  */
 
 #ifndef __UTILS_H__

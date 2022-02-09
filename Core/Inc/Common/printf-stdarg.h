@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 - 2022 Shiroko
+ * Copyright (c) 2021-2022 Shiroko
  * Project: SelfServiceCarWashing
  * File: printf-stdarg.h
  * Author: Shiroko <hhx.xxm@gmail.com>

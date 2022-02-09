@@ -17,23 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/tasks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/at.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/at.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/at.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/wifi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,6 +244,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="NamedScopeManager">
+    <scope name="SSCW_MyCode" pattern="file[SelfServiceCarWashing]:Core//*&amp;&amp;!file:Core/Inc/dma.h&amp;&amp;!file:Core/Inc/dma2d.h&amp;&amp;!file:Core/Inc/fmc.h&amp;&amp;!file:Core/Inc/FreeRTOSConfig.h&amp;&amp;!file:Core/Inc/gpio.h&amp;&amp;!file:Core/Inc/ltdc.h&amp;&amp;!file:Core/Inc/lv_conf.h&amp;&amp;!file:Core/Inc/lv_demo_conf.h&amp;&amp;!file:Core/Inc/main.h&amp;&amp;!file:Core/Inc/rtc.h&amp;&amp;!file:Core/Inc/stm32f4xx_hal_conf.h&amp;&amp;!file:Core/Inc/stm32f4xx_it.h&amp;&amp;!file:Core/Inc/tim.h&amp;&amp;!file:Core/Inc/usart.h&amp;&amp;!file:Core/Src/dma.c&amp;&amp;!file:Core/Src/dma2d.c&amp;&amp;!file:Core/Src/fmc.c&amp;&amp;!file:Core/Src/freertos.c&amp;&amp;!file:Core/Src/gpio.c&amp;&amp;!file:Core/Src/ltdc.c&amp;&amp;!file:Core/Src/main.c&amp;&amp;!file:Core/Src/rtc.c&amp;&amp;!file:Core/Src/stm32f4xx_hal_msp.c&amp;&amp;!file:Core/Src/stm32f4xx_hal_timebase_tim.c&amp;&amp;!file:Core/Src/stm32f4xx_it.c&amp;&amp;!file:Core/Src/syscalls.c&amp;&amp;!file:Core/Src/system_stm32f4xx.c&amp;&amp;!file:Core/Src/tim.c&amp;&amp;!file:Core/Src/usart.c" />
     <order>
       <scope name="ACW_Scope" />
     </order>
@@ -417,7 +403,7 @@
       <workItem from="1644243600385" duration="4558000" />
       <workItem from="1644336439122" duration="165000" />
       <workItem from="1644336626717" duration="143000" />
-      <workItem from="1644390734223" duration="2187000" />
+      <workItem from="1644390734223" duration="2426000" />
     </task>
     <servers />
   </component>
