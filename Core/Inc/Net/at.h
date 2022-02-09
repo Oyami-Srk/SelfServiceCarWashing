@@ -42,7 +42,8 @@ typedef enum {
     NET_NOT_CONNECT,
     NET_NO_IP,
     NET_CONNECTED,
-    NET_CONNECTED_TO_SERVER
+    NET_CONNECTED_TO_SERVER,
+    NET_DEVICE_REGISTERED
 } NET_STATUS;
 
 #ifdef NET_MODULE_ESP32
@@ -84,5 +85,9 @@ void           AT_ResetStatus();
 #define AT_WAIT_FOR_RESP(queue, msg)                                           \
     AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, AT_WAIT_DELAY)
 #define AT_FREE_RESP(msg) vPortFree(msg.Buffer)
+
+// FreeRTOS wait for status
+#define AT_WAIT_INTV pdMS_TO_TICKS(100) // 100 ms check intv
+BaseType_t AT_WaitForStatus(NET_STATUS status, TickType_t max_delay);
 
 #endif // __NET_AT_H__

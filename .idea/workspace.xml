@@ -17,10 +17,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/init.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/at.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/at.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/at.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/wifi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -301,12 +313,12 @@
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -366,8 +378,8 @@
       <item itemvalue="CMake 应用程序.lvgl" />
       <item itemvalue="CMake 应用程序.lvgl_examples" />
       <item itemvalue="OpenOCD 下载并运行.OCD SelfServiceCarWashing" />
-      <item itemvalue="Shell Script.Run" />
       <item itemvalue="Shell Script.RTT" />
+      <item itemvalue="Shell Script.Run" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -402,7 +414,10 @@
       <workItem from="1643568749430" duration="16561000" />
       <workItem from="1643820414704" duration="3495000" />
       <workItem from="1643823917490" duration="53230000" />
-      <workItem from="1644243600385" duration="2697000" />
+      <workItem from="1644243600385" duration="4558000" />
+      <workItem from="1644336439122" duration="165000" />
+      <workItem from="1644336626717" duration="143000" />
+      <workItem from="1644390734223" duration="2187000" />
     </task>
     <servers />
   </component>

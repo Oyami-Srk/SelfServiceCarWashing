@@ -9,10 +9,6 @@
  *
  */
 
-//
-// Created by shiroko on 2022/2/3.
-//
-
 #ifndef __NET_WIFI_H__
 #define __NET_WIFI_H__
 

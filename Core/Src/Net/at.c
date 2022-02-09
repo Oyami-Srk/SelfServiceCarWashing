@@ -9,9 +9,6 @@
  *
  */
 
-//
-// Created by shiroko on 2022/2/3.
-//
 #include "Net/at.h"
 #include "Common/config.h"
 #include "Common/utils.h"
@@ -96,3 +93,14 @@ void AT_SetIP(const uint8_t *ip_array) {
 }
 
 const uint8_t *AT_GetIP() { return AT_Net_IP; }
+
+/* FreeRTOS impl */
+BaseType_t AT_WaitForStatus(NET_STATUS status, TickType_t max_delay) {
+    TickType_t xTickStart = xTaskGetTickCount();
+
+    while (AT_GetNetStatus() != status &&
+           xTaskGetTickCount() - xTickStart <= max_delay) {
+        vTaskDelay(AT_WAIT_INTV);
+    }
+    return pdTRUE;
+}

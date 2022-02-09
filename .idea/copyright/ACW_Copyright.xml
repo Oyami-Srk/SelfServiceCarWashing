@@ -1,6 +1,6 @@
 <component name="CopyrightManager">
   <copyright>
-    <option name="notice" value="#if (! &amp;#36;author)&#10;#set(&amp;#36;author={&quot;name&quot;: &quot;Shiroko&quot;, &quot;email&quot;: &quot;hhx.xxm@gmail.com&quot;})&#10;#end&#10;Copyright (c) 2021-2022 &amp;#36;author.name&#10;Project: &amp;#36;project.name&#10;File: &amp;#36;file.fileName&#10;Author: &amp;#36;author.name &lt;&amp;#36;author.email&gt;&#10;================================&#10;This Project may contain code from ST under Ultimate Liberty license.&#10;For that parts of codes, here is the copy of license: www.st.com/SLA0044&#10;" />
+    <option name="notice" value="#if (! &amp;#36;author)&#10;#set(&amp;#36;author={&quot;name&quot;: &quot;Shiroko&quot;, &quot;email&quot;: &quot;hhx.xxm@gmail.com&quot;})&#10;#end&#10;Copyright (c) 2021-2022 &amp;#36;author.name&#10;Project: &amp;#36;project.name&#10;File: &amp;#36;file.fileName&#10;Author: &amp;#36;author.name &lt;&amp;#36;author.email&gt;&#10;================================&#10;This Project may contain code from ST under Ultimate Liberty license.&#10;For that parts of codes, here is the copy of license: www.st.com/SLA0044&#10;================================" />
     <option name="myName" value="ACW_Copyright" />
   </copyright>
 </component>

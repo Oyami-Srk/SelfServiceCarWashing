@@ -12,12 +12,13 @@
 				"kind": "build",
 				"isDefault": true
 			},
+			/*
 			"problemMatcher": [
 				{
 					"base": "$gcc",
 					"fileLocation": ["relative", "${workspaceRoot}/build"]
 				}
-			],
+			],*/
 			"promptOnClose": true
 		},
 	]

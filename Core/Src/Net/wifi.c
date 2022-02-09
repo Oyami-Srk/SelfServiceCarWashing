@@ -9,10 +9,6 @@
  *
  */
 
-//
-// Created by shiroko on 2022/2/3.
-//
-
 #include "Net/wifi.h"
 #include "Common/config.h"
 #include "Common/utils.h"
@@ -390,6 +386,7 @@ connect_to_server:
         vTaskDelay(pdMS_TO_TICKS(3000));
         goto connect_to_server;
     }
+    AT_SetNetStatus(NET_CONNECTED_TO_SERVER);
 
     AT_UnregisterResponse(AT_Msg_Queue);
     vQueueDelete(AT_Msg_Queue);
@@ -398,8 +395,6 @@ connect_to_server:
     vTaskDelay(pdMS_TO_TICKS(2000));
     vTaskDelete(NULL); // delete self
     return;
-
-    // notify communication task to register devices
 
 failed:
     LOG("[WIFI] Cannot boot up WiFi module. Retry after 3 secs.");

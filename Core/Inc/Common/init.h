@@ -9,10 +9,6 @@
  *
  */
 
-//
-// Created by shiroko on 2022/2/1.
-//
-
 #ifndef __COMMON_INIT_H__
 #define __COMMON_INIT_H__
 

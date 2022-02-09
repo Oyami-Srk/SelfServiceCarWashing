@@ -9,15 +9,17 @@
  *
  */
 
-//
-// Created by shiroko on 2022/2/1.
-//
-
 #include "Common/init.h"
 #include "Common/utils.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+extern void standby_task(); // stanby.c
 
 void TASKS_INIT_RTOS() {
     LOG("[INIT] Starting init procedures.");
     LCD_INIT_RTOS();
     NET_UART_INIT_RTOS();
+    // Start Stand-by task
+    xTaskCreate(standby_task, "STANDBY", 256, NULL, tskIDLE_PRIORITY, NULL);
 }

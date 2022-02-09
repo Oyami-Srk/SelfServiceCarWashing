@@ -25,9 +25,6 @@
                 "This Project may contain code from ST under Ultimate Liberty license.",
                 "For that parts of codes, here is the copy of license: www.st.com/SLA0044",
                 "================================",
-                "Created: <<filecreated('YYYY/MM/DD hh:mm:ss')>>",
-                "Last Modified: <<dateformat('YYYY/MM/DD hh:mm:ss')>>",
-                "Modified By: <<author>> <<<authoremail>>>",
             ],
         }
     ],

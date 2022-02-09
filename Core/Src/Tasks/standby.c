@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 - 2022 Shiroko
  * Project: SelfServiceCarWashing
- * File: printf-stdarg.h
+ * File: standby.c
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -9,13 +9,15 @@
  * ================================
  */
 
-#ifndef __COMMON_PRINTF_STDARG_H__
-#define __COMMON_PRINTF_STDARG_H__
+#include "Common/utils.h"
+#include "FreeRTOS.h"
+#include "Net/at.h"
 
-int f_printf(const char *format, ...);
+_Noreturn void standby_task() {
+    LOG("[STANDBY] Start stand-by task.");
+    LOG("[STANDBY] Wait for network ready.");
+    AT_WaitForStatus(NET_CONNECTED_TO_SERVER, portMAX_DELAY);
 
-int f_sprintf(char *out, const char *format, ...);
-
-int f_snprintf(char *buf, unsigned int count, const char *format, ...);
-
-#endif // __COMMON_PRINTF_STDARG_H__
+    for (;;)
+        ;
+}
