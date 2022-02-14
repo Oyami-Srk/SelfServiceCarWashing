@@ -47,7 +47,7 @@ endif ()
 
 include_directories(${includes})
 
-add_definitions(${defines})
+add_definitions(${defines} -DSTM32F4)
 add_subdirectory(Middlewares/Third_Party/lvgl/)
 add_definitions(-DLV_LVGL_H_SIMPLE)
 

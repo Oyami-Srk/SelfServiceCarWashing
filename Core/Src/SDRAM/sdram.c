@@ -34,7 +34,7 @@
 
 // 5ms roughly delay
 void SDRAM_delay(__IO uint32_t nCount) {
-    __IO uint32_t index = 0;
+    __IO uint32_t index;
     for (index = (100000 * nCount); index != 0; index--)
         ;
 }
@@ -84,7 +84,7 @@ void SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef      *hsdram,
 }
 
 uint8_t SDRAM_Test(void) {
-    uint32_t i        = 0; // 计数变量
+    uint32_t i;            // 计数变量
     uint32_t ReadData = 0; // 读取到的数据
     uint8_t  ReadData_8b;
 

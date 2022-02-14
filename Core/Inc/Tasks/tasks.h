@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021-2022 Shiroko
  * Project: SelfServiceCarWashing
- * File: wifi.h
+ * File: tasks.h
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -9,15 +9,14 @@
  * ================================
  */
 
-#ifndef __NET_WIFI_H__
-#define __NET_WIFI_H__
+#ifndef __TASKS_TASKS_H__
+#define __TASKS_TASKS_H__
 
-#include "FreeRTOS.h"
-#include "Net/at.h"
+#include <stdint-gcc.h>
 
-// Init before UART start receiving
-void NET_WIFI_INIT();
-// Process active message while No task registered queue
-void NET_WIFI_UART_PROC(uint8_t *buffer, uint16_t len);
+void Cmd_ProcessActive(uint8_t *buffer, uint16_t len);
 
-#endif // __NET_WIFI_H__k
+void start_inuse_task(const char *userId, float avail);
+void stop_inuse_task();
+
+#endif // __TASKS_TASKS_H__

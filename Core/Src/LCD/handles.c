@@ -16,6 +16,7 @@
 #include "lvgl.h"
 #include "main.h"
 #include "task.h"
+#include "Common/utils.h"
 
 extern volatile uint8_t g_gpu_state;
 extern lv_disp_drv_t    g_disp_drv;
@@ -42,10 +43,15 @@ void LCD_CLEAR(void) {
 void    disp_init(void);  // in lvgl.c
 uint8_t Touch_Init(void); // in touchpad.c
 
+static void lv_logger(const char *buf) { LOGF("%s", buf); }
+
 void LCD_INIT_DMA2D(void) {
     LCD_CLEAR();
     // lvgl process
     lv_init();
+    // register log
+    lv_log_register_print_cb(lv_logger);
+    LV_LOG_WARN("Test logger for lvgl.");
     disp_init();
 }
 

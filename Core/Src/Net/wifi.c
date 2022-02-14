@@ -9,8 +9,13 @@
  * ================================
  */
 
-#include "Net/wifi.h"
 #include "Common/config.h"
+#include "Tasks/tasks.h"
+
+#pragma clang diagnostic push
+#pragma ide diagnostic   ignored "OCDFAInspection"
+#ifdef NET_MODULE_ESP32
+
 #include "Common/utils.h"
 #include "FreeRTOS.h"
 #include "Net/at.h"
@@ -18,9 +23,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#ifdef NET_MODULE_ESP32
-
-void task_wifi_init(void *args) {
+void task_wifi_init(__attribute__((unused)) void *args) {
     // TODO: Guard for connection lost
     int retry_intv;
 retry_start:
@@ -85,7 +88,7 @@ retry_start:
     // Connect to AP
     retries = 0;
 connect_to_ap:
-    LOG("[WIFI] Trying to connect to AP " NET_WIFI_AP_NAME);
+    LOG_SCR("[WIFI] Trying to connect to AP " NET_WIFI_AP_NAME);
     if (retries > NET_MAX_RETRIES) {
         LOG("[WIFI] Max retries exceeded while connect to ap. Restart all "
             "initialization procedures.");
@@ -112,7 +115,7 @@ connect_to_ap:
     if (result == AT_ERROR) {
         if (STATIC_STR_CMP(msg.Buffer, "+CWJAP")) {
             uint8_t err_code;
-            sscanf(msg.Buffer, "+CWJAP:%hhu", &err_code);
+            sscanf((char *)msg.Buffer, "+CWJAP:%hhu", &err_code);
             PRINTF("[WIFI] Connect to AP Failed with Error code: %d(",
                    err_code);
             switch (err_code) {
@@ -165,7 +168,7 @@ connect_to_ap:
                 goto connect_to_ap;
             }
         }
-        p          = msg.Buffer;
+        p          = (char *)msg.Buffer;
         int remain = msg.Len;
         int size;
 
@@ -195,7 +198,7 @@ connect_to_ap:
     // Get mac address
     retries = 0;
 get_mac_addr:
-    LOG("[WIFI] Trying to get device's MAC address.");
+    LOG_SCR("[WIFI] Trying to get device's MAC address.");
     if (retries > NET_MAX_RETRIES) {
         LOG("[WIFI] Max retries exceeded while get mac address. Restart all "
             "initialization procedures.");
@@ -212,7 +215,7 @@ get_mac_addr:
     vTaskDelay(pdMS_TO_TICKS(100));
     SEND_WAIT_CHECK("AT+CIPSTAMAC?",
                     "[WIFI] Failed to get device's MAC address.", get_mac_addr);
-    p = msg.Buffer;
+    p = (char *)msg.Buffer;
     p += sizeof("+CIPSTAMAC:") - 1;
     if (*p != '\"') {
         LOG("[WIFI] Command result broken while get device's MAC address. "
@@ -223,19 +226,19 @@ get_mac_addr:
         goto get_mac_addr;
     }
 
-    char mac_buffer[17];
+    char mac_buffer[18];
     memcpy(mac_buffer, p + 1, 17);
     AT_FREE_RESP(msg);
     mac_buffer[17] = '\0';
     for (p = mac_buffer; p < mac_buffer + 17; p++)
         *p = toupper(*p);
-    PRINTF("[WIFI] Device MAC: %s\r\n", mac_buffer);
+    PRINTF_SCR("[WIFI] Device MAC: %s\r\n", mac_buffer);
     AT_SetMacAddr(mac_buffer);
 
     // Get IP
     retries = 0;
 get_ip_addr:
-    LOG("[WIFI] Trying to get device's IP address.");
+    LOG_SCR("[WIFI] Trying to get device's IP address.");
     if (retries > NET_MAX_RETRIES) {
         LOG("[WIFI] Max retries exceeded while get ip address. Restart all "
             "initialization procedures.");
@@ -275,8 +278,8 @@ get_ip_addr:
         ip[i]  = atoi(ip_buffer);
     }
     AT_FREE_RESP(msg);
-    PRINTF("[WIFI] Device IP Address: %d.%d.%d.%d\r\n", ip[0], ip[1], ip[2],
-           ip[3]);
+    PRINTF_SCR("[WIFI] Device IP Address: %d.%d.%d.%d\r\n", ip[0], ip[1], ip[2],
+               ip[3]);
     AT_SetIP(ip);
 
     // Update time
@@ -286,15 +289,15 @@ update_time:;
     time_t currTime   = GetRTCTime();
     if (lastUpdate != 0 && lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
         char *time_buffer = ParseTimeInStr(lastUpdate);
-        PRINTF("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
-               time_buffer);
+        PRINTF_SCR("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
+                   time_buffer);
         vPortFree(time_buffer);
         time_buffer = ParseTimeInStr(currTime);
-        PRINTF("[WIFI] Now RTC Time is %s.\r\n", time_buffer);
+        PRINTF_SCR("[WIFI] Now RTC Time is %s.\r\n", time_buffer);
         vPortFree(time_buffer);
         goto update_time_finish;
     }
-    LOG("[WIFI] Trying to update time from SNTP.");
+    LOG_SCR("[WIFI] Trying to update time from SNTP.");
     if (retries > NET_MAX_RETRIES) {
         LOG("[WIFI] Max retries exceeded while update time. Restart all "
             "initialization procedures.");
@@ -335,18 +338,28 @@ update_time_finish:
     // Connect to Server
     retries = 0;
 connect_to_server:
-    PRINTF("[WIFI] Trying to connect to server.");
+    PRINTF_SCR("[WIFI] Trying to connect to server.");
     if (retries != 0) {
-        retry_intv = 100;
-        PRINTF(" (retry times: %d).", retries);
+        if (retries > 3) {
+            retry_intv = 10000;
+        } else if (retries > 30) {
+            retry_intv = 60000;
+        } else if (retries > 50) {
+            retry_intv = 60000 * 30;
+        } else if (retries > 70) {
+            PRINTF_SCR("[WIFI] Server down......");
+            vTaskDelay(pdMS_TO_TICKS(1000 * 60));
+            Error_Handler();
+        }
+        PRINTF_SCR(" (retry times: %d).", retries);
     }
-    PRINTF("\r\n");
+    PRINTF_SCR("\r\n");
     vTaskDelay(pdMS_TO_TICKS(500));
 
     while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
         // clean queue
         AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-        NET_WIFI_UART_PROC(msg.Buffer, msg.Len); // process active message
+        NET_MODULE_UART_PROC(msg.Buffer, msg.Len); // process active message
     }
     if (AT_GetNetStatus() != NET_CONNECTED) {
         LOG("[WIFI] Connection to network lost... Retry after 3 secs.");
@@ -358,7 +371,7 @@ connect_to_server:
     SEND_WAIT_CHECK("AT+PING=\"" SERVER_ADDR "\"",
                     "[WIFI] Failed to ping to server.", connect_to_server);
     uint16_t ping;
-    sscanf(msg.Buffer, "+PING:%hu", &ping);
+    sscanf((char *)msg.Buffer, "+PING:%hu", &ping);
     PRINTF("[WIFI] Ping to server " SERVER_ADDR " : %d ms.\r\n", ping);
     AT_FREE_RESP(msg);
     SEND_WAIT_CHECK("AT+CIPRECONNINTV=" NET_TCP_RECONNECT_INTV,
@@ -391,7 +404,8 @@ connect_to_server:
     AT_UnregisterResponse(AT_Msg_Queue);
     vQueueDelete(AT_Msg_Queue);
 
-    LOG("[WIFI] WiFi Module booted up.");
+    LOG_SCR("[WIFI] WiFi Module booted up.");
+    put_text_on_loading_scr("\n\n\n\n\n");
     vTaskDelay(pdMS_TO_TICKS(2000));
     vTaskDelete(NULL); // delete self
     return;
@@ -405,14 +419,25 @@ failed:
     goto retry_start;
 }
 
-void NET_WIFI_INIT() {
+uint8_t NET_MODULE_GET_RADIO_STRENGTH() {
+    return 32; // static value, esp32 have no command to query the radio
+               // strength of current connected ap
+}
+
+void NET_MODULE_INIT() {
     // this Function not inside FreeRTOS Task
     xTaskCreate(task_wifi_init, "WIFI-INIT", 256, NULL, tskIDLE_PRIORITY, NULL);
 }
 
 // buffer need to be free
-void NET_WIFI_UART_PROC(uint8_t *buffer, uint16_t len) {
-    LOG("[NET] Received active message.");
+void NET_MODULE_UART_PROC(uint8_t *buffer, uint16_t len) {
+    LOGF("[NET] Received active message (length %d).", len);
+    if (buffer[0] == '+') {
+        // server command
+        // Free in ProcessActive
+        Cmd_ProcessActive(buffer, len);
+        return;
+    }
     vPortFree(buffer);
 }
 

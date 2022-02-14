@@ -23,6 +23,7 @@
 #define ENABLE_NET_LED
 #define ENABLE_WORKING_LED
 
+//#define ENABLE_HEARTBEAT
 #define HEARTBEAT_INTV 5000 // in ms
 
 #define NET_MAX_RETRIES 3

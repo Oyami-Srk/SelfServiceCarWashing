@@ -65,9 +65,9 @@ void MX_RTC_Init(void)
         return;
     }
 
-    /* USER CODE END Check_RTC_BKUP */
+  /* USER CODE END Check_RTC_BKUP */
 
-    /** Initialize RTC and set the Time and Date
+  /** Initialize RTC and set the Time and Date
   */
   sTime.Hours = 0x0;
   sTime.Minutes = 0x0;

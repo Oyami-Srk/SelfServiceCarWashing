@@ -7,6 +7,7 @@
     <generated>
       <config projectName="SelfServiceCarWashing" targetName="lvgl" />
       <config projectName="SelfServiceCarWashing" targetName="SelfServiceCarWashing.elf" />
+      <config projectName="SelfServiceCarWashing" targetName="lvgl_demos" />
       <config projectName="SelfServiceCarWashing" targetName="lvgl_examples" />
     </generated>
   </component>
@@ -17,8 +18,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/ACW_Copyright.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/Tasks/tasks.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/cmd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_template.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/at.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/uart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/uart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/wifi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Doc.md" beforeDir="false" afterPath="$PROJECT_DIR$/Doc.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +84,8 @@
     <option name="nodes">
       <map>
         <entry key="STM32F429.svd" value="-E" />
-        <entry key="STM32F429.svd|g:GPIO" value="-C" />
-        <entry key="STM32F429.svd|g:USART" value="-E" />
+        <entry key="STM32F429.svd|g:GPIO" value="-E" />
+        <entry key="STM32F429.svd|g:USART" value="-C" />
         <entry key="STM32F429.svd|p:GPIOA" value="-C" />
         <entry key="STM32F429.svd|p:GPIOA|AFRH" value="HC" />
         <entry key="STM32F429.svd|p:GPIOA|AFRL" value="HC" />
@@ -108,7 +141,7 @@
         <entry key="STM32F429.svd|p:GPIOE|OSPEEDR" value="HC" />
         <entry key="STM32F429.svd|p:GPIOE|OTYPER" value="HC" />
         <entry key="STM32F429.svd|p:GPIOE|PUPDR" value="HC" />
-        <entry key="STM32F429.svd|p:GPIOF" value="-C" />
+        <entry key="STM32F429.svd|p:GPIOF" value="-E" />
         <entry key="STM32F429.svd|p:GPIOF|AFRH" value="HC" />
         <entry key="STM32F429.svd|p:GPIOF|AFRL" value="HC" />
         <entry key="STM32F429.svd|p:GPIOF|BSRR" value="HC" />
@@ -214,12 +247,12 @@
         <entry key="STM32F429.svd|p:RTC|TSTR" value="HC" />
         <entry key="STM32F429.svd|p:RTC|WPR" value="HC" />
         <entry key="STM32F429.svd|p:RTC|WUTR" value="HC" />
-        <entry key="STM32F429.svd|p:USART3" value="-E" />
+        <entry key="STM32F429.svd|p:USART3" value="-C" />
         <entry key="STM32F429.svd|p:USART3|BRR" value="HC" />
         <entry key="STM32F429.svd|p:USART3|CR1" value="HC" />
         <entry key="STM32F429.svd|p:USART3|CR2" value="HC" />
         <entry key="STM32F429.svd|p:USART3|CR3" value="HC" />
-        <entry key="STM32F429.svd|p:USART3|DR" value="HE" />
+        <entry key="STM32F429.svd|p:USART3|DR" value="HC" />
         <entry key="STM32F429.svd|p:USART3|GTPR" value="HC" />
         <entry key="STM32F429.svd|p:USART3|SR" value="HC" />
       </map>
@@ -228,6 +261,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -250,7 +284,7 @@
     </order>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="21dJbyS1mU3iWxfDEo7FpFfsS9S" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -272,13 +306,13 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/STM32F429.svd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pc_simulator_sdl_eclipse" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="copyright.profiles" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.21356651" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
@@ -299,17 +333,22 @@
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="lvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lvgl" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lvgl_demos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="lvgl_demos" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -362,6 +401,7 @@
     <list>
       <item itemvalue="CMake 应用程序.SelfServiceCashing.elf" />
       <item itemvalue="CMake 应用程序.lvgl" />
+      <item itemvalue="CMake 应用程序.lvgl_demos" />
       <item itemvalue="CMake 应用程序.lvgl_examples" />
       <item itemvalue="OpenOCD 下载并运行.OCD SelfServiceCarWashing" />
       <item itemvalue="Shell Script.RTT" />
@@ -403,7 +443,10 @@
       <workItem from="1644243600385" duration="4558000" />
       <workItem from="1644336439122" duration="165000" />
       <workItem from="1644336626717" duration="143000" />
-      <workItem from="1644390734223" duration="2426000" />
+      <workItem from="1644390734223" duration="27789000" />
+      <workItem from="1644755413261" duration="14328000" />
+      <workItem from="1644781581585" duration="19292000" />
+      <workItem from="1644867059173" duration="689000" />
     </task>
     <servers />
   </component>
@@ -436,14 +479,24 @@
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
-          <line>94</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
           <line>221</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Tasks/inuse.c</url>
+          <line>110</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Tasks/inuse.c</url>
+          <line>187</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
+          <line>95</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -451,6 +504,7 @@
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="g_disp_drv" />
         <watch expression="NET_RX_BUFFER" />
+        <watch expression="inuse_info" />
       </configuration>
     </watches-manager>
   </component>

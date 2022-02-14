@@ -18,7 +18,6 @@
 
 #include "Common/config.h"
 #include "FreeRTOS.h"
-#include "Net/wifi.h"
 #include "queue.h"
 #include <stdio.h>
 
@@ -46,15 +45,11 @@ typedef enum {
     NET_DEVICE_REGISTERED
 } NET_STATUS;
 
-#ifdef NET_MODULE_ESP32
-// using esp32 as net module
-#define NET_MODULE_INIT      NET_WIFI_INIT
-#define NET_MODULE_UART_PROC NET_WIFI_UART_PROC
-#else
-// using 4g module as net module
-#define NET_MODULE_INIT      NET_LTE_INIT
-#define NET_MODULE_UART_PROC NET_LET_INIT
-#endif
+/* Must implement this function in each module */
+void    NET_MODULE_INIT();
+void    NET_MODULE_UART_PROC(uint8_t *buffer, uint16_t len);
+uint8_t NET_MODULE_GET_RADIO_STRENGTH();
+/* ******************************************* */
 
 #define MAX_DELAY_QUEUE_WAIT 2000
 
@@ -74,17 +69,18 @@ const char    *AT_GetMacAddr();
 void           AT_SetIP(const uint8_t *ip_array);
 const uint8_t *AT_GetIP();
 void           AT_ResetStatus();
+inline uint8_t AT_GetRadioStrength() { return NET_MODULE_GET_RADIO_STRENGTH(); }
 
 #define AT_WAIT_DELAY pdMS_TO_TICKS(10 * 1000) // wait 10 secs.
 
 #define AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, delay)                         \
-    if (xQueueReceive(queue, &msg, delay) == pdFALSE) {                        \
+    if (xQueueReceive(queue, &(msg), delay) == pdFALSE) {                      \
         LOG("[UART] Cannot receive response.");                                \
         Error_Handler();                                                       \
     }
 #define AT_WAIT_FOR_RESP(queue, msg)                                           \
     AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, AT_WAIT_DELAY)
-#define AT_FREE_RESP(msg) vPortFree(msg.Buffer)
+#define AT_FREE_RESP(msg) vPortFree((msg).Buffer)
 
 // FreeRTOS wait for status
 #define AT_WAIT_INTV pdMS_TO_TICKS(100) // 100 ms check intv

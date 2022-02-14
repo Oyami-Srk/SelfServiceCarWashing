@@ -43,12 +43,12 @@ elseif ("${CMAKE_BUILD_TYPE}" STREQUAL "MinSizeRel")
     add_compile_options(-Os)
 else ()
     message(STATUS "Minimal optimization, debug info included")
-    add_compile_options(-Og -g)
+    add_compile_options(-Og -g -fstack-check)
 endif ()
 
 include_directories(Core/Inc Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_HAL_Driver/Inc/Legacy Middlewares/Third_Party/FreeRTOS/Source/include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include)
 
-add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx)
+add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx -DSTM32F4)
 add_subdirectory(Middlewares/Third_Party/lvgl/)
 add_definitions(-DLV_LVGL_H_SIMPLE)
 

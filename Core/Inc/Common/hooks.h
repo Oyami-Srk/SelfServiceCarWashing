@@ -19,4 +19,18 @@ void DMA2D_CB_ERROR();
 /* UART3 Hooks */
 void UART3_IRQ_HANDLER();
 
+/* TIM3 Hooks */
+void TIM3_IT_HANDLER();
+
+/* EXTI Hooks */
+/*
+ * EXTI5 - BTN1
+ * EXTI4 - BTN2
+ * EXTI2 - BTN3
+ * EXTI3 - BTN4
+ * EXTI6 - BTN7
+ * EXTI7 - BTN8
+ */
+void EXTI_BTN_IT_HANDLER();
+
 #endif // __COMMON_HOOKS_H__

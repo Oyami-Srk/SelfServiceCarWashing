@@ -22,7 +22,7 @@
 #include "usart.h"
 #include <stdio.h>
 
-#define UART3_DATA_SIZE 256
+#define UART3_DATA_SIZE 1024
 
 typedef struct {
     uint16_t rxLen;
@@ -35,7 +35,7 @@ static SemaphoreHandle_t UART3_RxSmph                    = NULL;
 
 QueueHandle_t AT_Resp_Queue = NULL;
 
-_Noreturn void task_uart3(void *args) {
+_Noreturn void task_uart3(__attribute__((unused)) void *args) {
     static AT_Response_Msg_t msg;
 
     for (;;) {
@@ -62,7 +62,7 @@ _Noreturn void task_uart3(void *args) {
                     NET_MODULE_UART_PROC(buffer, UART3_RxLen);
                 }
             }
-            // restart recive
+            // restart receive
             HAL_UART_Receive_DMA(&huart3, UART3_RxBuffer, UART3_DATA_SIZE);
         }
         osDelay(1);

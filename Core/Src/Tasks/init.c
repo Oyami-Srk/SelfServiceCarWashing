@@ -12,14 +12,18 @@
 #include "Common/init.h"
 #include "Common/utils.h"
 #include "FreeRTOS.h"
+#include "GUI/handles.h"
 #include "task.h"
 
-extern void standby_task(); // stanby.c
+extern void standby_task(); // standby.c
 
 void TASKS_INIT_RTOS() {
-    LOG("[INIT] Starting init procedures.");
+    LOG_SCR("[INIT] Starting init procedures.");
+    set_long_message("...System starting...");
     LCD_INIT_RTOS();
+    put_text_on_loading_scr("[Init] Finished LCD Init procedures.\n");
     NET_UART_INIT_RTOS();
+    put_text_on_loading_scr("[Init] Finished Net UART Init procedures.\n");
     // Start Stand-by task
     xTaskCreate(standby_task, "STANDBY", 256, NULL, tskIDLE_PRIORITY, NULL);
 }

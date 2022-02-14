@@ -14,8 +14,7 @@
 #include "lvgl.h"
 #include "dma2d.h"
 #include "main.h"
-
-#define LVGL_DRAW_BUFFER_SIZE LCD_WIDTH * 200
+#include "GUI/handles.h"
 
 static int32_t           x1_flush;
 static int32_t           y1_flush;
@@ -24,19 +23,28 @@ static int32_t           y2_fill;
 static int32_t           y_fill_act;
 static const lv_color_t *buf_to_flush;
 
-static lv_color_t *disp_buf1 = LCD_END_ADDR;
+#if 1
+#define LVGL_DRAW_BUFFER_SIZE (LCD_WIDTH * LCD_HEIGHT)
+static lv_color_t *disp_buf1 = (lv_color_t *)LCD_END_ADDR;
 static lv_color_t *disp_buf2 =
-    LCD_END_ADDR + LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t);
+    (lv_color_t *)(LCD_END_ADDR + LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t));
+#else
+#define LVGL_DRAW_BUFFER_SIZE (LCD_WIDTH * 15)
+lv_color_t disp_buf1[LVGL_DRAW_BUFFER_SIZE];
+lv_color_t disp_buf2[LVGL_DRAW_BUFFER_SIZE];
+#endif
 
 uint8_t       g_gpu_state = 0;
 lv_disp_drv_t g_disp_drv;
 
-static __IO uint16_t *my_fb = LCD_LAYER0_MEM_ADDR;
+static __IO uint16_t *my_fb = (uint16_t *)LCD_LAYER0_MEM_ADDR;
 
-static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
-                       lv_color_t *color_p) {
+static void disp_flush(__attribute__((unused)) lv_disp_drv_t *disp_drv,
+                       const lv_area_t *area, lv_color_t *color_p) {
+    /*
     uint32_t h = area->y2 - area->y1;
     uint32_t w = area->x2 - area->x1;
+    */
 
     uint32_t OffLineSrc = LCD_WIDTH - (area->x2 - area->x1 + 1);
     uint32_t addr       = LCD_LAYER0_MEM_ADDR +
@@ -55,7 +63,7 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area,
     g_gpu_state = 1;
 }
 
-void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d) {
+void DMA2D_CB(__attribute__((unused)) DMA2D_HandleTypeDef *p_hdma2d) {
     if (g_gpu_state == 1) {
         g_gpu_state = 0;
         lv_disp_flush_ready(&g_disp_drv);
@@ -64,8 +72,15 @@ void DMA2D_CB(DMA2D_HandleTypeDef *p_hdma2d) {
 
 void DMA2D_CB_ERROR(DMA2D_HandleTypeDef *p_hdma2d) {}
 
+/*
 static volatile uint32_t t_saved = 0;
-static monitor_cb(lv_disp_drv_t *d, uint32_t t, uint32_t p) { t_saved = t; }
+ */
+
+static void monitor_cb(__attribute__((unused)) lv_disp_drv_t *d, uint32_t t,
+                       __attribute__((unused)) uint32_t p) {
+    //    t_saved = t;
+    ((void)t);
+}
 
 uint8_t touchpad_get_xy(uint16_t *x, uint16_t *y); // in touchpad.c
 
@@ -73,13 +88,13 @@ static bool touchpad_read(lv_indev_drv_t *drv, lv_indev_data_t *data) {
     static int16_t last_x = 0;
     static int16_t last_y = 0;
 
-    bool    detected;
-    int16_t x;
-    int16_t y;
+    bool     detected;
+    uint16_t x;
+    uint16_t y;
     detected = touchpad_get_xy(&x, &y);
     if (detected) {
-        data->point.x = x;
-        data->point.y = y;
+        data->point.x = (int16_t)x;
+        data->point.y = (int16_t)y;
         last_x        = data->point.x;
         last_y        = data->point.y;
 
@@ -95,7 +110,7 @@ static bool touchpad_read(lv_indev_drv_t *drv, lv_indev_data_t *data) {
 
 void disp_init(void) {
     static lv_disp_draw_buf_t buf;
-    lv_disp_draw_buf_init(&buf, disp_buf1, disp_buf2, LCD_WIDTH * 50);
+    lv_disp_draw_buf_init(&buf, disp_buf1, disp_buf2, LVGL_DRAW_BUFFER_SIZE);
     lv_disp_drv_init(&g_disp_drv);
     g_disp_drv.draw_buf   = &buf;
     g_disp_drv.flush_cb   = disp_flush;
@@ -110,5 +125,7 @@ void disp_init(void) {
     indev_drv.type    = LV_INDEV_TYPE_POINTER;
     lv_indev_drv_register(&indev_drv);
     // start main gui
-    draw_widget();
+    init_gui();
+    // enter loading screen
+    loading_switch_in();
 }

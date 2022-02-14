@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "Common/hooks.h"
+#include "Common/init.h"
 /* USER CODE END 0 */
 
 DMA2D_HandleTypeDef hdma2d;
@@ -29,9 +30,8 @@ DMA2D_HandleTypeDef hdma2d;
 /* DMA2D init function */
 void MX_DMA2D_Init(void)
 {
-    HAL_GetTick();
 
-    /* USER CODE BEGIN DMA2D_Init 0 */
+  /* USER CODE BEGIN DMA2D_Init 0 */
     hdma2d.XferCpltCallback  = DMA2D_CB;
     hdma2d.XferErrorCallback = DMA2D_CB_ERROR;
   /* USER CODE END DMA2D_Init 0 */
