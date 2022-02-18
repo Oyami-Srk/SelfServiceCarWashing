@@ -17,7 +17,7 @@ void DMA2D_CB();
 void DMA2D_CB_ERROR();
 
 /* UART3 Hooks */
-void UART3_IRQ_HANDLER();
+void NET_UART_IRQ_HANDLER();
 
 /* TIM3 Hooks */
 void TIM3_IT_HANDLER();

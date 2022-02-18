@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021-2022 Shiroko
  * Project: SelfServiceCarWashing
- * File: cmd.c
+ * File: dev_cmd.c
  * Author: Shiroko <hhx.xxm@gmail.com>
  * ================================
  * This Project may contain code from ST under Ultimate Liberty license.
@@ -16,7 +16,7 @@
 #include "Net/at.h"
 #include <stdbool.h>
 
-static bool cmd_running = false;
+bool cmd_running = false;
 #define WAIT_FOR_RUNNING()                                                     \
     while (cmd_running)                                                        \
         vTaskDelay(pdMS_TO_TICKS(50));                                         \
@@ -35,9 +35,10 @@ CMD_RESULT Cmd_GetRespResult(const char *msg) {
     }
 }
 
-static char       buffer[64]   = {0};
-QueueHandle_t     AT_Msg_Queue = NULL;
-AT_Response_Msg_t msg;
+char cmd_send_buffer[128] = {0};
+
+static QueueHandle_t     AT_Msg_Queue = NULL;
+static AT_Response_Msg_t msg;
 
 #define CREATE_AND_REGISTER()                                                  \
     AT_Msg_Queue = xQueueCreate(8, sizeof(AT_Response_Msg_t));                 \
@@ -54,12 +55,12 @@ AT_Response_Msg_t msg;
 CMD_RESULT Cmd_RegisterDevice() {
     WAIT_FOR_RUNNING();
     const uint8_t *ip = AT_GetIP();
-    sprintf(buffer, DEV_CMD_REGISTER, AT_GetMacAddr(), ip[0], ip[1], ip[2],
-            ip[3], GetRTCTime(), "0.2.0", AT_GetRadioStrength());
-    LOGF("[CMD] Send: %s", buffer);
+    sprintf(cmd_send_buffer, DEV_CMD_REGISTER, AT_GetIdent(), ip[0], ip[1],
+            ip[2], ip[3], GetRTCTime(), SOFTWARE_VER, AT_GetRadioStrength());
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
     CREATE_AND_REGISTER();
 
-    AT_SendCommand((uint8_t *)buffer, strlen(buffer));
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
@@ -70,7 +71,7 @@ CMD_RESULT Cmd_RegisterDevice() {
 }
 
 CMD_RESULT Cmd_UserLogin(const char *username, const char *password,
-                         char *userId, float *avail) {
+                         char *userId, char *user_dispname, float *avail) {
     WAIT_FOR_RUNNING();
     AT_WaitForStatus(NET_DEVICE_REGISTERED, portMAX_DELAY);
 
@@ -88,17 +89,18 @@ CMD_RESULT Cmd_UserLogin(const char *username, const char *password,
     for (int i = 0; i < 16; i++)
         sprintf(md5str + 2 * i, "%02X", MD5Result[i]);
 
-    sprintf(buffer, DEV_CMD_LOGIN, username, md5str);
+    sprintf(cmd_send_buffer, DEV_CMD_LOGIN, AT_GetIdent(), username, md5str);
 
-    LOGF("[CMD] Send: %s", buffer);
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
     CREATE_AND_REGISTER();
 
-    AT_SendCommand((uint8_t *)buffer, strlen(buffer));
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
     if (result == CMD_RESULT_OK) {
-        sscanf((char *)msg.Buffer, SRV_RESP_LOGIN_OK, userId, avail);
+        sscanf((char *)msg.Buffer, SRV_RESP_LOGIN_OK, userId, user_dispname,
+               avail);
     } else {
         *userId = '\0';
     }
@@ -114,12 +116,13 @@ CMD_RESULT Cmd_UserLogOut(const char *userId, float water_used, float foam_used,
     WAIT_FOR_RUNNING();
     AT_WaitForStatus(NET_DEVICE_REGISTERED, portMAX_DELAY);
 
-    sprintf(buffer, DEV_CMD_LOGOUT, userId, water_used, foam_used, time_used);
+    sprintf(cmd_send_buffer, DEV_CMD_LOGOUT, AT_GetIdent(), userId, water_used,
+            foam_used, time_used);
 
-    LOGF("[CMD] Send: %s", buffer);
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
     CREATE_AND_REGISTER();
 
-    AT_SendCommand((uint8_t *)buffer, strlen(buffer));
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
@@ -131,7 +134,8 @@ CMD_RESULT Cmd_UserLogOut(const char *userId, float water_used, float foam_used,
 }
 
 static void cb_set_qr_code(lv_timer_t *timer) {
-    uint8_t *qr_array = timer->user_data + sizeof("+SERVRESP OK ") - 1;
+    uint8_t *qr_array =
+        timer->user_data + sizeof("+SERVRESP OK ") + NET_IDENT_SIZE;
     redraw_qr_code(qr_array);
     vPortFree(timer->user_data);
     lv_timer_del(timer);
@@ -141,31 +145,30 @@ CMD_RESULT Cmd_AcquireQRCode() {
     WAIT_FOR_RUNNING();
     AT_WaitForStatus(NET_DEVICE_REGISTERED, portMAX_DELAY);
 
-    LOGF("[CMD] Send: %s", DEV_CMD_QRCODE);
+    sprintf(cmd_send_buffer, DEV_CMD_QRCODE, AT_GetIdent());
+
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
     CREATE_AND_REGISTER();
 
-    AT_SendCommand((uint8_t *)DEV_CMD_QRCODE, sizeof(DEV_CMD_QRCODE) - 1);
-    //    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-    if (xQueueReceive(AT_Msg_Queue, &msg,
-                      ((TickType_t)(((TickType_t)(10 * 1000) *
-                                     (TickType_t)((TickType_t)1000)) /
-                                    (TickType_t)1000))) == ((BaseType_t)0)) {
-        f_printf("[UART] Cannot receive response."
-                 "\r\n");
-        Error_Handler();
-    }
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
+    if (memcmp(msg.Buffer + sizeof("SERVRESP OK "), AT_GetIdent(),
+               NET_IDENT_SIZE) != 0)
+        result = CMD_RESULT_ERROR;
+
     if (result == CMD_RESULT_OK) {
-        uint8_t *qr_array = msg.Buffer + sizeof("+SERVRESP OK ") - 1;
+        uint8_t *qr_array =
+            msg.Buffer + sizeof("+SERVRESP OK ") + NET_IDENT_SIZE;
         uint16_t size;
         if ((size = (*((uint16_t *)qr_array))) == 0) {
             result = CMD_RESULT_ERROR;
         } else {
             LOGF("Received size %dx%d Qr Code", size, size);
             LOGF("Wanted bytes: %d, Received bytes: %d.",
-                 (size * size) / 8 + 2 + sizeof("+SERVRESP OK ") - 1 +
-                     ((size * size) % 2 ? 1 : 0),
+                 (size * size) / 8 + 2 + sizeof("+SERVRESP OK ") +
+                     NET_IDENT_SIZE + ((size * size) % 2 ? 1 : 0),
                  msg.Len);
             //            redraw_qr_code(qr_array);
             lv_timer_create(cb_set_qr_code, 1000, msg.Buffer);
@@ -185,12 +188,12 @@ CMD_RESULT Cmd_HeartBeat() {
     WAIT_FOR_RUNNING();
 
     const uint8_t *ip = AT_GetIP();
-    sprintf(buffer, DEV_CMD_HEARTBEAT, AT_GetMacAddr(), ip[0], ip[1], ip[2],
-            ip[3], GetRTCTime(), "0.2.0", AT_GetRadioStrength());
-    LOGF("[CMD] Send: %s", buffer);
+    sprintf(cmd_send_buffer, DEV_CMD_HEARTBEAT, AT_GetIdent(), ip[0], ip[1],
+            ip[2], ip[3], GetRTCTime(), SOFTWARE_VER, AT_GetRadioStrength());
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
     CREATE_AND_REGISTER();
 
-    AT_SendCommand((uint8_t *)buffer, strlen(buffer));
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);

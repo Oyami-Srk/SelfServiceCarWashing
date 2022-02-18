@@ -11,8 +11,10 @@
 #include "FreeRTOS.h"
 #include "event_groups.h"
 #include "task.h"
+#include "semphr.h"
 
 #include "Common/utils.h"
+#include "Common/config.h"
 #include "GUI/porting.h"
 #include "Tasks/tasks.h"
 
@@ -26,8 +28,10 @@ static uint32_t pwm_lastTick = 0;
 
 static inuse_information_t inuse_info;
 static int                 calc_time  = 0;
-static bool                inuse      = false;
-TaskHandle_t               inuse_task = NULL;
+static TaskHandle_t        inuse_task = NULL;
+static SemaphoreHandle_t   info_mutex = NULL;
+
+bool inuse = false;
 
 #define BTN1_EVENT (0x01 << 0)
 #define BTN2_EVENT (0x01 << 1)
@@ -42,6 +46,7 @@ void task_calc_usage() {
 
     xLastWakeTime = xTaskGetTickCount();
     for (; inuse;) {
+        xSemaphoreTake(info_mutex, portMAX_DELAY);
         if (inuse_info.current_using != CURRENT_USING_NONE) {
             calc_time++;
             if (calc_time == 10) {
@@ -49,9 +54,18 @@ void task_calc_usage() {
                 calc_time = 0;
             }
             if (inuse_info.current_using == CURRENT_USING_WATER) {
+                inuse_info.current_usage_water +=
+                    inuse_info.current_flow_speed / 100; // flow speed is mL/s
             } else if (inuse_info.current_using == CURRENT_USING_FOAM) {
+                inuse_info.current_usage_foam +=
+                    inuse_info.current_flow_speed / 100; // flow speed is mL/s
             }
+            inuse_info.avail -=
+                inuse_info.current_usage_water +
+                inuse_info.current_usage_foam * FOAM_TO_WATER_FRACTION;
         }
+        xSemaphoreGive(info_mutex);
+
         vTaskDelayUntil(&xLastWakeTime, xPeriod);
     }
     vTaskDelete(NULL);
@@ -67,18 +81,30 @@ static bool scan_btn(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 static void BTN1_Pressed() {
-    LOG("[INUSE] Button 1 Pressed.");
-    ;
+    LOG("[INUSE] Button 1 Pressed, Using water.");
+    xSemaphoreTake(info_mutex, portMAX_DELAY);
+    inuse_info.current_using = CURRENT_USING_WATER;
+    xSemaphoreGive(info_mutex);
+    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_RESET);
 }
 
 static void BTN2_Pressed() {
-    LOG("[INUSE] Button 2 Pressed.");
-    ;
+    LOG("[INUSE] Button 2 Pressed, Using foam.");
+    xSemaphoreTake(info_mutex, portMAX_DELAY);
+    inuse_info.current_using = CURRENT_USING_FOAM;
+    xSemaphoreGive(info_mutex);
+    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_SET);
 }
 
 static void BTN3_Pressed() {
-    LOG("[INUSE] Button 3 Pressed.");
-    ;
+    LOG("[INUSE] Button 3 Pressed, Stop");
+    xSemaphoreTake(info_mutex, portMAX_DELAY);
+    inuse_info.current_using = CURRENT_USING_NONE;
+    xSemaphoreGive(info_mutex);
+    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_RESET);
 }
 
 static void BTN4_Pressed() {
@@ -121,12 +147,18 @@ _Noreturn void task_inuse() {
 
 void start_inuse_task(const char *userId, float avail) {
     LOG("[INUSE] Start.");
+    info_mutex = xSemaphoreCreateMutex();
+
+    xSemaphoreTake(info_mutex, portMAX_DELAY);
     memset(&inuse_info, 0, sizeof(inuse_information_t));
+    strcpy(inuse_info.userId, userId);
+    xSemaphoreGive(info_mutex);
+
     calc_time = 0;
     inuse     = true;
     xTaskCreate(task_calc_usage, "CALC_USAGE", 128, NULL, tskIDLE_PRIORITY + 3,
                 NULL);
-    xTaskCreate(task_calc_usage, "INUSE", 128, NULL, tskIDLE_PRIORITY + 3,
+    xTaskCreate(task_inuse, "INUSE", 128, NULL, tskIDLE_PRIORITY + 3,
                 &inuse_task);
     HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
 }
@@ -144,14 +176,16 @@ void stop_inuse_task() {
     inuse_info.current_using = CURRENT_USING_NONE;
     if (calc_time != 0)
         inuse_info.current_used_time++;
+    vSemaphoreDelete(info_mutex);
+    info_mutex = NULL;
 }
 
 static uint32_t current_used_time = 0;
 void            get_inuse_information(inuse_information_t *info) {
     LOG("Get Information...");
-    //    memcpy(info, &inuse_info, sizeof(inuse_information_t));
-    info->current_used_time = current_used_time;
-    current_used_time++;
+    xSemaphoreTake(info_mutex, portMAX_DELAY);
+    memcpy(info, &inuse_info, sizeof(inuse_information_t));
+    xSemaphoreGive(info_mutex);
 }
 
 static float calc_flow_speed(float freq) { return (freq + 3) / 8.1f; }

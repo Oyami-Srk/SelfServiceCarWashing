@@ -58,16 +58,16 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOK_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(TOUCH_IIC_SCL_GPIO_Port, TOUCH_IIC_SCL_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC, TOUCH_IIC_SCL_Pin|MDM_PEN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(TOUCH_IIC_RST_GPIO_Port, TOUCH_IIC_RST_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, RELAY3_Pin|RELAY4_Pin|MDM_PWK_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, RELAY3_Pin|RELAY4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(MDM_PEN_GPIO_Port, MDM_PEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(MDM_PWK_GPIO_Port, MDM_PWK_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOH, RELAY5_Pin|RELAY6_Pin|WORKING_STATUS_LED_Pin|NET_STATUS_LED_Pin, GPIO_PIN_RESET);

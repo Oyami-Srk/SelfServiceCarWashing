@@ -34,8 +34,8 @@ lv_color_t disp_buf1[LVGL_DRAW_BUFFER_SIZE];
 lv_color_t disp_buf2[LVGL_DRAW_BUFFER_SIZE];
 #endif
 
-uint8_t       g_gpu_state = 0;
-lv_disp_drv_t g_disp_drv;
+uint8_t              g_gpu_state = 0;
+static lv_disp_drv_t g_disp_drv;
 
 static __IO uint16_t *my_fb = (uint16_t *)LCD_LAYER0_MEM_ADDR;
 

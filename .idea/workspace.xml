@@ -18,39 +18,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Tasks/tasks.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Net/cmd.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/lte.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/Net/serv_cmd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists_template.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists_template.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/Net/at.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/wifi.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/lv_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/cmd.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/at.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/at.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/cmd.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/dev_cmd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Net/uart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/uart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Net/wifi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/SDRAM/sdram.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/rtc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/rtc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_hal_timebase_tim.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Doc.md" beforeDir="false" afterPath="$PROJECT_DIR$/Doc.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/GUI" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -311,6 +306,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.21356651" />
@@ -333,12 +329,12 @@
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="SelfServiceCashing.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -447,6 +443,7 @@
       <workItem from="1644755413261" duration="14328000" />
       <workItem from="1644781581585" duration="19292000" />
       <workItem from="1644867059173" duration="689000" />
+      <workItem from="1645185024094" duration="12791000" />
     </task>
     <servers />
   </component>
@@ -480,23 +477,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>221</line>
+          <line>201</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/Tasks/inuse.c</url>
-          <line>110</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/Tasks/inuse.c</url>
-          <line>187</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
-          <line>95</line>
+          <line>102</line>
           <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Net/serv_cmd.c</url>
+          <line>339</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -505,6 +497,9 @@
         <watch expression="g_disp_drv" />
         <watch expression="NET_RX_BUFFER" />
         <watch expression="inuse_info" />
+        <watch expression="login_call_userId" />
+        <watch expression="login_call_dispName" />
+        <watch expression="msg" />
       </configuration>
     </watches-manager>
   </component>

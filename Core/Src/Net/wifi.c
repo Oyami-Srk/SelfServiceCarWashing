@@ -12,8 +12,6 @@
 #include "Common/config.h"
 #include "Tasks/tasks.h"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic   ignored "OCDFAInspection"
 #ifdef NET_MODULE_ESP32
 
 #include "Common/utils.h"
@@ -69,6 +67,7 @@ retry_start:
     AT_RESULT result = AT_GetResult(msg.Buffer, msg.Len);
     AT_FREE_RESP(msg);
     if (result != AT_OK) {
+        AT_UnregisterResponse(AT_Msg_Queue);
         goto failed;
     }
 
@@ -400,6 +399,7 @@ connect_to_server:
         goto connect_to_server;
     }
     AT_SetNetStatus(NET_CONNECTED_TO_SERVER);
+    AT_FREE_RESP(msg);
 
     AT_UnregisterResponse(AT_Msg_Queue);
     vQueueDelete(AT_Msg_Queue);

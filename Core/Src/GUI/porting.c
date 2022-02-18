@@ -39,13 +39,14 @@ void get_clock_str(char *buffer, bool show_mark) {
                   time.Seconds);
 }
 
-uint8_t login(const char *username, const char *password) {
+uint8_t login(const char *username, const char *password, char *dispname) {
     char userId[64];
     memset(userId, 0, 64);
 
     float avail;
-    if (Cmd_UserLogin(username, password, userId, &avail) == CMD_RESULT_OK) {
-        //        start_inuse_task(userId, avail);
+    if (Cmd_UserLogin(username, password, userId, dispname, &avail) ==
+        CMD_RESULT_OK) {
+        start_inuse_task(userId, avail);
         return LOGIN_SUCCESS;
     }
     return LOGIN_FAILED;
@@ -54,7 +55,7 @@ uint8_t login(const char *username, const char *password) {
 void logout() {
     inuse_information_t info;
     get_inuse_information(&info);
-    //    stop_inuse_task();
+    stop_inuse_task();
     while (Cmd_UserLogOut(info.userId, info.current_usage_water,
                           info.current_usage_foam,
                           info.current_used_time) != CMD_RESULT_OK) {

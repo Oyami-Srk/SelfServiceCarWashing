@@ -49,6 +49,12 @@ uint32_t SetRTCTime(const char *str_time) {
 #else
     // Process LTE time response
     // Eg: 2021/07/19,09:22:04+32
+    uint16_t year;
+    sscanf(str_time, "%hu/%hhu/%hhu,%hhu:%hhu:%hhu", &year, &date.Month,
+           &date.Date, &time.Hours, &time.Minutes, &time.Seconds);
+    if (year < 2022)
+        return 0;
+    date.Year = year - 2000;
 #endif
     HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
     HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
@@ -113,7 +119,8 @@ int f_putchar(int ch) {
     SEGGER_RTT_PutChar(0, ch);
 #endif
 #ifdef DEBUG_PRINT_USE_UART1
-    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 10);
+//    huart1.Instance->DR = ch;
 #endif
     return ch;
 }

@@ -35,6 +35,7 @@ typedef enum {
     AT_NO_ANSWER,
     AT_PARSE_ERROR,
     AT_OTHER,
+    AT_RDY,
 } AT_RESULT;
 
 typedef enum {
@@ -64,8 +65,8 @@ AT_RESULT AT_GetResult(uint8_t *buffer, uint16_t len);
 
 void           AT_SetNetStatus(NET_STATUS status);
 NET_STATUS     AT_GetNetStatus();
-void           AT_SetMacAddr(const char *mac);
-const char    *AT_GetMacAddr();
+void           AT_SetIdent(const char *ident);
+const char    *AT_GetIdent();
 void           AT_SetIP(const uint8_t *ip_array);
 const uint8_t *AT_GetIP();
 void           AT_ResetStatus();
@@ -81,6 +82,13 @@ inline uint8_t AT_GetRadioStrength() { return NET_MODULE_GET_RADIO_STRENGTH(); }
 #define AT_WAIT_FOR_RESP(queue, msg)                                           \
     AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, AT_WAIT_DELAY)
 #define AT_FREE_RESP(msg) vPortFree((msg).Buffer)
+
+#ifdef NET_MODULE_LTE
+#define NET_IDENT_SIZE 15
+#endif
+#ifdef NET_MODULE_ESP32
+#define NET_IDENT_SIZE 17
+#endif
 
 // FreeRTOS wait for status
 #define AT_WAIT_INTV pdMS_TO_TICKS(100) // 100 ms check intv

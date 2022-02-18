@@ -64,4 +64,47 @@ _Noreturn void standby_task() {
     }
 }
 
-void Cmd_ProcessActive(uint8_t *buffer, uint16_t len) { vPortFree(buffer); }
+void Cmd_ProcessActive(uint8_t *buffer, uint16_t len) {
+    if (STATIC_STR_CMP(buffer, "+SERVCMD")) {
+        LOG("Received Server command.");
+        char *ptocomp = (char *)buffer + sizeof("+SERVCMD");
+        if (STATIC_STR_CMP(ptocomp, SRV_CMD_GETSTATUS)) {
+            Srv_GetStatus(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_LOGIN)) {
+            Srv_UserLogin(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_LOGOUT)) {
+            Srv_UserLogout(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_RESET)) {
+            Srv_Reset(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_SHUTDOWN)) {
+            Srv_Shutdown(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_START)) {
+            Srv_ServiceStart(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_STOP)) {
+            Srv_ServiceStop(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_DISPOFF)) {
+            Srv_DispOff(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_DISPON)) {
+            Srv_DispOn(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_DISPMSG)) {
+            Srv_DispMessage(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_QRCODE)) {
+            Srv_DispQRCode(buffer, len);
+        } else if (STATIC_STR_CMP(ptocomp, SRV_CMD_SETCONF)) {
+            Srv_SetConf(buffer, len);
+        } else {
+            len -= sizeof("+SERVCMD");
+            char *p = ptocomp;
+            while (len && *p != ' ') {
+                p++;
+                len--;
+            }
+            *p = '\0';
+
+            LOGF("Unknown Command: %s", ptocomp);
+            vPortFree(buffer);
+        }
+    } else {
+        vPortFree(buffer);
+    }
+}

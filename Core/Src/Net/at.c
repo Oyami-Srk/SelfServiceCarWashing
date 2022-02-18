@@ -20,6 +20,8 @@ extern QueueHandle_t AT_Resp_Queue;
 
 void AT_SendCommand(uint8_t *buffer, uint16_t len) {
     HAL_UART_Transmit_DMA(&huart3, buffer, len);
+    LOGF("Send: %s", buffer);
+    //    HAL_UART_Transmit(&huart3, buffer, len, 1000);
 }
 
 AT_RESULT AT_RegisterResponse(QueueHandle_t queueHandle) {
@@ -52,16 +54,18 @@ AT_RESULT AT_GetResult(uint8_t *buffer, uint16_t len) {
         return AT_OK;
     if (STATIC_STR_CMP(pb, "ERROR"))
         return AT_ERROR;
+    if (STATIC_STR_CMP(pb, "RDY"))
+        return AT_RDY;
     // TODO: more comparison
     return AT_OTHER;
 }
 
 NET_STATUS AT_Net_Status;
-char       AT_Net_MacAddr[18];
+char       AT_Net_Ident[18];
 uint8_t    AT_Net_IP[4];
 
 void AT_ResetStatus() {
-    memset(AT_Net_MacAddr, 0, 18);
+    memset(AT_Net_Ident, 0, 18);
     memset(AT_Net_IP, 0, 4);
     AT_Net_Status = NET_NOT_CONNECT;
 }
@@ -82,11 +86,9 @@ void AT_SetNetStatus(NET_STATUS status) {
 
 NET_STATUS AT_GetNetStatus() { return AT_Net_Status; }
 
-void AT_SetMacAddr(const char *mac) {
-    memcpy(AT_Net_MacAddr, mac, 18 * sizeof(char));
-}
+void AT_SetIdent(const char *ident) { strcpy(AT_Net_Ident, ident); }
 
-const char *AT_GetMacAddr() { return AT_Net_MacAddr; }
+const char *AT_GetIdent() { return AT_Net_Ident; }
 
 void AT_SetIP(const uint8_t *ip_array) {
     memcpy(AT_Net_IP, ip_array, 4 * sizeof(uint8_t));
