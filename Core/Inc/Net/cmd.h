@@ -28,7 +28,7 @@
 
 // Server response
 #define SRV_RESP          "+SERVRESP %c"
-#define SRV_RESP_LOGIN_OK "+SERVRESP OK %s %s %f\n"
+#define SRV_RESP_LOGIN_OK "%s %s %f\n"
 // Server Command
 #define SRV_CMD_HEAD         "+SERVCMD"
 #define SRV_CMD_GETSTATUS    "GET_STATUS"

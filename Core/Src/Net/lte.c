@@ -426,8 +426,10 @@ void NET_MODULE_UART_PROC(uint8_t *buffer, uint16_t len) {
         Cmd_ProcessActive(buffer, len);
         return;
     } else {
-        if (STATIC_STR_CMP(buffer, "NO CARRIER")) {
+        if (STATIC_STR_CMP(buffer, "\r\nNO CARRIER")) {
+            LOG("[LTE] Connection Broken.");
             AT_SetNetStatus(NET_NOT_CONNECT);
+
             xTaskCreate(task_lte_init, "LTE-INIT", 256, NULL, tskIDLE_PRIORITY,
                         NULL);
         }

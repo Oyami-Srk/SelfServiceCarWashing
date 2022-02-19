@@ -19,7 +19,8 @@ extern void standby_task(); // standby.c
 
 void TASKS_INIT_RTOS() {
     LOG_SCR("[INIT] Starting init procedures.");
-    set_long_message("...System starting...");
+    LOG_SCR("[INIT] 测试中文显示。");
+    set_long_message("……系统启动中……");
     LCD_INIT_RTOS();
     put_text_on_loading_scr("[Init] Finished LCD Init procedures.\n");
     NET_UART_INIT_RTOS();

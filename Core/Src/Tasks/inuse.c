@@ -51,14 +51,29 @@ void task_calc_usage() {
             calc_time++;
             if (calc_time == 10) {
                 inuse_info.current_used_time++;
+                switch (inuse_info.current_using) {
+                case CURRENT_USING_WATER:
+                    inuse_info.water_used_time++;
+                    break;
+                case CURRENT_USING_FOAM:
+                    inuse_info.foam_used_time++;
+                    break;
+                default:
+                    break;
+                }
                 calc_time = 0;
             }
-            if (inuse_info.current_using == CURRENT_USING_WATER) {
+            switch (inuse_info.current_using) {
+            case CURRENT_USING_WATER:
                 inuse_info.current_usage_water +=
                     inuse_info.current_flow_speed / 100; // flow speed is mL/s
-            } else if (inuse_info.current_using == CURRENT_USING_FOAM) {
+                break;
+            case CURRENT_USING_FOAM:
                 inuse_info.current_usage_foam +=
                     inuse_info.current_flow_speed / 100; // flow speed is mL/s
+                break;
+            default:
+                break;
             }
             inuse_info.avail -=
                 inuse_info.current_usage_water +

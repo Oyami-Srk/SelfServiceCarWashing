@@ -98,9 +98,13 @@ CMD_RESULT Cmd_UserLogin(const char *username, const char *password,
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
+    if (memcmp(msg.Buffer + sizeof("+SERVRESP OK"), AT_GetIdent(),
+               NET_IDENT_SIZE) != 0)
+        result = CMD_RESULT_ERROR;
+
     if (result == CMD_RESULT_OK) {
-        sscanf((char *)msg.Buffer, SRV_RESP_LOGIN_OK, userId, user_dispname,
-               avail);
+        sscanf((char *)(msg.Buffer + sizeof("+SERVRESP OK ") + NET_IDENT_SIZE),
+               SRV_RESP_LOGIN_OK, userId, user_dispname, avail);
     } else {
         *userId = '\0';
     }
@@ -154,7 +158,7 @@ CMD_RESULT Cmd_AcquireQRCode() {
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
-    if (memcmp(msg.Buffer + sizeof("SERVRESP OK "), AT_GetIdent(),
+    if (memcmp(msg.Buffer + sizeof("+SERVRESP OK"), AT_GetIdent(),
                NET_IDENT_SIZE) != 0)
         result = CMD_RESULT_ERROR;
 
