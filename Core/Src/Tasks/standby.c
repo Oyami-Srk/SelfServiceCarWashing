@@ -54,9 +54,9 @@ _Noreturn void heartbeat_task() {
 
 _Noreturn void standby_task() {
     LOG("[STANDBY] Start stand-by task.");
-    xTaskCreate(register_task, "REGISTER", 128, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(register_task, "REGISTER", 512, NULL, tskIDLE_PRIORITY, NULL);
 #ifdef ENABLE_HEARTBEAT
-    xTaskCreate(heartbeat_task, "HEARTBEAT", 128, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(heartbeat_task, "HEARTBEAT", 512, NULL, tskIDLE_PRIORITY, NULL);
 #endif
 
     for (;;) {

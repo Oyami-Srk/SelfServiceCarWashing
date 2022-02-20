@@ -32,11 +32,11 @@ void get_clock_str(char *buffer, bool show_mark) {
     HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
     HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN);
     if (show_mark)
-        f_sprintf(buffer, "%02d:%02d:%02d", time.Hours, time.Minutes,
-                  time.Seconds);
+        my_sprintf(buffer, "%02d:%02d:%02d", time.Hours, time.Minutes,
+                   time.Seconds);
     else
-        f_sprintf(buffer, "%02d %02d %02d", time.Hours, time.Minutes,
-                  time.Seconds);
+        my_sprintf(buffer, "%02d %02d %02d", time.Hours, time.Minutes,
+                   time.Seconds);
 }
 
 uint8_t login(const char *username, const char *password, char *dispname) {

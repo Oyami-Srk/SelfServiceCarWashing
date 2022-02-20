@@ -46,6 +46,13 @@
                   <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Include" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/App" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/Target" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Core/Inc" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc" />
+                  <listOptionValue builtIn="false" value="../FATFS/Target" />
+                  <listOptionValue builtIn="false" value="../FATFS/App" />
+                  <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src" />
                 </option>
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.1523314055" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER" />
@@ -67,6 +74,13 @@
                   <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Include" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/App" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/Target" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Core/Inc" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc" />
+                  <listOptionValue builtIn="false" value="../FATFS/Target" />
+                  <listOptionValue builtIn="false" value="../FATFS/App" />
+                  <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src" />
                 </option>
                 <option id="gnu.cpp.compiler.option.preprocessor.def.1836417854" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER" />
@@ -107,6 +121,8 @@
             </toolChain>
           </folderInfo>
           <sourceEntries>
+            <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS" />
+            <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="USB_DEVICE" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers" />
@@ -160,6 +176,13 @@
                   <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Include" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/App" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/Target" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Core/Inc" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc" />
+                  <listOptionValue builtIn="false" value="../FATFS/Target" />
+                  <listOptionValue builtIn="false" value="../FATFS/App" />
+                  <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src" />
                 </option>
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.1523314055" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER" />
@@ -181,6 +204,13 @@
                   <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F4xx/Include" />
                   <listOptionValue builtIn="false" value="../Drivers/CMSIS/Include" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/App" />
+                  <listOptionValue builtIn="false" value="../USB_DEVICE/Target" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Core/Inc" />
+                  <listOptionValue builtIn="false" value="../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc" />
+                  <listOptionValue builtIn="false" value="../FATFS/Target" />
+                  <listOptionValue builtIn="false" value="../FATFS/App" />
+                  <listOptionValue builtIn="false" value="../Middlewares/Third_Party/FatFs/src" />
                 </option>
                 <option id="gnu.cpp.compiler.option.preprocessor.def.symbols.1293478822" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER" />
@@ -221,6 +251,8 @@
             </toolChain>
           </folderInfo>
           <sourceEntries>
+            <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="FATFS" />
+            <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="USB_DEVICE" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Middlewares" />
             <entry excluding="" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers" />

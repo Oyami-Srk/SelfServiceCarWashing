@@ -12,6 +12,8 @@
 #include "Common/utils.h"
 #include "Common/config.h"
 #include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
 #include "rtc.h"
 #include <stdio.h>
 #include <time.h>
@@ -50,8 +52,34 @@ uint32_t SetRTCTime(const char *str_time) {
     // Process LTE time response
     // Eg: 2021/07/19,09:22:04+32
     uint16_t year;
-    sscanf(str_time, "%hu/%hhu/%hhu,%hhu:%hhu:%hhu", &year, &date.Month,
-           &date.Date, &time.Hours, &time.Minutes, &time.Seconds);
+    uint8_t  tz;
+    char     tzpm;
+    sscanf(str_time, "%hu/%hhu/%hhu,%hhu:%hhu:%hhu%c%hhu", &year, &date.Month,
+           &date.Date, &time.Hours, &time.Minutes, &time.Seconds, &tzpm, &tz);
+
+    struct tm curr_calc      = {.tm_year =
+                               date.Year + 100, // tm_year start from 1900
+                                .tm_mon  = date.Month - 1, // tm_mon start from 0
+                                .tm_mday = date.Date,
+                                .tm_hour = time.Hours,
+                                .tm_min  = time.Minutes,
+                                .tm_sec  = time.Seconds};
+    uint32_t  timestamp_calc = timegm(&curr_calc) & 0xFFFFFFFF;
+    if (tzpm == '+') {
+        timestamp_calc += 15 * tz * 60;
+    } else if (tzpm == '-') {
+        timestamp_calc -= 15 * tz * 60;
+    }
+    time_t     ts     = timestamp_calc;
+    struct tm *tminfo = localtime(&ts);
+
+    date.Year    = tminfo->tm_year - 100;
+    date.Month   = tminfo->tm_mon + 1;
+    date.Date    = tminfo->tm_mday;
+    time.Hours   = tminfo->tm_hour;
+    time.Minutes = tminfo->tm_min;
+    time.Seconds = tminfo->tm_sec;
+
     if (year < 2022)
         return 0;
     date.Year = year - 2000;
@@ -89,7 +117,7 @@ uint32_t GetRTCTime() {
                       .tm_hour = time.Hours,
                       .tm_min  = time.Minutes,
                       .tm_sec  = time.Seconds};
-    return mktime(&curr) &
+    return timegm(&curr) &
            0xFFFFFFFF; // only take bottom half, available before year 2106
 }
 
@@ -123,4 +151,16 @@ int f_putchar(int ch) {
 //    huart1.Instance->DR = ch;
 #endif
     return ch;
+}
+
+// Stack overflow detection
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName) {
+#if configCHECK_FOR_STACK_OVERFLOW
+    LOGF("Caught a overflow in tasks %s.", pcTaskName);
+    __BKPT();
+    for (;;) {
+        HAL_GPIO_TogglePin(GPIO(WORKING_STATUS_LED));
+        HAL_Delay(100);
+    }
+#endif
 }

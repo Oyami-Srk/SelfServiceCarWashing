@@ -86,5 +86,5 @@ _Noreturn static void task_lvgl() {
 
 // init for FreeRTOS
 void LCD_INIT_RTOS() {
-    xTaskCreate(task_lvgl, "LCD-LVGL", 1024, NULL, tskIDLE_PRIORITY + 1, NULL);
+    xTaskCreate(task_lvgl, "LCD-LVGL", 1024, NULL, tskIDLE_PRIORITY, NULL);
 }

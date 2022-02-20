@@ -337,7 +337,7 @@ update_time_finish:
     // Connect to Server
     retries = 0;
 connect_to_server:
-    PRINTF_SCR("[LTE] Trying to connect to server.");
+    PRINTF("[LTE] Trying to connect to server.");
     if (retries != 0) {
         if (retries > 3) {
             retry_intv = 10000;
@@ -346,13 +346,13 @@ connect_to_server:
         } else if (retries > 50) {
             retry_intv = 60000 * 30;
         } else if (retries > 70) {
-            PRINTF_SCR("[LTE] Server down......");
+            PRINTF("[LTE] Server down......");
             vTaskDelay(pdMS_TO_TICKS(1000 * 60));
             Error_Handler();
         }
-        PRINTF_SCR(" (retry times: %d).", retries);
+        PRINTF(" (retry times: %d).", retries);
     }
-    PRINTF_SCR("\r\n");
+    PRINTF("\r\n");
     vTaskDelay(pdMS_TO_TICKS(500));
 
     while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
@@ -414,7 +414,7 @@ uint8_t NET_MODULE_GET_RADIO_STRENGTH() { return radio_strength; }
 
 void NET_MODULE_INIT() {
     // this Function not inside FreeRTOS Task
-    xTaskCreate(task_lte_init, "LTE-INIT", 256, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(task_lte_init, "LTE-INIT", 1024, NULL, tskIDLE_PRIORITY, NULL);
 }
 
 // buffer need to be free
@@ -430,7 +430,7 @@ void NET_MODULE_UART_PROC(uint8_t *buffer, uint16_t len) {
             LOG("[LTE] Connection Broken.");
             AT_SetNetStatus(NET_NOT_CONNECT);
 
-            xTaskCreate(task_lte_init, "LTE-INIT", 256, NULL, tskIDLE_PRIORITY,
+            xTaskCreate(task_lte_init, "LTE-INIT", 512, NULL, tskIDLE_PRIORITY,
                         NULL);
         }
     }

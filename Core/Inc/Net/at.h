@@ -70,7 +70,9 @@ const char    *AT_GetIdent();
 void           AT_SetIP(const uint8_t *ip_array);
 const uint8_t *AT_GetIP();
 void           AT_ResetStatus();
-inline uint8_t AT_GetRadioStrength() { return NET_MODULE_GET_RADIO_STRENGTH(); }
+static inline uint8_t AT_GetRadioStrength() {
+    return NET_MODULE_GET_RADIO_STRENGTH();
+}
 
 #define AT_WAIT_DELAY pdMS_TO_TICKS(10 * 1000) // wait 10 secs.
 

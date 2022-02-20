@@ -22,20 +22,20 @@
 
 int f_putchar(int ch);
 
-#define LOG(msg)       f_printf(msg "\r\n")
-#define LOGF(msg, ...) f_printf(msg "\r\n", __VA_ARGS__)
-#define PRINTF(...)    f_printf(__VA_ARGS__)
+#define LOG(msg)       my_printf(msg "\r\n")
+#define LOGF(msg, ...) my_printf(msg "\r\n", __VA_ARGS__)
+#define PRINTF(...)    my_printf(__VA_ARGS__)
 
 #define LOG_SCR(msg)                                                           \
-    f_printf(msg "\r\n");                                                      \
+    my_printf(msg "\r\n");                                                     \
     put_text_on_loading_scr(msg "\n")
 
 #define LOGF_SCR(msg, ...)                                                     \
-    f_printf(msg "\r\n", __VA_ARGS__);                                         \
+    my_printf(msg "\r\n", __VA_ARGS__);                                        \
     put_text_on_loading_scr_fmt(msg "\n", __VA_ARGS__)
 
 #define PRINTF_SCR(...)                                                        \
-    f_printf(__VA_ARGS__);                                                     \
+    my_printf(__VA_ARGS__);                                                    \
     put_text_on_loading_scr_fmt(__VA_ARGS__)
 
 #define GPIO(name) name##_GPIO_Port, name##_Pin
@@ -58,6 +58,7 @@ int f_putchar(int ch);
     }                                                                          \
     PRINTF("\r\n")
 
+time_t   timegm(struct tm *tim_p);         // uOS++ timegm
 uint32_t SetRTCTime(const char *str_time); // return time stamp
 uint32_t GetRTCTime();                     // return current time stamp
 uint32_t GetRTCLastUpdate();               // return last update time stamp

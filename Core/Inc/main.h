@@ -120,6 +120,8 @@ void Error_Handler(void);
 #define LCD_BACK_LIGHT_GPIO_Port GPIOD
 #define RELAY7_Pin GPIO_PIN_2
 #define RELAY7_GPIO_Port GPIOG
+#define SPI_FLASH_CS_Pin GPIO_PIN_3
+#define SPI_FLASH_CS_GPIO_Port GPIOG
 #define RELAY8_Pin GPIO_PIN_6
 #define RELAY8_GPIO_Port GPIOG
 #define TOUCH_IIC_INT_Pin GPIO_PIN_15

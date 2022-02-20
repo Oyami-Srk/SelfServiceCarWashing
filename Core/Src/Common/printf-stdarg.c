@@ -191,21 +191,21 @@ static int print(char **out, const char *format, va_list args) {
     return pc;
 }
 
-int f_printf(const char *format, ...) {
+int my_printf(const char *format, ...) {
     va_list args;
 
     va_start(args, format);
     return print(0, format, args);
 }
 
-int f_sprintf(char *out, const char *format, ...) {
+int my_sprintf(char *out, const char *format, ...) {
     va_list args;
 
     va_start(args, format);
     return print(&out, format, args);
 }
 
-int f_snprintf(char *buf, unsigned int count, const char *format, ...) {
+int my_snprintf(char *buf, unsigned int count, const char *format, ...) {
     va_list args;
 
     (void)count;

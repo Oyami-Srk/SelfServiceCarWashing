@@ -12,10 +12,10 @@
 #ifndef __COMMON_PRINTF_STDARG_H__
 #define __COMMON_PRINTF_STDARG_H__
 
-int f_printf(const char *format, ...);
+int my_printf(const char *format, ...);
 
-int f_sprintf(char *out, const char *format, ...);
+int my_sprintf(char *out, const char *format, ...);
 
-int f_snprintf(char *buf, unsigned int count, const char *format, ...);
+int my_snprintf(char *buf, unsigned int count, const char *format, ...);
 
 #endif // __COMMON_PRINTF_STDARG_H__
