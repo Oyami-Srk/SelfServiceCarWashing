@@ -18,33 +18,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Inc/Flash/flash.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Common/timegm.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/Flash/flash.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.cproject" beforeDir="false" afterPath="$PROJECT_DIR$/.cproject" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/printf-stdarg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Net/at.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Net/at.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Common/printf-stdarg.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/printf-stdarg.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Flash/flash.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Flash/flash.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/GUI/porting.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GUI/porting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Net/lte.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/lte.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Flash/flash.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Flash/flash.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/standby.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FATFS/Target/ffconf.h" beforeDir="false" afterPath="$PROJECT_DIR$/FATFS/Target/ffconf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FATFS/Target/user_diskio.c" beforeDir="false" afterPath="$PROJECT_DIR$/FATFS/Target/user_diskio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/USB_DEVICE/App/usbd_storage_if.c" beforeDir="false" afterPath="$PROJECT_DIR$/USB_DEVICE/App/usbd_storage_if.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/USB_DEVICE/Target/usbd_conf.c" beforeDir="false" afterPath="$PROJECT_DIR$/USB_DEVICE/Target/usbd_conf.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +69,7 @@
     <option name="nodes">
       <map>
         <entry key="STM32F429.svd" value="-E" />
-        <entry key="STM32F429.svd|g:GPIO" value="-E" />
+        <entry key="STM32F429.svd|g:GPIO" value="-C" />
         <entry key="STM32F429.svd|g:USART" value="-C" />
         <entry key="STM32F429.svd|p:GPIOA" value="-C" />
         <entry key="STM32F429.svd|p:GPIOA|AFRH" value="HC" />
@@ -134,7 +126,7 @@
         <entry key="STM32F429.svd|p:GPIOE|OSPEEDR" value="HC" />
         <entry key="STM32F429.svd|p:GPIOE|OTYPER" value="HC" />
         <entry key="STM32F429.svd|p:GPIOE|PUPDR" value="HC" />
-        <entry key="STM32F429.svd|p:GPIOF" value="-E" />
+        <entry key="STM32F429.svd|p:GPIOF" value="-C" />
         <entry key="STM32F429.svd|p:GPIOF|AFRH" value="HC" />
         <entry key="STM32F429.svd|p:GPIOF|AFRL" value="HC" />
         <entry key="STM32F429.svd|p:GPIOF|BSRR" value="HC" />
@@ -391,7 +383,7 @@
       <method v="2" />
     </configuration>
     <configuration name="OCD SelfServiceCarWashing" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SelfServiceCarWashing" TARGET_NAME="SelfServiceCarWashing.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="SelfServiceCarWashing" RUN_TARGET_NAME="SelfServiceCarWashing.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="$PROJECT_DIR$/openocd.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="$PROJECT_DIR$/openocd.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -449,6 +441,8 @@
       <workItem from="1644781581585" duration="19292000" />
       <workItem from="1644867059173" duration="689000" />
       <workItem from="1645185024094" duration="12791000" />
+      <workItem from="1645383059712" duration="8942000" />
+      <workItem from="1645393016680" duration="10198000" />
     </task>
     <servers />
   </component>
@@ -478,28 +472,49 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Middlewares/Third_Party/lvgl/examples/widgets/btn/lv_example_btn_1.c</url>
           <line>17</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>200</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/stm32f4xx_it.c</url>
           <line>103</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
+          <line>200</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/FATFS/Target/user_diskio.c</url>
+          <line>150</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Tasks/init.c</url>
+          <line>29</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/Tasks/init.c</url>
-          <line>130</line>
-          <option name="timeStamp" value="58" />
+          <line>144</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/USB_DEVICE/App/usbd_storage_if.c</url>
+          <line>235</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="sFlash_ReadBuffer" />
+        <watch expression="sFlash_WriteBuffer" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

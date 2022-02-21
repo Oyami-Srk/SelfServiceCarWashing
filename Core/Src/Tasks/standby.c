@@ -58,6 +58,7 @@ _Noreturn void standby_task() {
 #ifdef ENABLE_HEARTBEAT
     xTaskCreate(heartbeat_task, "HEARTBEAT", 512, NULL, tskIDLE_PRIORITY, NULL);
 #endif
+    extern void MX_USB_DEVICE_Init(void);
 
     for (;;) {
         vTaskDelay(pdMS_TO_TICKS(1000));

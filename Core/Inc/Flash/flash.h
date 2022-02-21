@@ -12,69 +12,69 @@
 #ifndef __FLASH_FLASH_H__
 #define __FLASH_FLASH_H__
 
-#include "stm32f4xx_hal.h"
+#include "Common/utils.h"
+#include "main.h"
 
-#define sFLASH_CMD_WRITE  0x02 /* Write to Memory instruction */
-#define sFLASH_CMD_WRSR   0x01 /* Write Status Register instruction */
-#define sFLASH_CMD_WREN   0x06 /* Write enable instruction */
-#define sFLASH_CMD_READ   0x03 /* Read from Memory instruction */
-#define sFLASH_CMD_RDSR   0x05 /* Read Status Register instruction  */
-#define sFLASH_CMD_RDID   0x9F /* Read identification */
-#define sFLASH_CMD_SE     0x20 /* Sector Erase instruction */
-#define sFLASH_CMD_BE     0xC7 /* Bulk Erase instruction */
-#define sFLASH_WIP_FLAG   0x01 /* Write In Progress (WIP) flag */
-#define sFLASH_DUMMY_BYTE 0xA5
+#define SPI_FLASH_PGSIZE 256
 
-#define sFLASH_SPI_PAGESIZE 256
+#define W25QXX_SPI_Handle (&hspi1)
 
-#define sFLASH_ID 0XEF4017 // W25Q64
-//#define  sFLASH_ID                0XEF4018     //W25Q128
+// W25X系列/Q系列芯片列表
+// W25Q80  ID  0XEF13
+// W25Q16  ID  0XEF14
+// W25Q32  ID  0XEF15
+// W25Q64  ID  0XEF16
+// W25Q128 ID  0XEF17
+#define W25Q80  0XEF13
+#define W25Q16  0XEF14
+#define W25Q32  0XEF15
+#define W25Q64  0XEF16
+#define W25Q128 0XEF17
 
-/*-------------------------------------------- SPI1配置宏
- * ---------------------------------------*/
+#define W25QXX_CS_L() HAL_GPIO_WritePin(GPIO(SPI_FLASH_CS), GPIO_PIN_RESET)
+#define W25QXX_CS_H() HAL_GPIO_WritePin(GPIO(SPI_FLASH_CS), GPIO_PIN_SET)
 
-#define SPI1_SCK_PIN  GPIO_PIN_3 // SPI1_SCK 引脚
-#define SPI1_SCK_PORT GPIOB      // SPI1_SCK 引脚端口
-#define GPIO_SPI1_SCK_CLK_ENABLE                                               \
-    __HAL_RCC_GPIOB_CLK_ENABLE() // SPI1_SCK	引脚时钟
+extern uint16_t W25QXX_TYPE;
+extern uint32_t W25QXX_SIZE;
+extern uint8_t  W25QXX_UID[8];
 
-#define SPI1_MISO_PIN  GPIO_PIN_4 // SPI1_MISO 引脚
-#define SPI1_MISO_PORT GPIOB      // SPI1_MISO 引脚端口
-#define GPIO_SPI1_MISO_CLK_ENABLE                                              \
-    __HAL_RCC_GPIOB_CLK_ENABLE() // SPI1_MISO 引脚时钟
+//
+//指令表
+#define W25X_WriteEnable      0x06
+#define W25X_WriteDisable     0x04
+#define W25X_ReadStatusReg    0x05
+#define W25X_WriteStatusReg   0x01
+#define W25X_ReadData         0x03
+#define W25X_FastReadData     0x0B
+#define W25X_FastReadDual     0x3B
+#define W25X_PageProgram      0x02
+#define W25X_BlockErase       0xD8
+#define W25X_SectorErase      0x20
+#define W25X_ChipErase        0xC7
+#define W25X_PowerDown        0xB9
+#define W25X_ReleasePowerDown 0xAB
+#define W25X_DeviceID         0xAB
+#define W25X_ManufactDeviceID 0x90
+#define W25X_JedecDeviceID    0x9F
 
-#define SPI1_MOSI_PIN  GPIO_PIN_5 // SPI1_MOSI 引脚
-#define SPI1_MOSI_PORT GPIOB      // SPI1_MOSI 引脚端口
-#define GPIO_SPI1_MOSI_CLK_ENABLE                                              \
-    __HAL_RCC_GPIOB_CLK_ENABLE() // SPI1_MOSI 引脚时钟
-
-#define SPI1_CS_PIN             GPIO_PIN_3 // SPI1_CS 引脚
-#define SPI1_CS_PORT            GPIOG      // SPI1_CS 引脚端口
-#define GPIO_SPI1_CS_CLK_ENABLE __HAL_RCC_GPIOG_CLK_ENABLE() // SPI1_CS 引脚时钟
-
-#define sFLASH_CS_LOW()                                                        \
-    HAL_GPIO_WritePin(SPI1_CS_PORT, SPI1_CS_PIN, GPIO_PIN_RESET) // CS输出低电平
-#define sFLASH_CS_HIGH()                                                       \
-    HAL_GPIO_WritePin(SPI1_CS_PORT, SPI1_CS_PIN, GPIO_PIN_SET) // CS输出高电平
-
-/*---------------------------------------------- 函数声明
- * ---------------------------------------*/
-
-void     sFLASH_EraseSector(uint32_t SectorAddr);
-void     sFLASH_EraseBulk(void);
-void     sFLASH_WritePage(uint8_t *pBuffer, uint32_t WriteAddr,
-                          uint16_t NumByteToWrite);
-void     sFLASH_WriteBuffer(uint8_t *pBuffer, uint32_t WriteAddr,
-                            uint16_t NumByteToWrite);
-void     sFLASH_ReadBuffer(uint8_t *pBuffer, uint32_t ReadAddr,
-                           uint16_t NumByteToRead);
-uint32_t sFLASH_ReadID(void);
-void     sFLASH_StartReadSequence(uint32_t ReadAddr);
-
-uint8_t  sFLASH_ReadByte(void);
-uint8_t  sFLASH_SendByte(uint8_t byte);
-uint16_t sFLASH_SendHalfWord(uint16_t HalfWord);
-void     sFLASH_WriteEnable(void);
-void     sFLASH_WaitForWriteEnd(void);
+int      W25QXX_Init(void);
+void     W25QXX_ReadUniqueID(uint8_t UID[8]);
+uint16_t W25QXX_ReadID(void);         //读取FLASH ID
+uint8_t  W25QXX_ReadSR(void);         //读取状态寄存器
+void     W25QXX_Write_SR(uint8_t sr); //写状态寄存器
+void     W25QXX_Write_Enable(void);   //写使能
+void     W25QXX_Write_Disable(void);  //写保护
+void     W25QXX_Write_NoCheck(uint8_t *pBuffer, uint32_t WriteAddr,
+                              uint16_t NumByteToWrite);
+void     W25QXX_Read(uint8_t *pBuffer, uint32_t ReadAddr,
+                     uint16_t NumByteToRead); //读取flash
+void     W25QXX_Write(uint8_t *pBuffer, uint32_t WriteAddr,
+                      uint16_t NumByteToWrite);  //写入flash
+void     W25QXX_Erase_Chip(void);                //整片擦除
+void     W25QXX_Erase_Sector(uint32_t Dst_Addr); //扇区擦除
+void     W25QXX_Wait_Busy(void);                 //等待空闲
+void     W25QXX_PowerDown(void);                 //进入掉电模式
+void     W25QXX_WAKEUP(void);                    //唤醒
+uint32_t W25QXX_ReadCapacity(void);
 
 #endif // __FLASH_FLASH_H__

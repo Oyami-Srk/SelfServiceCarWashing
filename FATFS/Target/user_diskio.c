@@ -39,11 +39,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define PAGE_SIZE 256
-#define SECTOR_SIZE 4096
-#define SECTOR_COUNT 200
-#define BLOCK_SIZE 65536
-#define FLASH_PAGES_PER_SECTOR (SECTOR_SIZE/PAGE_SIZE)
+#define SECTOR_SIZE  4096
+#define SECTOR_COUNT 2048
+#define BLOCK_SIZE   65536
 /* Private variables ---------------------------------------------------------*/
 /* Disk status */
 static volatile DSTATUS Stat = STA_NOINIT;
@@ -87,7 +85,7 @@ DSTATUS USER_initialize (
 {
   /* USER CODE BEGIN INIT */
     Stat = STA_NOINIT;
-    if(sFLASH_ReadID() == sFLASH_ID)
+    if (W25QXX_ReadID() == W25Q64)
         Stat &= ~STA_NOINIT;
     return Stat;
   /* USER CODE END INIT */
@@ -126,9 +124,10 @@ DRESULT USER_read (
   /* USER CODE BEGIN READ */
   UINT i = 0;
   for(i = 0; i < count; i++) {
-      sFLASH_ReadBuffer(buff + i * SECTOR_SIZE, sector  * SECTOR_SIZE + i * SECTOR_SIZE, SECTOR_SIZE);
+      W25QXX_Read(buff + i * SECTOR_SIZE,
+                  sector * SECTOR_SIZE + i * SECTOR_SIZE, SECTOR_SIZE);
   }
-    return RES_OK;
+  return RES_OK;
   /* USER CODE END READ */
 }
 
@@ -152,7 +151,9 @@ DRESULT USER_write (
   /* USER CODE HERE */
     UINT i = 0;
     for(i = 0; i < count; i++) {
-        sFLASH_WriteBuffer((void*)(buff + i * SECTOR_SIZE), sector * SECTOR_SIZE + i * SECTOR_SIZE, SECTOR_SIZE);
+        //        sFLASH_EraseSector(sector * SECTOR_SIZE + i * SECTOR_SIZE);
+        W25QXX_Write((void *)(buff + i * SECTOR_SIZE),
+                     sector * SECTOR_SIZE + i * SECTOR_SIZE, SECTOR_SIZE);
     }
     return RES_OK;
   /* USER CODE END WRITE */
