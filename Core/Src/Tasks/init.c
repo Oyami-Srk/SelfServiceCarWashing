@@ -28,7 +28,6 @@ void fatfs_test() {
     static FIL     file;
     static FRESULT f_res;
 
-    f_res = f_mkfs("0:", FM_FAT, 0, work, sizeof(work));
     f_res = f_mount(&fs, "0:", 1);
     if (f_res != RES_OK) {
         f_res = f_mkfs("0:", FM_FAT, 0, work, sizeof(work));
@@ -66,7 +65,6 @@ void fatfs_test() {
         return;
     }
     LOG("[FATFS] Close file succeed");
-    HAL_Delay(100);
 
     {
         DIR         dir;
@@ -142,14 +140,16 @@ void fatfs_test() {
 }
 
 void init_task() {
-    fatfs_test();
     vTaskDelete(NULL);
 }
 
 void TASKS_INIT_RTOS() {
     LOG_SCR("[INIT] Starting init procedures.");
     LOG_SCR("[INIT] 测试中文显示。");
-    set_long_message("……系统启动中……");
+    //    set_long_message("……系统启动中……");
+    set_long_message(
+        "本洗车机为自助式服务，请用微信扫描屏幕右侧二维码，并按照说明使用。"
+        "如有问题请电联1XXXXXXXXXX。感谢您的使用，祝您生活愉快。");
     LCD_INIT_RTOS();
     put_text_on_loading_scr("[Init] Finished LCD Init procedures.\n");
     NET_UART_INIT_RTOS();

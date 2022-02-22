@@ -54,30 +54,33 @@
 /* USER CODE END PRIVATE_TYPES */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup USBD_STORAGE_Private_Defines
- * @brief Private defines.
- * @{
- */
+  * @brief Private defines.
+  * @{
+  */
 
-#define STORAGE_LUN_NBR 1
-#define STORAGE_BLK_NBR 2048
-#define STORAGE_BLK_SIZ 4096
+#define STORAGE_LUN_NBR                  1
+#define STORAGE_BLK_NBR                  0x10000
+#define STORAGE_BLK_SIZ                  0x200
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
-
+#undef STORAGE_BLK_NBR
+#undef STORAGE_BLK_SIZ
+#define STORAGE_BLK_NBR 2048
+#define STORAGE_BLK_SIZ 4096
 /* USER CODE END PRIVATE_DEFINES */
 
 /**
- * @}
- */
+  * @}
+  */
 
 /** @defgroup USBD_STORAGE_Private_Macros
- * @brief Private macros.
- * @{
- */
+  * @brief Private macros.
+  * @{
+  */
 
 /* USER CODE BEGIN PRIVATE_MACRO */
 
@@ -223,36 +226,36 @@ int8_t STORAGE_IsWriteProtected_HS(uint8_t lun)
 }
 
 /**
- * @brief  .
- * @param  lun: .
- * @param  buf: .
- * @param  blk_addr: .
- * @param  blk_len: .
- * @retval USBD_OK if all operations are OK else USBD_FAIL
- */
-int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr,
-                       uint16_t blk_len) {
-    /* USER CODE BEGIN 13 */
+  * @brief  .
+  * @param  lun: .
+  * @param  buf: .
+  * @param  blk_addr: .
+  * @param  blk_len: .
+  * @retval USBD_OK if all operations are OK else USBD_FAIL
+  */
+int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
+{
+  /* USER CODE BEGIN 13 */
     W25QXX_Read((uint8_t *)buf, blk_addr << 12, blk_len << 12);
     //    memset(buf, 0xF4, blk_len * STORAGE_BLK_SIZ);
     return (USBD_OK);
-    /* USER CODE END 13 */
+  /* USER CODE END 13 */
 }
 
 /**
- * @brief  .
- * @param  lun: .
- * @param  buf: .
- * @param  blk_addr: .
- * @param  blk_len: .
- * @retval USBD_OK if all operations are OK else USBD_FAIL
- */
-int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr,
-                        uint16_t blk_len) {
-    /* USER CODE BEGIN 14 */
+  * @brief  .
+  * @param  lun: .
+  * @param  buf: .
+  * @param  blk_addr: .
+  * @param  blk_len: .
+  * @retval USBD_OK if all operations are OK else USBD_FAIL
+  */
+int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
+{
+  /* USER CODE BEGIN 14 */
     W25QXX_Write((uint8_t *)buf, blk_addr << 12, blk_len << 12);
     return (USBD_OK);
-    /* USER CODE END 14 */
+  /* USER CODE END 14 */
 }
 
 /**

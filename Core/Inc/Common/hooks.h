@@ -16,6 +16,9 @@
 void DMA2D_CB();
 void DMA2D_CB_ERROR();
 
+/* LTDC Hooks */
+void LTDC_IRQ_HANDLER();
+
 /* UART3 Hooks */
 void NET_UART_IRQ_HANDLER();
 
