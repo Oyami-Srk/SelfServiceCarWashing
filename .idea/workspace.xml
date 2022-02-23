@@ -18,30 +18,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-24.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-36.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/hooks.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/lv_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Common/timegm.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/fmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/fmc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/GUI" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/fonts.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/fonts.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/loading.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/loading.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/login.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/login.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/setup.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/setup.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/USB_DEVICE/App/usbd_storage_if.c" beforeDir="false" afterPath="$PROJECT_DIR$/USB_DEVICE/App/usbd_storage_if.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/USB_DEVICE/Target/usbd_conf.c" beforeDir="false" afterPath="$PROJECT_DIR$/USB_DEVICE/Target/usbd_conf.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/misc/lv_mem.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/misc/lv_mem.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

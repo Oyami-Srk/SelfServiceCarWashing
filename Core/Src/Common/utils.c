@@ -64,21 +64,20 @@ uint32_t SetRTCTime(const char *str_time) {
                                 .tm_hour = time.Hours,
                                 .tm_min  = time.Minutes,
                                 .tm_sec  = time.Seconds};
-    uint32_t  timestamp_calc = timegm(&curr_calc) & 0xFFFFFFFF;
+    uint32_t  timestamp_calc = mktime(&curr_calc) & 0xFFFFFFFF;
     if (tzpm == '+') {
         timestamp_calc += 15 * tz * 60;
     } else if (tzpm == '-') {
         timestamp_calc -= 15 * tz * 60;
     }
-    time_t ts = timestamp_calc;
-    //    struct tm *tminfo = localtime(&ts);
-    /*
-        date.Year    = tminfo->tm_year - 100;
-        date.Month   = tminfo->tm_mon + 1;
-        date.Date    = tminfo->tm_mday;
-        time.Hours   = tminfo->tm_hour;
-        time.Minutes = tminfo->tm_min;
-        time.Seconds = tminfo->tm_sec;*/
+    time_t     ts     = timestamp_calc;
+    struct tm *tminfo = localtime(&ts);
+    date.Year         = tminfo->tm_year - 100;
+    date.Month        = tminfo->tm_mon + 1;
+    date.Date         = tminfo->tm_mday;
+    time.Hours        = tminfo->tm_hour;
+    time.Minutes      = tminfo->tm_min;
+    time.Seconds      = tminfo->tm_sec;
 
     if (year < 2022)
         return 0;
@@ -94,8 +93,7 @@ uint32_t SetRTCTime(const char *str_time) {
                       .tm_hour = time.Hours,
                       .tm_min  = time.Minutes,
                       .tm_sec  = time.Seconds};
-    //    uint32_t  timestamp = mktime(&curr) & 0xFFFFFFFF;
-    uint32_t timestamp = 123;
+    uint32_t  timestamp = mktime(&curr) & 0xFFFFFFFF;
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR2, timestamp);
     // Disable time stamp for touch screen
     if (HAL_RTCEx_DeactivateTimeStamp(&hrtc) != HAL_OK) {
@@ -118,7 +116,7 @@ uint32_t GetRTCTime() {
                       .tm_hour = time.Hours,
                       .tm_min  = time.Minutes,
                       .tm_sec  = time.Seconds};
-    return timegm(&curr) &
+    return mktime(&curr) &
            0xFFFFFFFF; // only take bottom half, available before year 2106
 }
 
@@ -130,9 +128,8 @@ uint32_t GetRTCLastUpdate() {
 
 char *ParseTimeInStr(time_t currTime) {
     char *time_buffer = (char *)pvPortMalloc(sizeof(char) * 100);
-    //    strftime(time_buffer, 100, "%Y/%m/%d %X", localtime(&currTime));
-    //    return time_buffer;
-    return "1:2:3";
+    strftime(time_buffer, 100, "%Y/%m/%d %X", localtime(&currTime));
+    return time_buffer;
 }
 
 /* Debug output */

@@ -71,13 +71,11 @@ void LCD_INIT_DISP() {
 
 _Noreturn static void task_lvgl() {
     TickType_t       xLastWakeTime;
-    const TickType_t xPeriod = pdMS_TO_TICKS(5);
+    const TickType_t xPeriod = pdMS_TO_TICKS(1);
 
-    // 使用当前时间初始化变量xLastWakeTime ,注意这和vTaskDelay()函数不同
     xLastWakeTime = xTaskGetTickCount();
 
     for (;;) {
-        /* 调用系统延时函数,周期性阻塞5ms */
         vTaskDelayUntil(&xLastWakeTime, xPeriod);
         lv_task_handler();
     }

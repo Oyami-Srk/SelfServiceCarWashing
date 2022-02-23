@@ -29,14 +29,13 @@ static const lv_color_t *buf_to_flush;
 #define LVGL_DRAW_BUFFER_SDRAM 1
 //#define USE_LTDC_ADDR_SW
 
+static uint8_t *font1_buffer = (uint8_t *)0xD0234000; // 4MB size
+static uint8_t *font2_buffer = (uint8_t *)0xD0634000; // <9MB size
 #if LVGL_DRAW_BUFFER_SDRAM
 #define LVGL_DRAW_BUFFER_SIZE (LCD_WIDTH * LCD_HEIGHT)
 // static lv_color_t *disp_buf1 = (lv_color_t *)LCD_END_ADDR;
-static lv_color_t *disp_buf1    = (lv_color_t *)0xD00BC000;
-static lv_color_t *disp_buf2    = (lv_color_t *)0xD0178000;
-static uint8_t    *font1_buffer = (uint8_t *)0xD0234000; // 4MB size
-static uint8_t    *font2_buffer = (uint8_t *)0xD0634000; // <9MB size
-
+static lv_color_t *disp_buf1 = (lv_color_t *)0xD00BC000;
+static lv_color_t *disp_buf2 = (lv_color_t *)0xD0178000;
 //    (lv_color_t *)(LCD_END_ADDR + LVGL_DRAW_BUFFER_SIZE * sizeof(lv_color_t));
 #else
 #define LVGL_DRAW_BUFFER_SIZE (LCD_WIDTH * 15)
@@ -74,7 +73,7 @@ static void disp_flush(__attribute__((unused)) lv_disp_drv_t *disp_drv,
 #else
     HAL_LTDC_SetAddress(&hltdc, (uint32_t)color_p, 0);
     HAL_LTDC_ProgramLineEvent(&hltdc, 480);
-    HAL_Delay(10);
+    HAL_Delay(1);
 //    g_gpu_state = 1;
 #endif
 }
@@ -198,6 +197,7 @@ void disp_init(void) {
     indev_drv.read_cb = touchpad_read;
     indev_drv.type    = LV_INDEV_TYPE_POINTER;
     lv_indev_drv_register(&indev_drv);
+
     // Load fonts from SPI FATFs
     extern void fatfs_test();
     fatfs_test();

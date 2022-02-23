@@ -148,8 +148,11 @@ void TASKS_INIT_RTOS() {
     LOG_SCR("[INIT] 测试中文显示。");
     //    set_long_message("……系统启动中……");
     set_long_message(
-        "本洗车机为自助式服务，请用微信扫描屏幕右侧二维码，并按照说明使用。"
-        "如有问题请电联1XXXXXXXXXX。感谢您的使用，祝您生活愉快。");
+        "本洗车机为自助式服务，请用微信扫描屏幕右侧二维码，并按照说明使用。如有"
+        "问题请电联1XXXXXXXXXX。感谢您的使用，祝您生活愉快。人之初，性本善，习"
+        "相近，性相远。汉语又称华语、唐话，概指由上古汉语发展而来、使用汉字的分"
+        "析语，为汉藏语系最大的一支语族。如把整个汉语族视为单一语言，则汉语为世"
+        "界使用人数最多的语言，目前全世界有五分之一人口将汉语做为母语。");
     LCD_INIT_RTOS();
     put_text_on_loading_scr("[Init] Finished LCD Init procedures.\n");
     NET_UART_INIT_RTOS();
