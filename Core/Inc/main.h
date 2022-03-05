@@ -103,10 +103,10 @@ void Error_Handler(void);
 #define WORKING_STATUS_LED_GPIO_Port GPIOH
 #define NET_STATUS_LED_Pin GPIO_PIN_5
 #define NET_STATUS_LED_GPIO_Port GPIOH
-#define FOAM_LED_Pin GPIO_PIN_4
-#define FOAM_LED_GPIO_Port GPIOA
-#define WATER_LED_Pin GPIO_PIN_5
-#define WATER_LED_GPIO_Port GPIOA
+#define RELAY2_Pin GPIO_PIN_4
+#define RELAY2_GPIO_Port GPIOA
+#define RELAY1_Pin GPIO_PIN_5
+#define RELAY1_GPIO_Port GPIOA
 #define BTN2_Pin GPIO_PIN_4
 #define BTN2_GPIO_Port GPIOC
 #define BTN2_EXTI_IRQn EXTI4_IRQn

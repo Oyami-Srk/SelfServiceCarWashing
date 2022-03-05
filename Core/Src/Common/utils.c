@@ -83,6 +83,7 @@ uint32_t SetRTCTime(const char *str_time) {
         return 0;
     date.Year = year - 2000;
 #endif
+    date.WeekDay = 0; // Fix year incorrect
     HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN);
     HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN);
     HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, RTC_COOKIE);
@@ -155,7 +156,7 @@ int f_putchar(int ch) {
 // Stack overflow detection
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName) {
 #if configCHECK_FOR_STACK_OVERFLOW
-    LOGF("Caught a overflow in tasks %s.", pcTaskName);
     __BKPT();
+    LOGF("Caught a overflow in tasks %s.", pcTaskName);
 #endif
 }

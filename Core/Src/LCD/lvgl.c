@@ -134,7 +134,7 @@ static bool touchpad_read(lv_indev_drv_t *drv, lv_indev_data_t *data) {
     return false;
 }
 
-void load_font(const char *path, uint8_t *buffer) {
+HAL_StatusTypeDef load_font(const char *path, uint8_t *buffer) {
     static FIL     file;
     static FRESULT f_res;
 
@@ -143,31 +143,34 @@ void load_font(const char *path, uint8_t *buffer) {
 
     if (f_res != RES_OK) {
         LOG("[FATFS] Stat file failed.");
+        return HAL_ERROR;
     }
     LOGF("[FATFS] Found Font %s, file size: %d bytes.", path, info.fsize);
 
     f_res = f_open(&file, path, FA_READ);
     if (f_res != RES_OK) {
         LOGF("[FATFS] Open Font file %s failed.", path);
-        return;
+        return HAL_ERROR;
     }
 
     UINT br;
     f_res = f_read(&file, buffer, info.fsize, &br);
     if (f_res != RES_OK) {
         LOGF("[FATFS] Load Font file %s failed.", path);
-        return;
+        return HAL_ERROR;
     }
     LOGF("[FATFS] Load Font file %s succeed, loaded %d bytes.", path, br);
 
     f_res = f_close(&file);
     if (f_res != RES_OK) {
         LOG("[FATFS] Close file failed.");
-        return;
+        return HAL_OK;
     }
+    return HAL_OK;
 }
 
-void load_font_n36() {}
+lv_font_t *NotoSansCJK_24;
+lv_font_t *NotoSansCJK_36;
 
 void disp_init(void) {
     static lv_disp_draw_buf_t buf;
@@ -201,8 +204,19 @@ void disp_init(void) {
     // Load fonts from SPI FATFs
     extern void fatfs_test();
     fatfs_test();
-    load_font("0:N24.bin", font1_buffer);
-    load_font("0:N36.bin", font2_buffer);
+    if (HAL_OK == load_font("0:N24.bin", font1_buffer)) {
+        extern lv_font_t f_NotoSansCJK_24;
+        NotoSansCJK_24 = &f_NotoSansCJK_24;
+    } else {
+        NotoSansCJK_24 = &lv_font_montserrat_24;
+    }
+
+    if (HAL_OK == load_font("0:N36.bin", font2_buffer)) {
+        extern lv_font_t f_NotoSansCJK_36;
+        NotoSansCJK_36 = &f_NotoSansCJK_36;
+    } else {
+        NotoSansCJK_36 = &lv_font_montserrat_36;
+    }
 
     // start main gui
     init_gui();

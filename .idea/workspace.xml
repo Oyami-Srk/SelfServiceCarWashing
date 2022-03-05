@@ -19,17 +19,23 @@
   <component name="ChangeListManager">
     <list default="true" id="4041fa37-1e63-4c25-b278-d54b12e1e297" name="变更" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Common/timegm.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/Common/config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/Common/config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/Common/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Common/utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/handles.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/handles.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-24.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-24.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-36.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/NotoSansCJK-36.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/LCD/lvgl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Net/wifi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Net/wifi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/Tasks/inuse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/GUI" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/fonts.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/fonts.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/inuse.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/loading.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/loading.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/login.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/login.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/setup.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/GUI/Src/GUI/setup.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/misc/lv_mem.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middlewares/Third_Party/lvgl/src/misc/lv_mem.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F429BITx_FLASH.ld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/SelfServiceCarWashing.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +49,7 @@
     <option name="columnWidths">
       <list>
         <option value="262" />
-        <option value="122" />
+        <option value="102" />
         <option value="0" />
       </list>
     </option>
@@ -63,7 +69,7 @@
       <map>
         <entry key="STM32F429.svd" value="-E" />
         <entry key="STM32F429.svd|g:GPIO" value="-C" />
-        <entry key="STM32F429.svd|g:USART" value="-C" />
+        <entry key="STM32F429.svd|g:USART" value="-E" />
         <entry key="STM32F429.svd|p:GPIOA" value="-C" />
         <entry key="STM32F429.svd|p:GPIOA|AFRH" value="HC" />
         <entry key="STM32F429.svd|p:GPIOA|AFRL" value="HC" />
@@ -225,7 +231,7 @@
         <entry key="STM32F429.svd|p:RTC|TSTR" value="HC" />
         <entry key="STM32F429.svd|p:RTC|WPR" value="HC" />
         <entry key="STM32F429.svd|p:RTC|WUTR" value="HC" />
-        <entry key="STM32F429.svd|p:USART3" value="-C" />
+        <entry key="STM32F429.svd|p:USART3" value="-E" />
         <entry key="STM32F429.svd|p:USART3|BRR" value="HC" />
         <entry key="STM32F429.svd|p:USART3|CR1" value="HC" />
         <entry key="STM32F429.svd|p:USART3|CR2" value="HC" />
@@ -291,7 +297,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.21356651" />
     <property name="structure.view.defaults.are.configured" value="true" />
   </component>
@@ -439,6 +445,9 @@
       <workItem from="1645185024094" duration="12791000" />
       <workItem from="1645383059712" duration="8942000" />
       <workItem from="1645393016680" duration="10198000" />
+      <workItem from="1646309623957" duration="41000" />
+      <workItem from="1646309672075" duration="2951000" />
+      <workItem from="1646399182401" duration="8228000" />
     </task>
     <servers />
   </component>
@@ -492,6 +501,16 @@
           <url>file://$PROJECT_DIR$/Core/Src/Tasks/init.c</url>
           <line>29</line>
           <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Common/utils.c</url>
+          <line>113</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/Common/utils.c</url>
+          <line>86</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

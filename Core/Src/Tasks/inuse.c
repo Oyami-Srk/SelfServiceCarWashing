@@ -31,6 +31,14 @@ static int                 calc_time  = 0;
 static TaskHandle_t        inuse_task = NULL;
 static SemaphoreHandle_t   info_mutex = NULL;
 
+#define PUMP_ON()  HAL_GPIO_WritePin(GPIO(RELAY1), GPIO_PIN_SET)
+#define WATER_ON() HAL_GPIO_WritePin(GPIO(RELAY2), GPIO_PIN_SET)
+#define FOAM_ON()  HAL_GPIO_WritePin(GPIO(RELAY3), GPIO_PIN_SET)
+
+#define PUMP_OFF()  HAL_GPIO_WritePin(GPIO(RELAY1), GPIO_PIN_RESET)
+#define WATER_OFF() HAL_GPIO_WritePin(GPIO(RELAY2), GPIO_PIN_RESET)
+#define FOAM_OFF()  HAL_GPIO_WritePin(GPIO(RELAY3), GPIO_PIN_RESET)
+
 bool inuse = false;
 
 #define BTN1_EVENT (0x01 << 0)
@@ -96,30 +104,44 @@ static bool scan_btn(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 static void BTN1_Pressed() {
-    LOG("[INUSE] Button 1 Pressed, Using water.");
     xSemaphoreTake(info_mutex, portMAX_DELAY);
-    inuse_info.current_using = CURRENT_USING_WATER;
+    if (inuse_info.current_using == CURRENT_USING_WATER) {
+        inuse_info.current_using = CURRENT_USING_NONE;
+        PUMP_OFF();
+        WATER_OFF();
+        FOAM_OFF();
+    } else {
+        inuse_info.current_using = CURRENT_USING_WATER;
+        PUMP_ON();
+        WATER_ON();
+        FOAM_OFF();
+    }
     xSemaphoreGive(info_mutex);
-    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_RESET);
 }
 
 static void BTN2_Pressed() {
-    LOG("[INUSE] Button 2 Pressed, Using foam.");
     xSemaphoreTake(info_mutex, portMAX_DELAY);
-    inuse_info.current_using = CURRENT_USING_FOAM;
+    if (inuse_info.current_using == CURRENT_USING_FOAM) {
+        inuse_info.current_using = CURRENT_USING_NONE;
+        PUMP_OFF();
+        WATER_OFF();
+        FOAM_OFF();
+    } else {
+        inuse_info.current_using = CURRENT_USING_FOAM;
+        WATER_ON();
+        FOAM_ON();
+        PUMP_ON();
+    }
     xSemaphoreGive(info_mutex);
-    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_SET);
-    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_SET);
 }
 
 static void BTN3_Pressed() {
-    LOG("[INUSE] Button 3 Pressed, Stop");
     xSemaphoreTake(info_mutex, portMAX_DELAY);
     inuse_info.current_using = CURRENT_USING_NONE;
     xSemaphoreGive(info_mutex);
-    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_RESET);
+    PUMP_OFF();
+    WATER_OFF();
+    FOAM_OFF();
 }
 
 static void BTN4_Pressed() {
@@ -185,9 +207,9 @@ void stop_inuse_task() {
     vTaskDelete(inuse_task);
     inuse_task = NULL;
 
-    HAL_GPIO_WritePin(GPIO(WATER_LED), GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIO(FOAM_LED), GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(GPIO(RELAY8), GPIO_PIN_RESET); // Electromagnet valve
+    PUMP_OFF();
+    WATER_OFF();
+    FOAM_OFF();
     inuse_info.current_using = CURRENT_USING_NONE;
     if (calc_time != 0)
         inuse_info.current_used_time++;

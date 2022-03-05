@@ -90,7 +90,7 @@ static bool __user_font_get_glyph_dsc(const lv_font_t     *font,
 // Noto Sans CJK SC Medium,,-1
 //字模高度：36
 // XBF字体,外部bin文件
-lv_font_t NotoSansCJK_24 = {
+lv_font_t f_NotoSansCJK_24 = {
     .get_glyph_bitmap = __user_font_get_bitmap,
     .get_glyph_dsc    = __user_font_get_glyph_dsc,
     .line_height      = 36,

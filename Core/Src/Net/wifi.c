@@ -232,7 +232,7 @@ get_mac_addr:
     for (p = mac_buffer; p < mac_buffer + 17; p++)
         *p = toupper(*p);
     PRINTF_SCR("[WIFI] Device MAC: %s\r\n", mac_buffer);
-    AT_SetMacAddr(mac_buffer);
+    AT_SetIdent(mac_buffer);
 
     // Get IP
     retries = 0;
@@ -286,7 +286,8 @@ get_ip_addr:
 update_time:;
     time_t lastUpdate = GetRTCLastUpdate();
     time_t currTime   = GetRTCTime();
-    if (lastUpdate != 0 && lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
+    if (!RTC_FORCE_UPDATE && lastUpdate != 0 &&
+        lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
         char *time_buffer = ParseTimeInStr(lastUpdate);
         PRINTF_SCR("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
                    time_buffer);
@@ -426,7 +427,7 @@ uint8_t NET_MODULE_GET_RADIO_STRENGTH() {
 
 void NET_MODULE_INIT() {
     // this Function not inside FreeRTOS Task
-    xTaskCreate(task_wifi_init, "WIFI-INIT", 256, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(task_wifi_init, "WIFI-INIT", 512, NULL, tskIDLE_PRIORITY, NULL);
 }
 
 // buffer need to be free
