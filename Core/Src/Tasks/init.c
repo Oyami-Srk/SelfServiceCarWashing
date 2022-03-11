@@ -18,6 +18,8 @@
 #include "fatfs.h"
 #include "Common/config.h"
 
+#include <stdio.h>
+
 extern void standby_task(); // standby.c
 
 static BYTE FATBuffer[4096] = {0};

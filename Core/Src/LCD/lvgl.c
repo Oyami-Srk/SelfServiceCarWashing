@@ -169,8 +169,8 @@ HAL_StatusTypeDef load_font(const char *path, uint8_t *buffer) {
     return HAL_OK;
 }
 
-lv_font_t *NotoSansCJK_24;
-lv_font_t *NotoSansCJK_36;
+const lv_font_t *NotoSansCJK_24;
+const lv_font_t *NotoSansCJK_36;
 
 void disp_init(void) {
     static lv_disp_draw_buf_t buf;
@@ -197,8 +197,9 @@ void disp_init(void) {
     // TODO: detect touchpad to set enable or not
     static lv_indev_drv_t indev_drv;
     lv_indev_drv_init(&indev_drv);
-    indev_drv.read_cb = touchpad_read;
-    indev_drv.type    = LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb =
+        (void (*)(struct _lv_indev_drv_t *, lv_indev_data_t *))touchpad_read;
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
     lv_indev_drv_register(&indev_drv);
 
     // Load fonts from SPI FATFs

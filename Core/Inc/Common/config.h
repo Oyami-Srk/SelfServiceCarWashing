@@ -24,8 +24,8 @@
 //#define NET_UART_USE_2
 #define NET_UART_USE_3
 
-//#define NET_MODULE_ESP32
-#define NET_MODULE_LTE
+#define NET_MODULE_ESP32
+//#define NET_MODULE_LTE
 
 #define ENABLE_NET_BUFFER_PRINT 1
 
