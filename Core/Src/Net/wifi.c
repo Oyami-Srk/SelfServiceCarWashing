@@ -21,6 +21,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+static char cmd_buffer[512];
+
 void task_wifi_init(__attribute__((unused)) void *args) {
     // TODO: Guard for connection lost
     int retry_intv;
@@ -72,7 +74,7 @@ retry_start:
     }
 
 #define SEND_WAIT_CHECK(cmd, message, label)                                   \
-    AT_SendStaticCommand(cmd "\r\n");                                          \
+    AT_SendCommand((uint8_t *)(cmd), strlen(cmd));                             \
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);                                       \
     result = AT_GetResult(msg.Buffer, msg.Len);                                \
     if (result != AT_OK) {                                                     \
@@ -87,7 +89,8 @@ retry_start:
     // Connect to AP
     retries = 0;
 connect_to_ap:
-    LOG_SCR("[WIFI] Trying to connect to AP " NET_WIFI_AP_NAME);
+    LOGF_SCR("[WIFI] Trying to connect to AP: %s",
+             GET_CONFIG(CFG_SEL_NET_WIFI_AP_NAME));
     if (retries > NET_MAX_RETRIES) {
         LOG("[WIFI] Max retries exceeded while connect to ap. Restart all "
             "initialization procedures.");
@@ -102,13 +105,16 @@ connect_to_ap:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CWMODE=1", "[WIFI] Cannot set ESP32 to Station Mode.",
-                    connect_to_ap);
+    SEND_WAIT_CHECK("AT+CWMODE=1\r\n",
+                    "[WIFI] Cannot set ESP32 to Station Mode.", connect_to_ap);
     AT_FREE_RESP(msg);
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    AT_SendStaticCommand("AT+CWJAP=\"" NET_WIFI_AP_NAME "\",\"" NET_WIFI_AP_PSWD
-                         "\"\r\n");
+    sprintf(cmd_buffer, "AT+CWJAP=\"%s\",\"%s\"\r\n",
+            (char *)GET_CONFIG(CFG_SEL_NET_WIFI_AP_NAME),
+            (char *)GET_CONFIG(CFG_SEL_NET_WIFI_AP_PSWD));
+    AT_SendCommand((uint8_t *)cmd_buffer, strlen(cmd_buffer));
+
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
     result = AT_GetResult(msg.Buffer, msg.Len);
     if (result == AT_ERROR) {
@@ -125,7 +131,8 @@ connect_to_ap:
                 PRINTF("Password Incorrect");
                 break;
             case 3:
-                PRINTF("Target AP " NET_WIFI_AP_NAME " cannot be found");
+                PRINTF("Target AP %s cannot be found",
+                       (char *)GET_CONFIG(CFG_SEL_NET_WIFI_AP_NAME));
                 break;
             case 4:
                 PRINTF("Connection failed.");
@@ -212,7 +219,7 @@ get_mac_addr:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CIPSTAMAC?",
+    SEND_WAIT_CHECK("AT+CIPSTAMAC?\r\n",
                     "[WIFI] Failed to get device's MAC address.", get_mac_addr);
     p = (char *)msg.Buffer;
     p += sizeof("+CIPSTAMAC:") - 1;
@@ -252,8 +259,8 @@ get_ip_addr:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CIPSTA?", "[WIFI] Failed to get device's IP address.",
-                    get_ip_addr);
+    SEND_WAIT_CHECK("AT+CIPSTA?\r\n",
+                    "[WIFI] Failed to get device's IP address.", get_ip_addr);
     p = (char *)msg.Buffer;
     p += sizeof("+CIPSTA:ip:") - 1;
     if (*p != '\"') {
@@ -286,8 +293,10 @@ get_ip_addr:
 update_time:;
     time_t lastUpdate = GetRTCLastUpdate();
     time_t currTime   = GetRTCTime();
-    if (!RTC_FORCE_UPDATE && lastUpdate != 0 &&
-        lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
+    if (!(((uint16_t)((uint32_t)GET_CONFIG(CFG_SEL_FLAGS) & 0xFFFF)) &
+          CFG_FLAG_FORCE_UPDATE_SNTP) &&
+        lastUpdate != 0 &&
+        lastUpdate - currTime < (uint32_t)GET_CONFIG(CFG_SEL_SNTP_UPD_INTV)) {
         char *time_buffer = ParseTimeInStr(lastUpdate);
         PRINTF_SCR("[WIFI] RTC Time is updated at %s. Skip update.\r\n",
                    time_buffer);
@@ -311,10 +320,12 @@ update_time:;
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CIPSNTPCFG=1,8,\"" NET_SNTP_SERVER "\"",
-                    "[WIFI] Failed to configure SNTP Server.", update_time);
+    sprintf(cmd_buffer, "AT+CIPSNTPCFG=1,8,\"%s\"\r\n",
+            (char *)GET_CONFIG(CFG_SEL_SNTP_SERVER));
+    SEND_WAIT_CHECK(cmd_buffer, "[WIFI] Failed to configure SNTP Server.",
+                    update_time);
     AT_FREE_RESP(msg);
-    SEND_WAIT_CHECK("AT+CIPSNTPTIME?", "[WIFI] Failed to update SNTP time.",
+    SEND_WAIT_CHECK("AT+CIPSNTPTIME?\r\n", "[WIFI] Failed to update SNTP time.",
                     update_time);
     p = (char *)msg.Buffer;
     p += sizeof("+CIPSNTPTIME") - 1;
@@ -368,23 +379,33 @@ connect_to_server:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+PING=\"" SERVER_ADDR "\"",
-                    "[WIFI] Failed to ping to server.", connect_to_server);
+
+    sprintf(cmd_buffer, "AT+PING=\"%s\"\r\n",
+            (char *)GET_CONFIG(CFG_SEL_SERVER_ADDR));
+    SEND_WAIT_CHECK(cmd_buffer, "[WIFI] Failed to ping to server.",
+                    connect_to_server);
     uint16_t ping;
     sscanf((char *)msg.Buffer, "+PING:%hu", &ping);
-    PRINTF("[WIFI] Ping to server " SERVER_ADDR " : %d ms.\r\n", ping);
+
+    PRINTF("[WIFI] Ping to server %s : %d ms.\r\n",
+           (char *)GET_CONFIG(CFG_SEL_SERVER_ADDR), ping);
     AT_FREE_RESP(msg);
-    SEND_WAIT_CHECK("AT+CIPRECONNINTV=" NET_TCP_RECONNECT_INTV,
+
+    SEND_WAIT_CHECK("AT+CIPRECONNINTV=" NET_TCP_RECONNECT_INTV "\r\n",
                     "[WIFI] Failed to set TCP reconnect interval.",
                     connect_to_server);
     AT_FREE_RESP(msg);
-    SEND_WAIT_CHECK("AT+CIPSTART=\"TCP\",\"" SERVER_ADDR "\"," SERVER_PORT
-                    "," NET_TCP_KEEPALIVE_TIME,
-                    "[WIFI] Failed to connect to server " SERVER_ADDR
-                    ":" SERVER_PORT,
+
+    sprintf(cmd_buffer,
+            "AT+CIPSTART=\"TCP\",\"%s\",%hu," NET_TCP_KEEPALIVE_TIME "\r\n",
+            (char *)GET_CONFIG(CFG_SEL_SERVER_ADDR),
+            (uint16_t)((uint32_t)GET_CONFIG(CFG_SEL_SERVER_PORT) & 0xFFFF));
+
+    SEND_WAIT_CHECK(cmd_buffer, "[WIFI] Failed to connect to server",
                     connect_to_server);
     AT_FREE_RESP(msg);
-    SEND_WAIT_CHECK("AT+CIPMODE=1",
+
+    SEND_WAIT_CHECK("AT+CIPMODE=1\r\n",
                     "[WIFI] Failed to enter pass-through recv mode.",
                     connect_to_server);
     AT_FREE_RESP(msg);

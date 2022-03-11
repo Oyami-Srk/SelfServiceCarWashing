@@ -27,8 +27,9 @@
  */
 
 // Server response
-#define SRV_RESP          "+SERVRESP %c"
-#define SRV_RESP_LOGIN_OK "%s %s %f\n"
+#define SRV_RESP           "+SERVRESP %c"
+#define SRV_RESP_LOGIN_OK  "%s %s %f\n"
+#define SRV_RESP_LOGOUT_OK "%f %f\n"
 // Server Command
 #define SRV_CMD_HEAD         "+SERVCMD"
 #define SRV_CMD_GETSTATUS    "GET_STATUS"
@@ -48,7 +49,8 @@
 // Device response
 #define DEV_RESP_OK        "+CTRLRESP OK"
 #define DEV_RESP_ERROR     "+CTRLRESP ERROR"
-#define DEV_RESP_GETSTATUS DEV_RESP_OK " %s %s %hhu.%hhu.%hhu.%hhu %lu %s %d %d"
+#define DEV_RESP_GETSTATUS                                                     \
+    DEV_RESP_OK " %s %s %hhu.%hhu.%hhu.%hhu %lu %s %d %lu"
 
 typedef enum {
     CMD_RESULT_OK,
@@ -61,7 +63,8 @@ CMD_RESULT Cmd_RegisterDevice();
 CMD_RESULT Cmd_UserLogin(const char *username, const char *password,
                          char *userId, char *user_dispname, float *avail);
 CMD_RESULT Cmd_UserLogOut(const char *userId, float water_used, float foam_used,
-                          uint32_t time_used);
+                          uint32_t time_used, float *used_money,
+                          float *left_money);
 CMD_RESULT Cmd_AcquireQRCode();
 CMD_RESULT Cmd_HeartBeat();
 

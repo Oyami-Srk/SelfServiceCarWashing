@@ -194,9 +194,9 @@ void SystemClock_Config(void)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void Error_Handler(void)
-{
-  /* USER CODE BEGIN Error_Handler_Debug */
+void Error_Handler(void) {
+    /* USER CODE BEGIN Error_Handler_Debug */
+    __BKPT();
     PRINTF("Error handler.Restart");
     HAL_NVIC_SystemReset();
     /* User can add his own implementation to report the HAL error return state
@@ -204,7 +204,7 @@ void Error_Handler(void)
     __disable_irq();
     while (1) {
     }
-  /* USER CODE END Error_Handler_Debug */
+    /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

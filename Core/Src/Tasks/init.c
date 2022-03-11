@@ -16,6 +16,7 @@
 #include "GUI/handles.h"
 #include "task.h"
 #include "fatfs.h"
+#include "Common/config.h"
 
 extern void standby_task(); // standby.c
 
@@ -145,6 +146,8 @@ void init_task() {
 
 void TASKS_INIT_RTOS() {
     LOG_SCR("[INIT] Starting init procedures.");
+    INIT_CONFIG();
+    LOG_SCR("[INIT] Finish loading configuration.");
     LOG_SCR("[INIT] 测试中文显示。");
     //    set_long_message("……系统启动中……");
     set_long_message(

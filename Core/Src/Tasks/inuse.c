@@ -23,6 +23,8 @@
 #include "stm32f4xx_it.h"
 #include "tim.h"
 
+static uint32_t fraction = CFG_DEFAULT_FOAM_TO_WATER_FRACTION;
+
 static int      using_time   = 0;
 static uint32_t pwm_lastTick = 0;
 
@@ -30,6 +32,7 @@ static inuse_information_t inuse_info;
 static int                 calc_time  = 0;
 static TaskHandle_t        inuse_task = NULL;
 static SemaphoreHandle_t   info_mutex = NULL;
+static bool                usable     = false;
 
 #define PUMP_ON()  HAL_GPIO_WritePin(GPIO(RELAY1), GPIO_PIN_SET)
 #define WATER_ON() HAL_GPIO_WritePin(GPIO(RELAY2), GPIO_PIN_SET)
@@ -50,7 +53,7 @@ bool inuse = false;
 
 void task_calc_usage() {
     TickType_t       xLastWakeTime;
-    const TickType_t xPeriod = pdMS_TO_TICKS(100); // 0.1 sec
+    const TickType_t xPeriod = pdMS_TO_TICKS(INUSE_SAMPLE_RATE); // 0.1 sec
 
     xLastWakeTime = xTaskGetTickCount();
     for (; inuse;) {
@@ -71,21 +74,30 @@ void task_calc_usage() {
                 }
                 calc_time = 0;
             }
+            float sample_flow = (inuse_info.current_flow_speed / 1000) *
+                                (1000.0f / INUSE_SAMPLE_RATE);
             switch (inuse_info.current_using) {
             case CURRENT_USING_WATER:
-                inuse_info.current_usage_water +=
-                    inuse_info.current_flow_speed / 100; // flow speed is mL/s
+                inuse_info.current_usage_water += sample_flow;
+                inuse_info.avail -= sample_flow;
                 break;
             case CURRENT_USING_FOAM:
-                inuse_info.current_usage_foam +=
-                    inuse_info.current_flow_speed / 100; // flow speed is mL/s
+                inuse_info.current_usage_foam += sample_flow;
+                inuse_info.avail -= sample_flow * (1000.0f / fraction);
                 break;
             default:
                 break;
             }
-            inuse_info.avail -=
-                inuse_info.current_usage_water +
-                inuse_info.current_usage_foam * FOAM_TO_WATER_FRACTION;
+            if (inuse_info.avail <= 0.001f) {
+                inuse_info.current_using = CURRENT_USING_NONE;
+                usable                   = false;
+                PUMP_OFF();
+                WATER_OFF();
+                FOAM_OFF();
+                show_delay_close_message("余额不足",
+                                         "您的剩余余额不足，无法继续用水！",
+                                         NULL, 10, NULL);
+            }
         }
         xSemaphoreGive(info_mutex);
 
@@ -104,6 +116,8 @@ static bool scan_btn(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin) {
 }
 
 static void BTN1_Pressed() {
+    if (!usable)
+        return;
     xSemaphoreTake(info_mutex, portMAX_DELAY);
     if (inuse_info.current_using == CURRENT_USING_WATER) {
         inuse_info.current_using = CURRENT_USING_NONE;
@@ -120,6 +134,8 @@ static void BTN1_Pressed() {
 }
 
 static void BTN2_Pressed() {
+    if (!usable)
+        return;
     xSemaphoreTake(info_mutex, portMAX_DELAY);
     if (inuse_info.current_using == CURRENT_USING_FOAM) {
         inuse_info.current_using = CURRENT_USING_NONE;
@@ -184,18 +200,27 @@ _Noreturn void task_inuse() {
 
 void start_inuse_task(const char *userId, float avail) {
     LOG("[INUSE] Start.");
+
+    fraction = (uint32_t)GET_CONFIG(CFG_SEL_FOAM_TO_WATER_FRAC);
+
     info_mutex = xSemaphoreCreateMutex();
 
     xSemaphoreTake(info_mutex, portMAX_DELAY);
     memset(&inuse_info, 0, sizeof(inuse_information_t));
     strcpy(inuse_info.userId, userId);
+    inuse_info.avail = avail;
+    if (avail <= 0.001f) {
+        usable = false;
+    } else {
+        usable = true;
+    }
     xSemaphoreGive(info_mutex);
 
     calc_time = 0;
     inuse     = true;
-    xTaskCreate(task_calc_usage, "CALC_USAGE", 128, NULL, tskIDLE_PRIORITY + 3,
+    xTaskCreate(task_calc_usage, "CALC_USAGE", 256, NULL, tskIDLE_PRIORITY + 3,
                 NULL);
-    xTaskCreate(task_inuse, "INUSE", 128, NULL, tskIDLE_PRIORITY + 3,
+    xTaskCreate(task_inuse, "INUSE", 256, NULL, tskIDLE_PRIORITY + 3,
                 &inuse_task);
     HAL_TIM_IC_Start_IT(&htim3, TIM_CHANNEL_1);
 }
@@ -215,6 +240,10 @@ void stop_inuse_task() {
         inuse_info.current_used_time++;
     vSemaphoreDelete(info_mutex);
     info_mutex = NULL;
+    memset(&inuse_info, 0, sizeof(inuse_information_t));
+    using_time   = 0;
+    calc_time    = 0;
+    pwm_lastTick = 0;
 }
 
 static uint32_t current_used_time = 0;
@@ -225,7 +254,6 @@ void            get_inuse_information(inuse_information_t *info) {
     xSemaphoreGive(info_mutex);
 }
 
-static float calc_flow_speed(float freq) { return (freq + 3) / 8.1f; }
 
 // using for capture the speed
 void TIM3_IT_HANDLER() {
@@ -237,7 +265,7 @@ void TIM3_IT_HANDLER() {
         return;
     }
     float freq                    = 1000.0f / (float)(currTick - pwm_lastTick);
-    inuse_info.current_flow_speed = calc_flow_speed(freq);
+    inuse_info.current_flow_speed = FLOW_SPEED_CALC(freq);
     pwm_lastTick                  = currTick;
 }
 

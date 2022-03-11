@@ -72,7 +72,7 @@ void AT_ResetStatus() {
 
 void AT_SetNetStatus(NET_STATUS status) {
     AT_Net_Status = status;
-#ifdef ENABLE_NET_LED
+#if (ENABLE_NET_LED == 1)
     switch (status) {
     case NET_CONNECTED:
         HAL_GPIO_WritePin(GPIO(NET_STATUS_LED), GPIO_PIN_SET);

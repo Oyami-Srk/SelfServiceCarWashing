@@ -157,7 +157,7 @@ void StartDefaultTask(void const * argument)
   extern int INUSE_TASK_RUNNING;
     /* Infinite loop */
     for (;;) {
-#ifdef ENABLE_WORKING_LED
+#if (ENABLE_WORKING_LED == 1)
         HAL_GPIO_TogglePin(GPIO(WORKING_STATUS_LED));
 #endif
         vTaskDelay(pdMS_TO_TICKS(1000));

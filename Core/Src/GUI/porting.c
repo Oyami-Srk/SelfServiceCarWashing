@@ -52,13 +52,12 @@ uint8_t login(const char *username, const char *password, char *dispname) {
     return LOGIN_FAILED;
 }
 
-void logout() {
-    inuse_information_t info;
-    get_inuse_information(&info);
+void logout(inuse_information_t *info, float *used_money, float *left_money) {
+    get_inuse_information(info);
     stop_inuse_task();
-    while (Cmd_UserLogOut(info.userId, info.current_usage_water,
-                          info.current_usage_foam,
-                          info.current_used_time) != CMD_RESULT_OK) {
+    while (Cmd_UserLogOut(info->userId, info->current_usage_water,
+                          info->current_usage_foam, info->current_used_time,
+                          used_money, left_money) != CMD_RESULT_OK) {
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 }

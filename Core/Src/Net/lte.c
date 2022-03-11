@@ -23,6 +23,7 @@
 #include <time.h>
 
 static uint8_t radio_strength;
+static char    cmd_buffer[512];
 
 void task_lte_init(__attribute__((unused)) void *args) {
     // TODO: Guard for connection lost
@@ -91,7 +92,7 @@ retry_start:
     }
 
 #define SEND_WAIT_CHECK(cmd, message, label)                                   \
-    AT_SendStaticCommand(cmd "\r\n");                                          \
+    AT_SendCommand((uint8_t *)(cmd), strlen(cmd));                             \
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);                                       \
     result = AT_GetResult(msg.Buffer, msg.Len);                                \
     if (result != AT_OK) {                                                     \
@@ -122,11 +123,12 @@ check_network:
 
     vTaskDelay(pdMS_TO_TICKS(500));
     retry_intv = 3000;
-    SEND_WAIT_CHECK("AT+CPIN?", "[LTE] No SIM Card Installed.", check_network);
+    SEND_WAIT_CHECK("AT+CPIN?\r\n", "[LTE] No SIM Card Installed.",
+                    check_network);
     AT_FREE_RESP(msg);
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CSQ", "[LTE] Cannot check Radio strength.",
+    SEND_WAIT_CHECK("AT+CSQ\r\n", "[LTE] Cannot check Radio strength.",
                     check_network);
     radio_strength = 0;
     sscanf((char *)msg.Buffer, "\r\n+CSQ: %hhu", &radio_strength);
@@ -145,7 +147,7 @@ check_network:
     AT_FREE_RESP(msg);
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CREG?", "[LTE] Cannot check registration state.",
+    SEND_WAIT_CHECK("AT+CREG?\r\n", "[LTE] Cannot check registration state.",
                     check_network);
     uint8_t a = 0, b = 0;
     sscanf((char *)msg.Buffer, "\r\n+CREG: %hhu,%hhu", &a, &b);
@@ -159,7 +161,7 @@ check_network:
     AT_FREE_RESP(msg);
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CGATT?", "[LTE] Cannot get attachment state.",
+    SEND_WAIT_CHECK("AT+CGATT?\r\n", "[LTE] Cannot get attachment state.",
                     check_network);
     a = 0;
     sscanf((char *)msg.Buffer, "\r\n+CGATT: %hhu", &a);
@@ -191,7 +193,7 @@ get_imsi:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+CIMI", "[LTE] Failed to get IMSI.", get_imsi);
+    SEND_WAIT_CHECK("AT+CIMI\r\n", "[LTE] Failed to get IMSI.", get_imsi);
     char imsi_buffer[16];
     memset(imsi_buffer, 0, 16);
     memcpy(imsi_buffer, msg.Buffer + 2, 15);
@@ -218,20 +220,22 @@ enter_tcp:
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+QICSGP=1,1,\"" NET_LTE_APN "\",\"\",\"\",1",
-                    "[LTE] Failed to configure TCP scene.", enter_tcp);
+    sprintf((char *)cmd_buffer, "AT+QICSGP=1,1,\"%s\",\"\",\"\",1\r\n",
+            (char *)GET_CONFIG(CFG_SEL_NET_LTE_APN));
+    SEND_WAIT_CHECK(cmd_buffer, "[LTE] Failed to configure TCP scene.",
+                    enter_tcp);
     AT_FREE_RESP(msg);
 
-    SEND_WAIT_CHECK("AT+QIDEACT=1",
+    SEND_WAIT_CHECK("AT+QIDEACT=1\r\n",
                     "[LTE] Failed to deactivate TCP scene...ignore.", tag1);
     AT_FREE_RESP(msg);
 tag1:
 
-    SEND_WAIT_CHECK("AT+QIACT=1", "[LTE] Failed to active TCP scene.",
+    SEND_WAIT_CHECK("AT+QIACT=1\r\n", "[LTE] Failed to active TCP scene.",
                     enter_tcp);
     AT_FREE_RESP(msg);
 
-    SEND_WAIT_CHECK("AT+QIACT?", "[LTE] Failed to get actived TCP scene.",
+    SEND_WAIT_CHECK("AT+QIACT?\r\n", "[LTE] Failed to get actived TCP scene.",
                     enter_tcp);
 
     char    *p   = msg.Buffer;
@@ -268,7 +272,10 @@ tag1:
 update_time:;
     time_t lastUpdate = GetRTCLastUpdate();
     time_t currTime   = GetRTCTime();
-    if (lastUpdate != 0 && lastUpdate - currTime < RTC_MINIUM_UPDATE_INTV) {
+    if (!(((uint16_t)((uint32_t)GET_CONFIG(CFG_SEL_FLAGS) & 0xFFFF)) &
+          CFG_FLAG_FORCE_UPDATE_SNTP) &&
+        lastUpdate != 0 &&
+        lastUpdate - currTime < (uint32_t)GET_CONFIG(CFG_SEL_SNTP_UPD_INTV)) {
         char *time_buffer = ParseTimeInStr(lastUpdate);
         PRINTF_SCR("[LTE] RTC Time is updated at %s. Skip update.\r\n",
                    time_buffer);
@@ -292,8 +299,10 @@ update_time:;
     }
 
     vTaskDelay(pdMS_TO_TICKS(100));
-    SEND_WAIT_CHECK("AT+QNTP=1,\"" NET_SNTP_SERVER "\"",
-                    "[LTE] Failed to update time.", update_time);
+
+    sprintf((char *)cmd_buffer, "AT+QNTP=1,\"%s\"\r\n",
+            (char *)GET_CONFIG(CFG_SEL_SNTP_SERVER));
+    SEND_WAIT_CHECK(cmd_buffer, "[LTE] Failed to update time.", update_time);
     AT_FREE_RESP(msg);
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
     p = (char *)msg.Buffer;
@@ -370,13 +379,15 @@ connect_to_server:
     vTaskDelay(pdMS_TO_TICKS(100));
     // TODO: ping
 
-    SEND_WAIT_CHECK("AT+QICLOSE=0", "[LTE] Failed to close socket...ignore.",
-                    tag2);
+    SEND_WAIT_CHECK("AT+QICLOSE=0\r\n",
+                    "[LTE] Failed to close socket...ignore.", tag2);
     AT_FREE_RESP(msg);
 tag2:
 
-    AT_SendStaticCommand("AT+QIOPEN=1,0,\"TCP\",\"" SERVER_ADDR
-                         "\"," SERVER_PORT ",0,2\r\n");
+    sprintf((char *)cmd_buffer, "AT+QIOPEN=1,0,\"TCP\",\"%s\",%hu,0,2\r\n",
+            (char *)GET_CONFIG(CFG_SEL_SERVER_ADDR),
+            (uint16_t)((uint32_t)GET_CONFIG(CFG_SEL_SERVER_PORT) & 0xFFFF));
+    AT_SendCommand(cmd_buffer, strlen(cmd_buffer));
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     if (!STATIC_STR_CMP(msg.Buffer, "\r\nCONNECT")) {

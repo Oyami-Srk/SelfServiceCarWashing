@@ -116,7 +116,8 @@ CMD_RESULT Cmd_UserLogin(const char *username, const char *password,
 }
 
 CMD_RESULT Cmd_UserLogOut(const char *userId, float water_used, float foam_used,
-                          uint32_t time_used) {
+                          uint32_t time_used, float *used_money,
+                          float *left_money) {
     WAIT_FOR_RUNNING();
     AT_WaitForStatus(NET_DEVICE_REGISTERED, portMAX_DELAY);
 
@@ -130,6 +131,19 @@ CMD_RESULT Cmd_UserLogOut(const char *userId, float water_used, float foam_used,
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
 
     CMD_RESULT result = Cmd_GetRespResult((const char *)msg.Buffer);
+
+    if (memcmp(msg.Buffer + sizeof("+SERVRESP OK"), AT_GetIdent(),
+               NET_IDENT_SIZE) != 0)
+        result = CMD_RESULT_ERROR;
+
+    if (result == CMD_RESULT_OK) {
+        sscanf((char *)(msg.Buffer + sizeof("+SERVRESP OK ") + NET_IDENT_SIZE),
+               SRV_RESP_LOGOUT_OK, used_money, left_money);
+    } else {
+        *used_money = 0.0f;
+        *left_money = 0.0f;
+    }
+
     AT_FREE_RESP(msg);
     UNREGISTER_AND_DELETE();
 
@@ -165,8 +179,9 @@ CMD_RESULT Cmd_AcquireQRCode() {
     if (result == CMD_RESULT_OK) {
         uint8_t *qr_array =
             msg.Buffer + sizeof("+SERVRESP OK ") + NET_IDENT_SIZE;
-        uint16_t size;
-        if ((size = (*((uint16_t *)qr_array))) == 0) {
+        uint16_t size = qr_array[0] | (qr_array[1] << 8);
+        //        if ((size = (*((uint16_t *)qr_array))) == 0) {
+        if (size == 0) {
             result = CMD_RESULT_ERROR;
         } else {
             LOGF("Received size %dx%d Qr Code", size, size);

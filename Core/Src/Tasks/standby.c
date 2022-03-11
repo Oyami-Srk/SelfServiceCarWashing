@@ -55,7 +55,7 @@ _Noreturn void heartbeat_task() {
 _Noreturn void standby_task() {
     LOG("[STANDBY] Start stand-by task.");
     xTaskCreate(register_task, "REGISTER", 512, NULL, tskIDLE_PRIORITY, NULL);
-#ifdef ENABLE_HEARTBEAT
+#if (ENABLE_HEARTBEAT == 1)
     xTaskCreate(heartbeat_task, "HEARTBEAT", 512, NULL, tskIDLE_PRIORITY, NULL);
 #endif
     extern void MX_USB_DEVICE_Init(void);

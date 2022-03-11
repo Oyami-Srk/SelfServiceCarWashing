@@ -58,7 +58,7 @@ _Noreturn void task_net_uart(__attribute__((unused)) void *args) {
                 LOG("[UART] Cannot alloc memory for buffer, OOM!");
             } else {
                 memcpy(buffer, NET_UART_RxBuffer, NET_UART_RxLen);
-#ifdef ENABLE_NET_BUFFER_PRINT
+#if (ENABLE_NET_BUFFER_PRINT == 1)
                 PRINT_BUFFER(buffer, NET_UART_RxLen, ">>>>  ");
 #endif
                 if (AT_Resp_Queue) {
@@ -88,7 +88,7 @@ void NET_UART_INIT_RTOS() {
 
     __HAL_UART_ENABLE_IT(&HUART, UART_IT_IDLE);
     HAL_UART_Receive_DMA(&HUART, NET_UART_RxBuffer, NET_UART_DATA_SIZE);
-    xTaskCreate(task_net_uart, "NET-UART", 256, NULL, tskIDLE_PRIORITY, NULL);
+    xTaskCreate(task_net_uart, "NET-UART", 512, NULL, tskIDLE_PRIORITY, NULL);
 
     NET_MODULE_INIT();
 }

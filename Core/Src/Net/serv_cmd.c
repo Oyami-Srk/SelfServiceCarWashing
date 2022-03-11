@@ -53,7 +53,8 @@ CMD_RESULT Srv_GetStatus(uint8_t *recv_buffer, uint16_t len) {
         status = "OK";
     sprintf(cmd_send_buffer, DEV_RESP_GETSTATUS, status, AT_GetIdent(), ip[0],
             ip[1], ip[2], ip[3], GetRTCTime(), SOFTWARE_VER,
-            AT_GetRadioStrength(), FOAM_TO_WATER_FRACTION);
+            AT_GetRadioStrength(),
+            (uint32_t)GET_CONFIG(CFG_SEL_FOAM_TO_WATER_FRAC));
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
     AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
@@ -109,9 +110,9 @@ CMD_RESULT Srv_UserLogin(uint8_t *recv_buffer, uint16_t len) {
     if (avail != 0.0f && match) {
         lv_timer_t *timer = lv_timer_create(cb_login_call, 1000, NULL);
         lv_timer_set_repeat_count(timer, 1);
-        sprintf(cmd_send_buffer, DEV_RESP_OK "%s\n", AT_GetIdent());
+        sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
     } else {
-        sprintf(cmd_send_buffer, DEV_RESP_ERROR "%s\n", AT_GetIdent());
+        sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
         result = CMD_RESULT_ERROR;
     }
 
@@ -124,10 +125,7 @@ CMD_RESULT Srv_UserLogin(uint8_t *recv_buffer, uint16_t len) {
 }
 
 static void cb_logout_call(lv_timer_t *timer) {
-    logout();
-    inuse_switch_out();
-    login_switch_in();
-
+    trigger_logout();
     lv_timer_del(timer);
 }
 
@@ -155,11 +153,8 @@ CMD_RESULT Srv_UserLogout(uint8_t *recv_buffer, uint16_t len) {
 
     sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
 
-    lv_timer_t *timer = lv_timer_create(cb_logout_call, 1000, NULL);
+    lv_timer_t *timer = lv_timer_create(cb_logout_call, 10, NULL);
     lv_timer_set_repeat_count(timer, 1);
-
-    LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     cmd_running = false;
     vPortFree(recv_buffer);
@@ -229,13 +224,65 @@ CMD_RESULT Srv_Shutdown(uint8_t *recv_buffer, uint16_t len) {
 }
 
 CMD_RESULT Srv_ServiceStop(uint8_t *recv_buffer, uint16_t len) {
+    WAIT_FOR_RUNNING();
+
+    char ident[18];
+    memset(ident, 0, 18);
+
+    sscanf((const char *)recv_buffer, SRV_CMD_HEAD " " SRV_CMD_STOP " %s",
+           ident);
+
+    bool match = (strcmp(AT_GetIdent(), ident) == 0);
+
+    CMD_RESULT result = CMD_RESULT_OK;
+    if (inuse || !match) {
+        sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
+        result = CMD_RESULT_ERROR;
+    } else {
+        sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
+    }
+
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+
+    if (!inuse && match) {
+        show_message("服务终止", "本机器暂时停止提供服务，敬请谅解。", false);
+    }
+
+    cmd_running = false;
     vPortFree(recv_buffer);
-    return CMD_RESULT_OK;
+    return result;
 }
 
 CMD_RESULT Srv_ServiceStart(uint8_t *recv_buffer, uint16_t len) {
+    WAIT_FOR_RUNNING();
+
+    char ident[18];
+    memset(ident, 0, 18);
+
+    sscanf((const char *)recv_buffer, SRV_CMD_HEAD " " SRV_CMD_START " %s",
+           ident);
+
+    bool match = (strcmp(AT_GetIdent(), ident) == 0);
+
+    CMD_RESULT result = CMD_RESULT_OK;
+    if (inuse || !match) {
+        sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
+        result = CMD_RESULT_ERROR;
+    } else {
+        sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
+    }
+
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+
+    if (!inuse && match) {
+        close_message();
+    }
+
+    cmd_running = false;
     vPortFree(recv_buffer);
-    return CMD_RESULT_OK;
+    return result;
 }
 
 CMD_RESULT Srv_DispOff(uint8_t *recv_buffer, uint16_t len) {
@@ -374,6 +421,43 @@ CMD_RESULT Srv_DispQRCode(uint8_t *recv_buffer, uint16_t len) {
 }
 
 CMD_RESULT Srv_SetConf(uint8_t *recv_buffer, uint16_t len) {
+    WAIT_FOR_RUNNING();
+
+    char ident[18];
+    memset(ident, 0, 18);
+
+    sscanf((const char *)recv_buffer, SRV_CMD_HEAD " " SRV_CMD_SETCONF " %s",
+           ident);
+
+    bool match = (strcmp(AT_GetIdent(), ident) == 0);
+
+    CMD_RESULT result = CMD_RESULT_OK;
+    if (!match) {
+        result = CMD_RESULT_ERROR;
+    } else {
+        uint8_t *conf_array =
+            recv_buffer + sizeof("+SERVCMD SET_CONF ") + NET_IDENT_SIZE;
+        uint8_t  selector = recv_buffer[0];
+        uint16_t size     = recv_buffer[1] | (recv_buffer[2] << 8);
+        if (size > 64) {
+            result = CMD_RESULT_ERROR;
+        } else {
+            int ret = SET_CONFIG(selector, recv_buffer + 3, size);
+            if (ret != 0)
+                result = CMD_RESULT_ERROR;
+            result = CMD_RESULT_OK;
+        }
+    }
+
+    if (result == CMD_RESULT_ERROR)
+        sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
+    else
+        sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
+
+    LOGF("[CMD] Send: %s", cmd_send_buffer);
+    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+
+    cmd_running = false;
     vPortFree(recv_buffer);
-    return CMD_RESULT_OK;
+    return result;
 }
