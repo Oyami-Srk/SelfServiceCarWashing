@@ -43,7 +43,7 @@ retry_start:
     }
 
     AT_Response_Msg_t msg;
-    AT_RegisterResponse(AT_Msg_Queue);
+    AT_UART_RegisterResponse(AT_Msg_Queue);
 
     // Reset the module
 
@@ -58,7 +58,7 @@ retry_start:
 
     // Clean Queue
     do {
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+        AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);
         AT_FREE_RESP(msg);
     } while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0);
 
@@ -66,7 +66,7 @@ retry_start:
 
     LOG("[LTE] Wait for Module powered up");
     do {
-        AT_WAIT_FOR_RESP_WITH_DELAY(AT_Msg_Queue, msg, portMAX_DELAY);
+        AT_UART_Recv(AT_Msg_Queue, &msg, portMAX_DELAY);
         if (AT_GetResult(msg.Buffer, msg.Len) == AT_RDY) {
             AT_FREE_RESP(msg);
             break;
@@ -75,33 +75,58 @@ retry_start:
     } while (true);
 
     // Disable Echo
-    AT_SendStaticCommand("ATE0\r\n");
+    AT_UART_SendStatic("ATE0\r\n");
     do {
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+        AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);
         AT_FREE_RESP(msg);
     } while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0);
 
+    int recv_retries;
+
     // Get AT Status
-    AT_SendStaticCommand("AT+GMR\r\n");
-    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+    AT_UART_SendStatic("AT+GMR\r\n");
+    AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);
     AT_RESULT result = AT_GetResult(msg.Buffer, msg.Len);
     AT_FREE_RESP(msg);
     if (result != AT_OK) {
-        AT_UnregisterResponse(AT_Msg_Queue);
+        AT_UART_UnregisterResponse(AT_Msg_Queue);
         goto failed;
     }
 
 #define SEND_WAIT_CHECK(cmd, message, label)                                   \
-    AT_SendCommand((uint8_t *)(cmd), strlen(cmd));                             \
-    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);                                       \
-    result = AT_GetResult(msg.Buffer, msg.Len);                                \
-    if (result != AT_OK) {                                                     \
-        PRINTF(message " Retry after %d secs.\r\n", retry_intv / 1000);        \
-        AT_FREE_RESP(msg);                                                     \
-        retries++;                                                             \
-        vTaskDelay(pdMS_TO_TICKS(retry_intv));                                 \
-        goto label;                                                            \
-    }
+    do {                                                                       \
+        int _recved = 0;                                                       \
+        for (int __i = 0; __i < 3; __i++) {                                    \
+            AT_UART_Send((uint8_t *)(cmd), strlen(cmd));                       \
+            for (int _recv_retries = 0; !_recved && _recv_retries < 3;         \
+                 _recv_retries++) {                                            \
+                if (AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY) == \
+                    AT_OK)                                                     \
+                    _recved = 1;                                               \
+            }                                                                  \
+            if (_recved)                                                       \
+                break;                                                         \
+        }                                                                      \
+        if (!_recved)                                                          \
+            result = AT_UART_TIMEOUT;                                          \
+        else                                                                   \
+            result = AT_GetResult(msg.Buffer, msg.Len);                        \
+        if (result != AT_OK) {                                                 \
+            PRINTF(message " Retry after %d secs.\r\n", retry_intv / 1000);    \
+            AT_FREE_RESP(msg);                                                 \
+            retries++;                                                         \
+            vTaskDelay(pdMS_TO_TICKS(retry_intv));                             \
+            goto label;                                                        \
+        }                                                                      \
+    } while (0)
+
+#define CLEAR_QUEUE()                                                          \
+    do {                                                                       \
+        while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {                    \
+            AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);           \
+            AT_FREE_RESP(msg);                                                 \
+        }                                                                      \
+    } while (0)
 
     int retries;
     // Connect to AP
@@ -115,11 +140,7 @@ check_network:
     }
     vTaskDelay(pdMS_TO_TICKS(500));
 
-    while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
-        // clean queue
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-        AT_FREE_RESP(msg);
-    }
+    CLEAR_QUEUE();
 
     vTaskDelay(pdMS_TO_TICKS(500));
     retry_intv = 3000;
@@ -186,11 +207,7 @@ get_imsi:
     }
     vTaskDelay(pdMS_TO_TICKS(500));
 
-    while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
-        // clean queue
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-        AT_FREE_RESP(msg);
-    }
+    CLEAR_QUEUE();
 
     vTaskDelay(pdMS_TO_TICKS(100));
     SEND_WAIT_CHECK("AT+CIMI\r\n", "[LTE] Failed to get IMSI.", get_imsi);
@@ -213,11 +230,7 @@ enter_tcp:
     }
     vTaskDelay(pdMS_TO_TICKS(500));
 
-    while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
-        // clean queue
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-        AT_FREE_RESP(msg);
-    }
+    CLEAR_QUEUE();
 
     vTaskDelay(pdMS_TO_TICKS(100));
     sprintf((char *)cmd_buffer, "AT+QICSGP=1,1,\"%s\",\"\",\"\",1\r\n",
@@ -292,11 +305,8 @@ update_time:;
         goto failed;
     }
     vTaskDelay(pdMS_TO_TICKS(500));
-    while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
-        // clean queue
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
-        AT_FREE_RESP(msg);
-    }
+
+    CLEAR_QUEUE();
 
     vTaskDelay(pdMS_TO_TICKS(100));
 
@@ -304,7 +314,7 @@ update_time:;
             (char *)GET_CONFIG(CFG_SEL_SNTP_SERVER));
     SEND_WAIT_CHECK(cmd_buffer, "[LTE] Failed to update time.", update_time);
     AT_FREE_RESP(msg);
-    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+    AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);
     p = (char *)msg.Buffer;
     p += sizeof("\r\n+QNTP:") - 1;
     if (*p != ' ') {
@@ -366,7 +376,7 @@ connect_to_server:
 
     while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0) {
         // clean queue
-        AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+        AT_UART_Recv(AT_Msg_Queue, &msg, AT_DEFAULT_WAIT_DELAY);
         NET_MODULE_UART_PROC(msg.Buffer, msg.Len); // process active message
     }
 
@@ -387,10 +397,13 @@ tag2:
     sprintf((char *)cmd_buffer, "AT+QIOPEN=1,0,\"TCP\",\"%s\",%hu,0,2\r\n",
             (char *)GET_CONFIG(CFG_SEL_SERVER_ADDR),
             (uint16_t)((uint32_t)GET_CONFIG(CFG_SEL_SERVER_PORT) & 0xFFFF));
-    AT_SendCommand(cmd_buffer, strlen(cmd_buffer));
-    AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
+    AT_UART_Send(cmd_buffer, strlen(cmd_buffer));
+    // TIMEOUT HAPPENDED HERE
+    AT_RESULT at_result =
+        AT_UART_Recv(AT_Msg_Queue, &msg, pdMS_TO_TICKS(30 * 1000));
 
-    if (!STATIC_STR_CMP(msg.Buffer, "\r\nCONNECT")) {
+    if (at_result == AT_UART_TIMEOUT ||
+        !STATIC_STR_CMP(msg.Buffer, "\r\nCONNECT")) {
         LOG("[LTE] Failed to connect to server. Retry after 3 "
             "secs.");
         AT_FREE_RESP(msg);
@@ -403,7 +416,7 @@ tag2:
 
     AT_SetNetStatus(NET_CONNECTED_TO_SERVER);
 
-    AT_UnregisterResponse(AT_Msg_Queue);
+    AT_UART_UnregisterResponse(AT_Msg_Queue);
     vQueueDelete(AT_Msg_Queue);
 
     LOG_SCR("[LTE] LTE Module booted up.");
@@ -414,7 +427,7 @@ tag2:
 
 failed:
     LOG("[LTE] Cannot boot up LTE module. Retry after 3 secs.");
-    AT_UnregisterResponse(AT_Msg_Queue);
+    AT_UART_UnregisterResponse(AT_Msg_Queue);
     vQueueDelete(AT_Msg_Queue);
 
     vTaskDelay(pdMS_TO_TICKS(3000));

@@ -18,20 +18,20 @@
 
 extern QueueHandle_t AT_Resp_Queue;
 
-void AT_SendCommand(uint8_t *buffer, uint16_t len) {
+void AT_UART_Send(uint8_t *buffer, uint16_t len) {
     HAL_UART_Transmit_DMA(&huart3, buffer, len);
     LOGF("Send: %s", buffer);
     //    HAL_UART_Transmit(&huart3, buffer, len, 1000);
 }
 
-AT_RESULT AT_RegisterResponse(QueueHandle_t queueHandle) {
+AT_RESULT AT_UART_RegisterResponse(QueueHandle_t queueHandle) {
     if (AT_Resp_Queue != NULL)
         return AT_BUSY; // Response can only have one registered at one time
     AT_Resp_Queue = queueHandle;
     return AT_OK;
 }
 
-AT_RESULT AT_UnregisterResponse(QueueHandle_t queueHandle) {
+AT_RESULT AT_UART_UnregisterResponse(QueueHandle_t queueHandle) {
     if (AT_Resp_Queue != queueHandle)
         return AT_ERROR;
     AT_Resp_Queue = NULL;
@@ -105,4 +105,13 @@ BaseType_t AT_WaitForStatus(NET_STATUS status, TickType_t max_delay) {
         vTaskDelay(AT_WAIT_INTV);
     }
     return pdTRUE;
+}
+
+AT_RESULT AT_UART_Recv(QueueHandle_t queue, AT_Response_Msg_t *msg_buffer,
+                       TickType_t timeout) {
+    if (xQueueReceive(queue, msg_buffer, timeout) == pdFALSE) {
+        LOG("[UART] UART Timeout.");
+        return AT_UART_TIMEOUT;
+    }
+    return AT_OK;
 }

@@ -57,7 +57,7 @@ CMD_RESULT Srv_GetStatus(uint8_t *recv_buffer, uint16_t len) {
             (uint32_t)GET_CONFIG(CFG_SEL_FOAM_TO_WATER_FRAC));
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     cmd_running = false;
     vPortFree(recv_buffer);
@@ -87,7 +87,7 @@ CMD_RESULT Srv_UserLogin(uint8_t *recv_buffer, uint16_t len) {
         sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
 
         LOGF("[CMD] Send: %s", cmd_send_buffer);
-        AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+        AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
         cmd_running = false;
         vPortFree(recv_buffer);
@@ -117,7 +117,7 @@ CMD_RESULT Srv_UserLogin(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     cmd_running = false;
     vPortFree(recv_buffer);
@@ -144,7 +144,7 @@ CMD_RESULT Srv_UserLogout(uint8_t *recv_buffer, uint16_t len) {
         sprintf(cmd_send_buffer, DEV_RESP_ERROR " %s\n", AT_GetIdent());
 
         LOGF("[CMD] Send: %s", cmd_send_buffer);
-        AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+        AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
         cmd_running = false;
         vPortFree(recv_buffer);
@@ -181,7 +181,7 @@ CMD_RESULT Srv_Reset(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         HAL_NVIC_SystemReset();
@@ -212,7 +212,7 @@ CMD_RESULT Srv_Shutdown(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         HAL_PWR_EnterSTANDBYMode();
@@ -243,7 +243,7 @@ CMD_RESULT Srv_ServiceStop(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         show_message("服务终止", "本机器暂时停止提供服务，敬请谅解。", false);
@@ -274,7 +274,7 @@ CMD_RESULT Srv_ServiceStart(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         close_message();
@@ -305,7 +305,7 @@ CMD_RESULT Srv_DispOff(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         HAL_GPIO_WritePin(GPIO(LCD_BACK_LIGHT), GPIO_PIN_RESET);
@@ -336,7 +336,7 @@ CMD_RESULT Srv_DispOn(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     if (!inuse && match) {
         HAL_GPIO_WritePin(GPIO(LCD_BACK_LIGHT), GPIO_PIN_SET);
@@ -374,7 +374,7 @@ CMD_RESULT Srv_DispMessage(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     lv_timer_t *timer = lv_timer_create(cb_long_msg_set, 1000, recv_buffer);
     lv_timer_set_repeat_count(timer, 1);
@@ -411,7 +411,7 @@ CMD_RESULT Srv_DispQRCode(uint8_t *recv_buffer, uint16_t len) {
     }
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     lv_timer_t *timer = lv_timer_create(cb_qrcode, 1000, recv_buffer);
     lv_timer_set_repeat_count(timer, 1);
@@ -455,7 +455,7 @@ CMD_RESULT Srv_SetConf(uint8_t *recv_buffer, uint16_t len) {
         sprintf(cmd_send_buffer, DEV_RESP_OK " %s\n", AT_GetIdent());
 
     LOGF("[CMD] Send: %s", cmd_send_buffer);
-    AT_SendCommand((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
+    AT_UART_Send((uint8_t *)cmd_send_buffer, strlen(cmd_send_buffer));
 
     cmd_running = false;
     vPortFree(recv_buffer);

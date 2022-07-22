@@ -46,7 +46,8 @@ int f_putchar(int ch);
     ((memcmp((dyn), (static), (sizeof((static)) - 1))) == 0)
 
 #define PRINT_BUFFER(BUFFER, LEN, NEWLINE)                                     \
-    PRINTF("\r\n");                                                            \
+    PRINTF(NEWLINE "UART Received %d bytes. Buffer Strlen: %d\r\n", LEN,       \
+           strlen(BUFFER));                                                    \
     PRINTF(NEWLINE);                                                           \
     for (int __PRINT_RX_BUFFER_I = 0; __PRINT_RX_BUFFER_I < (LEN);             \
          __PRINT_RX_BUFFER_I++) {                                              \

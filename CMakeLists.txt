@@ -52,6 +52,12 @@ add_definitions(-DUSE_HAL_DRIVER -DSTM32F429xx -DSTM32F4)
 add_subdirectory(Middlewares/Third_Party/lvgl/)
 add_definitions(-DLV_LVGL_H_SIMPLE)
 
+set(CM_BACKTRACE_SOURCES
+        "Middlewares/Third_Party/CmBacktrace/cm_backtrace/cm_backtrace.c"
+        "Middlewares/Third_Party/CmBacktrace/cm_backtrace/fault_handler/gcc/cmb_fault.S")
+include_directories("Middlewares/Third_Party/CmBacktrace/cm_backtrace")
+
+
 file(GLOB_RECURSE GUI_SOURCES "Middlewares/GUI/Src/*.c")
 include_directories("Middlewares/GUI/Inc")
 
@@ -61,7 +67,11 @@ include_directories("Middlewares/Third_Party/MD5/Inc")
 file(GLOB_RECURSE RTT_SOURCES "Drivers/RTT/Src/*.c")
 include_directories("Drivers/RTT/Inc")
 
-file(GLOB_RECURSE SOURCES "FATFS/*.*" "USB_DEVICE/*.*" "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Core/*.*")
+file(GLOB_RECURSE USB_SOURCES "Middlewares/ST/STM32_USB_Device_Library/*.*" "USB_DEVICE/*.*")
+file(GLOB_RECURSE FATFS_SOURCES "Middlewares/Third_Party/FatFs/*.*" "FATFS/*.*")
+file(GLOB_RECURSE RTOS_SOURCES "Middlewares/Third_Party/FreeRTOS/*.*")
+
+file(GLOB_RECURSE SOURCES "startup/*.*" "Drivers/*.*" "Core/*.*")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F429BITx_FLASH.ld)
 
@@ -69,7 +79,7 @@ add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES} ${RTT_SOURCES} ${MD5_SOURCES} ${GUI_SOURCES} ${LINKER_SCRIPT})
+add_executable(${PROJECT_NAME}.elf ${SOURCES} ${RTOS_SOURCES} ${RTT_SOURCES} ${MD5_SOURCES} ${GUI_SOURCES} ${USB_SOURCES} ${FATFS_SOURCES} ${CM_BACKTRACE_SOURCES} ${LINKER_SCRIPT})
 target_link_libraries(${PROJECT_NAME}.elf lvgl)
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)

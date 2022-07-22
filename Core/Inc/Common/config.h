@@ -24,8 +24,8 @@
 //#define NET_UART_USE_2
 #define NET_UART_USE_3
 
-#define NET_MODULE_ESP32
-//#define NET_MODULE_LTE
+//#define NET_MODULE_ESP32
+#define NET_MODULE_LTE
 
 #define ENABLE_NET_BUFFER_PRINT 1
 
@@ -112,29 +112,40 @@ typedef struct {
 #define CONFIG_DATA_SERIALIZED_MAX_SIZE                                        \
     (64 * 5 + 10 + 10 + 6 + 6 + 8 + 1 + 9) // 370 bytes
 #ifdef NET_MODULE_ESP32
-#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32 "%[^,],%[^,],"
+#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32_PRINT "%s,%s,"
+#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32_SCAN  "%[^,],%[^,],"
 #else
-#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32 ""
+#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32_PRINT ""
+#define CONFIG_DATA_SERIALIZED_FORMAT_ESP32_SCAN  ""
 #endif
 #ifdef NET_MODULE_LTE
-#define CONFIG_DATA_SERIALIZED_FORMAT_LTE "%s,"
+#define CONFIG_DATA_SERIALIZED_FORMAT_LTE_PRINT "%s,"
+#define CONFIG_DATA_SERIALIZED_FORMAT_LTE_SCAN  "%[^,],"
 #else
-#define CONFIG_DATA_SERIALIZED_FORMAT_LTE ""
+#define CONFIG_DATA_SERIALIZED_FORMAT_LTE_PRINT ""
+#define CONFIG_DATA_SERIALIZED_FORMAT_LTE_SCAN  ""
 #endif
-#define CONFIG_DATA_SERIALIZED_FORMAT                                          \
-    "%hhu," CONFIG_DATA_SERIALIZED_FORMAT_ESP32                                \
-        CONFIG_DATA_SERIALIZED_FORMAT_LTE "%[^,],%hu,%[^,],%lu,%lu,%hu,%hhu"
 
+#define CONFIG_DATA_SERIALIZED_FORMAT_SCAN                                     \
+    "%hhu," CONFIG_DATA_SERIALIZED_FORMAT_ESP32_SCAN                           \
+        CONFIG_DATA_SERIALIZED_FORMAT_LTE_SCAN                                 \
+    "%[^,],%hu,%[^,],%lu,%lu,%hu,%hhu"
+
+#define CONFIG_DATA_SERIALIZED_FORMAT_PRINT                                    \
+    "%hhu," CONFIG_DATA_SERIALIZED_FORMAT_ESP32_PRINT                          \
+        CONFIG_DATA_SERIALIZED_FORMAT_LTE_PRINT "%s,%hu,%s,%lu,%lu,%hu,%hhu"
 #endif
 
 /* Default dynamic configs */
 #ifdef NET_MODULE_ESP32
-#define CFG_DEFAULT_NET_WIFI_AP_NAME "WiFi501"
-#define CFG_DEFAULT_NET_WIFI_AP_PSWD "1145141919810"
-#define CFG_DEFAULT_SERVER_ADDR      "192.168.0.3"
+//#define CFG_DEFAULT_NET_WIFI_AP_NAME "WiFi501"
+//#define CFG_DEFAULT_NET_WIFI_AP_PSWD "1145141919810"
+#define CFG_DEFAULT_NET_WIFI_AP_NAME "Wireless-2.4GHz"
+#define CFG_DEFAULT_NET_WIFI_AP_PSWD "83885877"
+#define CFG_DEFAULT_SERVER_ADDR      "192.168.0.1"
 #else
 #define CFG_DEFAULT_NET_LTE_APN "CMNET"
-#define CFG_DEFAULT_SERVER_ADDR "srk00.qvq.moe"
+#define CFG_DEFAULT_SERVER_ADDR "srk01.qvq.moe"
 #endif
 
 #define CFG_DEFAULT_NET_SNTP_SERVER "114.118.7.163"
@@ -147,6 +158,9 @@ typedef struct {
 
 /* End of Dynamic default */
 
+#define FORCE_RESET_CONFIG 1
+// #define FORCE_FORMAT_FLASH 1
+#define DO_NOT_LOAD_FONT_FROM_FLASH 1
 // Type is decided by selector, uint16_t or uint32_t return direct value instead
 // of pointer
 void  INIT_CONFIG();

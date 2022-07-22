@@ -36,6 +36,7 @@ typedef enum {
     AT_PARSE_ERROR,
     AT_OTHER,
     AT_RDY,
+    AT_UART_TIMEOUT,
 } AT_RESULT;
 
 typedef enum {
@@ -54,13 +55,6 @@ uint8_t NET_MODULE_GET_RADIO_STRENGTH();
 
 #define MAX_DELAY_QUEUE_WAIT 2000
 
-void AT_SendCommand(uint8_t *buffer, uint16_t len);
-#define AT_SendStaticCommand(msg)                                              \
-    AT_SendCommand((uint8_t *)(msg), sizeof(msg) - 1)
-
-AT_RESULT AT_RegisterResponse(QueueHandle_t queueHandle);
-AT_RESULT AT_UnregisterResponse(QueueHandle_t queueHandle);
-
 AT_RESULT AT_GetResult(uint8_t *buffer, uint16_t len);
 
 void           AT_SetNetStatus(NET_STATUS status);
@@ -74,16 +68,6 @@ static inline uint8_t AT_GetRadioStrength() {
     return NET_MODULE_GET_RADIO_STRENGTH();
 }
 
-#define AT_WAIT_DELAY pdMS_TO_TICKS(10 * 1000) // wait 10 secs.
-
-#define AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, delay)                         \
-    if (xQueueReceive(queue, &(msg), delay) == pdFALSE) {                      \
-        LOG("[UART] Cannot receive response.");                                \
-        Error_Handler();                                                       \
-    }
-#define AT_WAIT_FOR_RESP(queue, msg)                                           \
-    AT_WAIT_FOR_RESP_WITH_DELAY(queue, msg, AT_WAIT_DELAY)
-#define AT_FREE_RESP(msg) vPortFree((msg).Buffer)
 
 #ifdef NET_MODULE_LTE
 #define NET_IDENT_SIZE 15
@@ -95,5 +79,17 @@ static inline uint8_t AT_GetRadioStrength() {
 // FreeRTOS wait for status
 #define AT_WAIT_INTV pdMS_TO_TICKS(100) // 100 ms check intv
 BaseType_t AT_WaitForStatus(NET_STATUS status, TickType_t max_delay);
+
+// UART
+AT_RESULT AT_UART_RegisterResponse(QueueHandle_t queueHandle);
+AT_RESULT AT_UART_UnregisterResponse(QueueHandle_t queueHandle);
+void      AT_UART_Send(uint8_t *buffer, uint16_t len);
+#define AT_UART_SendStatic(msg) AT_UART_Send((uint8_t *)(msg), sizeof(msg) - 1)
+AT_RESULT AT_UART_Recv(QueueHandle_t queue, AT_Response_Msg_t *msg_buffer,
+                       TickType_t timeout);
+
+#define AT_DEFAULT_WAIT_DELAY pdMS_TO_TICKS(10 * 1000) // wait 10 secs.
+
+#define AT_FREE_RESP(msg) vPortFree((msg).Buffer)
 
 #endif // __NET_AT_H__

@@ -1,4 +1,7 @@
 cmake-build-debug
 .idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
 .ccls-cache
 build
+.cache
+

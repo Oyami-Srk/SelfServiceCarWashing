@@ -12,12 +12,13 @@
 // LVGL Porting to DMA2D
 
 #include "lvgl.h"
-#include "dma2d.h"
-#include "main.h"
-#include "GUI/handles.h"
-#include "ltdc.h"
-#include "fatfs.h"
+#include "Common/config.h"
 #include "Common/utils.h"
+#include "GUI/handles.h"
+#include "dma2d.h"
+#include "fatfs.h"
+#include "ltdc.h"
+#include "main.h"
 
 static int32_t           x1_flush;
 static int32_t           y1_flush;
@@ -205,14 +206,16 @@ void disp_init(void) {
     // Load fonts from SPI FATFs
     extern void fatfs_test();
     fatfs_test();
-    if (HAL_OK == load_font("0:N24.bin", font1_buffer)) {
+    if (!DO_NOT_LOAD_FONT_FROM_FLASH &&
+        HAL_OK == load_font("0:N24.bin", font1_buffer)) {
         extern lv_font_t f_NotoSansCJK_24;
         NotoSansCJK_24 = &f_NotoSansCJK_24;
     } else {
         NotoSansCJK_24 = &lv_font_montserrat_24;
     }
 
-    if (HAL_OK == load_font("0:N36.bin", font2_buffer)) {
+    if (!DO_NOT_LOAD_FONT_FROM_FLASH &&
+        HAL_OK == load_font("0:N36.bin", font2_buffer)) {
         extern lv_font_t f_NotoSansCJK_36;
         NotoSansCJK_36 = &f_NotoSansCJK_36;
     } else {

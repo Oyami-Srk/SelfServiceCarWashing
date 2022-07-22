@@ -54,6 +54,7 @@ bool inuse = false;
 void task_calc_usage() {
     TickType_t       xLastWakeTime;
     const TickType_t xPeriod = pdMS_TO_TICKS(INUSE_SAMPLE_RATE); // 0.1 sec
+    bool             already_shown_msgbox = false;
 
     xLastWakeTime = xTaskGetTickCount();
     for (; inuse;) {
@@ -89,14 +90,26 @@ void task_calc_usage() {
                 break;
             }
             if (inuse_info.avail <= 0.001f) {
+                LOG("Avail empty");
                 inuse_info.current_using = CURRENT_USING_NONE;
                 usable                   = false;
                 PUMP_OFF();
                 WATER_OFF();
                 FOAM_OFF();
-                show_delay_close_message("余额不足",
-                                         "您的剩余余额不足，无法继续用水！",
-                                         NULL, 10, NULL);
+                if (!already_shown_msgbox) {
+                    show_delay_close_message("余额不足",
+                                             "您的剩余余额不足，无法继续用水！",
+                                             NULL, 10, NULL);
+                    already_shown_msgbox = true;
+                }
+            } else if (inuse_info.avail <= 10.0f) {
+                LOG("Avail too low");
+                if (!already_shown_msgbox) {
+                    show_delay_close_message("余额警告",
+                                             "您的余额仅剩10L，请及时充值。",
+                                             NULL, 10, NULL);
+                    already_shown_msgbox = true;
+                }
             }
         }
         xSemaphoreGive(info_mutex);
@@ -218,7 +231,7 @@ void start_inuse_task(const char *userId, float avail) {
 
     calc_time = 0;
     inuse     = true;
-    xTaskCreate(task_calc_usage, "CALC_USAGE", 256, NULL, tskIDLE_PRIORITY + 3,
+    xTaskCreate(task_calc_usage, "CALC_USAGE", 512, NULL, tskIDLE_PRIORITY + 3,
                 NULL);
     xTaskCreate(task_inuse, "INUSE", 256, NULL, tskIDLE_PRIORITY + 3,
                 &inuse_task);

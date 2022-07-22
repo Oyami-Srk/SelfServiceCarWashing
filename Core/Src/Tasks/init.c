@@ -31,7 +31,11 @@ void fatfs_test() {
     static FIL     file;
     static FRESULT f_res;
 
+#if FORCE_FORMAT_FLASH
+    f_res = FR_DISK_ERR;
+#else
     f_res = f_mount(&fs, "0:", 1);
+#endif
     if (f_res != RES_OK) {
         f_res = f_mkfs("0:", FM_FAT, 0, work, sizeof(work));
         if (f_res != RES_OK) {
@@ -142,11 +146,12 @@ void fatfs_test() {
     LOG("[FATFS] Close file succeed");
 }
 
-void init_task() {
-    vTaskDelete(NULL);
-}
+void init_task() { vTaskDelete(NULL); }
+
+#include <cm_backtrace.h>
 
 void TASKS_INIT_RTOS() {
+    cm_backtrace_init("SSCW", "0.1", "0.1");
     LOG_SCR("[INIT] Starting init procedures.");
     INIT_CONFIG();
     LOG_SCR("[INIT] Finish loading configuration.");

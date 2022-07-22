@@ -249,52 +249,74 @@ to its original value when it is released. */
  * and stores task state information, including a pointer to the task's context
  * (the task's run time environment, including register values)
  */
-typedef struct tskTaskControlBlock 			/* The old naming convention is used to prevent breaking kernel aware debuggers. */
+typedef struct tskTaskControlBlock /* The old naming convention is used to
+                                      prevent breaking kernel aware debuggers.
+                                    */
 {
-	volatile StackType_t	*pxTopOfStack;	/*< Points to the location of the last item placed on the tasks stack.  THIS MUST BE THE FIRST MEMBER OF THE TCB STRUCT. */
+    volatile StackType_t
+        *pxTopOfStack; /*< Points to the location of the last item placed on the
+                          tasks stack.  THIS MUST BE THE FIRST MEMBER OF THE TCB
+                          STRUCT. */
 
-	#if ( portUSING_MPU_WRAPPERS == 1 )
-		xMPU_SETTINGS	xMPUSettings;		/*< The MPU settings are defined as part of the port layer.  THIS MUST BE THE SECOND MEMBER OF THE TCB STRUCT. */
-	#endif
+#if (portUSING_MPU_WRAPPERS == 1)
+    xMPU_SETTINGS xMPUSettings; /*< The MPU settings are defined as part of the
+                                   port layer.  THIS MUST BE THE SECOND MEMBER
+                                   OF THE TCB STRUCT. */
+#endif
 
-	ListItem_t			xStateListItem;	/*< The list that the state list item of a task is reference from denotes the state of that task (Ready, Blocked, Suspended ). */
-	ListItem_t			xEventListItem;		/*< Used to reference a task from an event list. */
-	UBaseType_t			uxPriority;			/*< The priority of the task.  0 is the lowest priority. */
-	StackType_t			*pxStack;			/*< Points to the start of the stack. */
-	char				pcTaskName[ configMAX_TASK_NAME_LEN ];/*< Descriptive name given to the task when created.  Facilitates debugging only. */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
+    ListItem_t xStateListItem; /*< The list that the state list item of a task
+                                  is reference from denotes the state of that
+                                  task (Ready, Blocked, Suspended ). */
+    ListItem_t
+        xEventListItem;     /*< Used to reference a task from an event list. */
+    UBaseType_t uxPriority; /*< The priority of the task.  0 is the lowest
+                               priority. */
+    StackType_t *pxStack;   /*< Points to the start of the stack. */
+    char				pcTaskName[ configMAX_TASK_NAME_LEN ];/*< Descriptive name given to the task when created.  Facilitates debugging only. */ /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
 
-	#if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
-		StackType_t		*pxEndOfStack;		/*< Points to the highest valid address for the stack. */
-	#endif
+#if ((portSTACK_GROWTH > 0) || (configRECORD_STACK_HIGH_ADDRESS == 1))
+    StackType_t *pxEndOfStack; /*< Points to the highest valid address for
+                                  the stack. */
+#endif
+    UBaseType_t uxSizeOfStack; /*< Support For CmBacktrace >*/
 
-	#if ( portCRITICAL_NESTING_IN_TCB == 1 )
-		UBaseType_t		uxCriticalNesting;	/*< Holds the critical section nesting depth for ports that do not maintain their own count in the port layer. */
-	#endif
+#if (portCRITICAL_NESTING_IN_TCB == 1)
+    UBaseType_t uxCriticalNesting; /*< Holds the critical section nesting
+                                      depth for ports that do not maintain
+                                      their own count in the port layer. */
+#endif
 
-	#if ( configUSE_TRACE_FACILITY == 1 )
-		UBaseType_t		uxTCBNumber;		/*< Stores a number that increments each time a TCB is created.  It allows debuggers to determine when a task has been deleted and then recreated. */
-		UBaseType_t		uxTaskNumber;		/*< Stores a number specifically for use by third party trace code. */
-	#endif
+#if (configUSE_TRACE_FACILITY == 1)
+    UBaseType_t
+        uxTCBNumber; /*< Stores a number that increments each time a TCB is
+                        created.  It allows debuggers to determine when a
+                        task has been deleted and then recreated. */
+    UBaseType_t uxTaskNumber; /*< Stores a number specifically for use by
+                                 third party trace code. */
+#endif
 
-	#if ( configUSE_MUTEXES == 1 )
-		UBaseType_t		uxBasePriority;		/*< The priority last assigned to the task - used by the priority inheritance mechanism. */
-		UBaseType_t		uxMutexesHeld;
-	#endif
+#if (configUSE_MUTEXES == 1)
+    UBaseType_t
+        uxBasePriority; /*< The priority last assigned to the task - used by the
+                           priority inheritance mechanism. */
+    UBaseType_t uxMutexesHeld;
+#endif
 
-	#if ( configUSE_APPLICATION_TASK_TAG == 1 )
-		TaskHookFunction_t pxTaskTag;
-	#endif
+#if (configUSE_APPLICATION_TASK_TAG == 1)
+    TaskHookFunction_t pxTaskTag;
+#endif
 
-	#if( configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0 )
-		void			*pvThreadLocalStoragePointers[ configNUM_THREAD_LOCAL_STORAGE_POINTERS ];
-	#endif
+#if (configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0)
+    void *pvThreadLocalStoragePointers[configNUM_THREAD_LOCAL_STORAGE_POINTERS];
+#endif
 
-	#if( configGENERATE_RUN_TIME_STATS == 1 )
-		uint32_t		ulRunTimeCounter;	/*< Stores the amount of time the task has spent in the Running state. */
-	#endif
+#if (configGENERATE_RUN_TIME_STATS == 1)
+    uint32_t ulRunTimeCounter; /*< Stores the amount of time the task has spent
+                                  in the Running state. */
+#endif
 
-	#if ( configUSE_NEWLIB_REENTRANT == 1 )
-		/* Allocate a Newlib reent structure that is specific to this task.
+#if (configUSE_NEWLIB_REENTRANT == 1)
+    /* Allocate a Newlib reent structure that is specific to this task.
 		Note Newlib support has been included by popular demand, but is not
 		used by the FreeRTOS maintainers themselves.  FreeRTOS is not
 		responsible for resulting newlib operation.  User must be familiar with
@@ -864,18 +886,23 @@ UBaseType_t x;
 		pxTopOfStack = &( pxNewTCB->pxStack[ ulStackDepth - ( uint32_t ) 1 ] );
 		pxTopOfStack = ( StackType_t * ) ( ( ( portPOINTER_SIZE_TYPE ) pxTopOfStack ) & ( ~( ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) ) ); /*lint !e923 !e9033 !e9078 MISRA exception.  Avoiding casts between pointers and integers is not practical.  Size differences accounted for using portPOINTER_SIZE_TYPE type.  Checked by assert(). */
 
-		/* Check the alignment of the calculated top of stack is correct. */
-		configASSERT( ( ( ( portPOINTER_SIZE_TYPE ) pxTopOfStack & ( portPOINTER_SIZE_TYPE ) portBYTE_ALIGNMENT_MASK ) == 0UL ) );
+                /* Check the alignment of the calculated top of stack is
+                 * correct. */
+                configASSERT(
+                    (((portPOINTER_SIZE_TYPE)pxTopOfStack &
+                      (portPOINTER_SIZE_TYPE)portBYTE_ALIGNMENT_MASK) == 0UL));
 
-		#if( configRECORD_STACK_HIGH_ADDRESS == 1 )
-		{
-			/* Also record the stack's high address, which may assist
-			debugging. */
-			pxNewTCB->pxEndOfStack = pxTopOfStack;
-		}
-		#endif /* configRECORD_STACK_HIGH_ADDRESS */
-	}
-	#else /* portSTACK_GROWTH */
+#if (configRECORD_STACK_HIGH_ADDRESS == 1)
+                {
+                    /* Also record the stack's high address, which may assist
+                    debugging. */
+                    pxNewTCB->pxEndOfStack = pxTopOfStack;
+                }
+#endif /* configRECORD_STACK_HIGH_ADDRESS */
+                pxNewTCB->uxSizeOfStack =
+                    ulStackDepth; /*< Support For CmBacktrace >*/
+        }
+#else /* portSTACK_GROWTH */
 	{
 		pxTopOfStack = pxNewTCB->pxStack;
 
@@ -5237,73 +5264,86 @@ const TickType_t xConstTickCount = xTickCount;
 				needs to be updated too. */
 				if( xTimeToWake < xNextTaskUnblockTime )
 				{
-					xNextTaskUnblockTime = xTimeToWake;
-				}
-				else
-				{
-					mtCOVERAGE_TEST_MARKER();
-				}
-			}
-		}
-	}
-	#else /* INCLUDE_vTaskSuspend */
-	{
-		/* Calculate the time at which the task should be woken if the event
-		does not occur.  This may overflow but this doesn't matter, the kernel
-		will manage it correctly. */
-		xTimeToWake = xConstTickCount + xTicksToWait;
+                                    xNextTaskUnblockTime = xTimeToWake;
+                                } else {
+                                    mtCOVERAGE_TEST_MARKER();
+                                }
+                        }
+                }
+        }
+#else  /* INCLUDE_vTaskSuspend */
+        {
+            /* Calculate the time at which the task should be woken if the event
+            does not occur.  This may overflow but this doesn't matter, the
+            kernel will manage it correctly. */
+            xTimeToWake = xConstTickCount + xTicksToWait;
 
-		/* The list item will be inserted in wake time order. */
-		listSET_LIST_ITEM_VALUE( &( pxCurrentTCB->xStateListItem ), xTimeToWake );
+            /* The list item will be inserted in wake time order. */
+            listSET_LIST_ITEM_VALUE(&(pxCurrentTCB->xStateListItem),
+                                    xTimeToWake);
 
-		if( xTimeToWake < xConstTickCount )
-		{
-			/* Wake time has overflowed.  Place this item in the overflow list. */
-			vListInsert( pxOverflowDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
-		}
-		else
-		{
-			/* The wake time has not overflowed, so the current block list is used. */
-			vListInsert( pxDelayedTaskList, &( pxCurrentTCB->xStateListItem ) );
+            if (xTimeToWake < xConstTickCount) {
+                /* Wake time has overflowed.  Place this item in the overflow
+                 * list. */
+                vListInsert(pxOverflowDelayedTaskList,
+                            &(pxCurrentTCB->xStateListItem));
+            } else {
+                /* The wake time has not overflowed, so the current block list
+                 * is used. */
+                vListInsert(pxDelayedTaskList, &(pxCurrentTCB->xStateListItem));
 
-			/* If the task entering the blocked state was placed at the head of the
-			list of blocked tasks then xNextTaskUnblockTime needs to be updated
-			too. */
-			if( xTimeToWake < xNextTaskUnblockTime )
-			{
-				xNextTaskUnblockTime = xTimeToWake;
-			}
-			else
-			{
-				mtCOVERAGE_TEST_MARKER();
-			}
-		}
+                /* If the task entering the blocked state was placed at the head
+                of the list of blocked tasks then xNextTaskUnblockTime needs to
+                be updated too. */
+                if (xTimeToWake < xNextTaskUnblockTime) {
+                    xNextTaskUnblockTime = xTimeToWake;
+                } else {
+                    mtCOVERAGE_TEST_MARKER();
+                }
+            }
 
-		/* Avoid compiler warning when INCLUDE_vTaskSuspend is not 1. */
-		( void ) xCanBlockIndefinitely;
-	}
-	#endif /* INCLUDE_vTaskSuspend */
+            /* Avoid compiler warning when INCLUDE_vTaskSuspend is not 1. */
+            (void)xCanBlockIndefinitely;
+        }
+#endif /* INCLUDE_vTaskSuspend */
 }
 
 /* Code below here allows additional code to be inserted into this source file,
 especially where access to file scope functions and data is needed (for example
 when performing module tests). */
 
+/*-----------------------------------------------------------*/
+/*< Support For CmBacktrace >*/
+uint32_t *vTaskStackAddr() { return pxCurrentTCB->pxStack; }
+
+uint32_t vTaskStackSize() {
+#if (portSTACK_GROWTH > 0)
+
+    return (pxNewTCB->pxEndOfStack - pxNewTCB->pxStack + 1);
+
+#else /* ( portSTACK_GROWTH > 0 )*/
+
+    return pxCurrentTCB->uxSizeOfStack;
+
+#endif /* ( portSTACK_GROWTH > 0 )*/
+}
+
+char *vTaskName() { return pxCurrentTCB->pcTaskName; }
+/*-----------------------------------------------------------*/
+
 #ifdef FREERTOS_MODULE_TEST
-	#include "tasks_test_access_functions.h"
+#include "tasks_test_access_functions.h"
 #endif
 
+#if (configINCLUDE_FREERTOS_TASK_C_ADDITIONS_H == 1)
 
-#if( configINCLUDE_FREERTOS_TASK_C_ADDITIONS_H == 1 )
+#include "freertos_tasks_c_additions.h"
 
-	#include "freertos_tasks_c_additions.h"
-
-	#ifdef FREERTOS_TASKS_C_ADDITIONS_INIT
-		static void freertos_tasks_c_additions_init( void )
-		{
-			FREERTOS_TASKS_C_ADDITIONS_INIT();
-		}
-	#endif
+#ifdef FREERTOS_TASKS_C_ADDITIONS_INIT
+static void freertos_tasks_c_additions_init(void) {
+    FREERTOS_TASKS_C_ADDITIONS_INIT();
+}
+#endif
 
 #endif
 

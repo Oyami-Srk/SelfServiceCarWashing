@@ -4,3 +4,6 @@
 [submodule "Middlewares/GUI"]
 	path = Middlewares/GUI
 	url = git@github.com:Oyami-Srk/SelfServiceCarWashing-GUI
+[submodule "Middlewares/Third_Party/CmBacktrace"]
+	path = Middlewares/Third_Party/CmBacktrace
+	url = https://github.com/armink/CmBacktrace

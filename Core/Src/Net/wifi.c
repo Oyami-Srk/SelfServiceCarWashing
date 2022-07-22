@@ -44,9 +44,9 @@ retry_start:
     AT_RegisterResponse(AT_Msg_Queue);
 
     // Reset Module
-    AT_SendStaticCommand("+++"); // Exit pass-through for restart.
+    AT_UART_SendStatic("+++"); // Exit pass-through for restart.
     vTaskDelay(pdMS_TO_TICKS(100));
-    AT_SendStaticCommand("AT+RST\r\n");
+    AT_UART_SendStatic("AT+RST\r\n");
     vTaskDelay(pdMS_TO_TICKS(100));
     do {
         AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
@@ -57,14 +57,14 @@ retry_start:
     vTaskDelay(pdMS_TO_TICKS(1000));
 
     // Disable Echo
-    AT_SendStaticCommand("ATE0\r\n");
+    AT_UART_SendStatic("ATE0\r\n");
     do {
         AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
         AT_FREE_RESP(msg);
     } while (uxQueueMessagesWaiting(AT_Msg_Queue) != 0);
 
     // Get AT Status
-    AT_SendStaticCommand("AT+GMR\r\n");
+    AT_UART_SendStatic("AT+GMR\r\n");
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
     AT_RESULT result = AT_GetResult(msg.Buffer, msg.Len);
     AT_FREE_RESP(msg);
@@ -410,7 +410,7 @@ connect_to_server:
                     connect_to_server);
     AT_FREE_RESP(msg);
 
-    AT_SendStaticCommand("AT+CIPSEND\r\n");
+    AT_UART_SendStatic("AT+CIPSEND\r\n");
     AT_WAIT_FOR_RESP(AT_Msg_Queue, msg);
     if (msg.Buffer[msg.Len - 1] != '>') {
         LOG("[WIFI] Failed to enter full pass-through mode. Retry after 3 "

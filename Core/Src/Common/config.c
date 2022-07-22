@@ -39,17 +39,18 @@ static uint8_t *get_config_buffer(size_t *buffer_size) {
         *buffer_size = 0;
         return NULL;
     }
-    sprintf(
-        (char *)buffer, CONFIG_DATA_SERIALIZED_FORMAT "\n", configs.BEGIN_GUARD,
+    sprintf((char *)buffer, CONFIG_DATA_SERIALIZED_FORMAT_PRINT "\n",
+            configs.BEGIN_GUARD,
 #ifdef NET_MODULE_ESP32
-        configs.CFG_NET_WIFI_AP_NAME, configs.CFG_NET_WIFI_AP_PSWD,
+            configs.CFG_NET_WIFI_AP_NAME, configs.CFG_NET_WIFI_AP_PSWD,
 #endif
 #ifdef NET_MODULE_LTE
-        configs.CFG_NET_LTE_APN,
+            configs.CFG_NET_LTE_APN,
 #endif
-        configs.CFG_SERVER_ADDR, configs.CFG_SERVER_PORT,
-        configs.CFG_SNTP_SERVER, configs.CFG_SNTP_UPD_INTV,
-        configs.CFG_FOAM_TO_WATER_FRAC, configs.CFG_FLAGS, configs.END_GUARD);
+            configs.CFG_SERVER_ADDR, configs.CFG_SERVER_PORT,
+            configs.CFG_SNTP_SERVER, configs.CFG_SNTP_UPD_INTV,
+            configs.CFG_FOAM_TO_WATER_FRAC, configs.CFG_FLAGS,
+            configs.END_GUARD);
     *buffer_size = strlen((char *)buffer);
     return buffer;
 #endif
@@ -90,7 +91,8 @@ static bool load_config_from_fatfs() {
     }
     f_res = f_close(&file);
 
-    sscanf((char *)buffer, CONFIG_DATA_SERIALIZED_FORMAT, &configs.BEGIN_GUARD,
+    sscanf((char *)buffer, CONFIG_DATA_SERIALIZED_FORMAT_SCAN,
+           &configs.BEGIN_GUARD,
 #ifdef NET_MODULE_ESP32
            configs.CFG_NET_WIFI_AP_NAME, configs.CFG_NET_WIFI_AP_PSWD,
 #endif
@@ -143,6 +145,10 @@ static bool is_guard_failed() {
 }
 
 void INIT_CONFIG() {
+#if FORCE_RESET_CONFIG
+    RESET_CONFIG();
+    return;
+#endif
     if (
 #ifdef CONFIG_USE_FATFS
         load_config_from_fatfs()

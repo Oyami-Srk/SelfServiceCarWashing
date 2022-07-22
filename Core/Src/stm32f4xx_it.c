@@ -89,40 +89,38 @@ void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
 
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+    /* USER CODE END NonMaskableInt_IRQn 0 */
+    /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
     while (1) {
     }
-  /* USER CODE END NonMaskableInt_IRQn 1 */
+    /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Hard fault interrupt.
-  */
-void HardFault_Handler(void)
-{
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-    PRINTF("HardFault!!!!Restart...\r\n");
-    __BKPT();
-    HAL_NVIC_SystemReset();
-  /* USER CODE END HardFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_HardFault_IRQn 0 */
-    /* USER CODE END W1_HardFault_IRQn 0 */
-  }
-}
+ * @brief This function handles Hard fault interrupt.
+ */
+// void HardFault_Handler(void)
+//{
+//   /* USER CODE BEGIN HardFault_IRQn 0 */
+//     PRINTF("HardFault!!!!Restart...\r\n");
+//     __BKPT();
+//     HAL_NVIC_SystemReset();
+//   /* USER CODE END HardFault_IRQn 0 */
+//   while (1)
+//   {
+//     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+//     /* USER CODE END W1_HardFault_IRQn 0 */
+//   }
+// }
 
 /**
-  * @brief This function handles Memory management fault.
-  */
-void MemManage_Handler(void)
-{
-  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+ * @brief This function handles Memory management fault.
+ */
+void MemManage_Handler(void) {
+    /* USER CODE BEGIN MemoryManagement_IRQn 0 */
 
-  /* USER CODE END MemoryManagement_IRQn 0 */
-  while (1)
-  {
+    /* USER CODE END MemoryManagement_IRQn 0 */
+    while (1) {
     /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
     /* USER CODE END W1_MemoryManagement_IRQn 0 */
   }
